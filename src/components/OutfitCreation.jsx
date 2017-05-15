@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
+import DropZone from './DropZone.jsx';
 import { database } from '../firebase.js';
 
 class OutfitCreation extends Component {
@@ -14,6 +15,7 @@ class OutfitCreation extends Component {
     return(
       <div>
         OutfitCreation
+        <DropZone/>
         <CategoryTabs/>
       </div>
     );

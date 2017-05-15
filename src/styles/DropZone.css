@@ -1,0 +1,12 @@
+.DropZoneContainer{
+  width: 80%;
+  padding-bottom: 80%;
+  margin: auto;
+  border: 2px solid black;
+  background-color: grey;
+}
+.draggable{
+  width: 60px;
+  height: 60px;
+  background-color: red;
+}
