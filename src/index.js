@@ -27,15 +27,13 @@ const AppRouter = () => (
 
       <Switch>
         <Redirect exact from='/' to='/login'/>
+        <Route path='/login' component={LoginPage}/>
+        <Route path='/feed' component={Feed}/>
+        <Route path='/outfitCreation' component={OutfitCreation}/>
+        <Route path='/singleOutfit/:outfitId' component={SingleOutfitView}/>
+        <Route path='/rate/:outfitId' component={RateView}/>
         <Route component={NoMatch}/>
       </Switch>
-
-      <Route path='/login' component={LoginPage}/>
-      <Route path='/feed' component={Feed}/>
-      <Route path='/outfitCreation' component={OutfitCreation}/>
-      <Route path='/singleOutfit/:outfitId' component={SingleOutfitView}/>
-      <Route path='/rate/:outfitId' component={RateView}/>
-
     </div>
   </Router>
 )
