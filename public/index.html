@@ -14,8 +14,10 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
-    <link rel="stylesheet" type="text/css" href="css/foundation.css">
-    </link>
+    <link rel="stylesheet" type="text/css" href="css/foundation.css"></link>
+
+    <script src = "js/vendor/jquery.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.js"></script>
 
   </head>
   <body>
@@ -31,4 +33,11 @@
       To create a production bundle, use `npm run build`.
     -->
   </body>
+
+
+  <script>
+      $(document).ready(function() {
+          $(document).foundation();
+      })
+  </script>
 </html>
