@@ -50,6 +50,7 @@ class App extends Component {
              <li><Link to="/feed">feed</Link></li>
              <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/outfitCreation">Create an outfit</Link></li>
           </ul>
 
           <Switch>
