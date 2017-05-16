@@ -71,7 +71,6 @@ class LoginForm extends Component {
       </div>
     );
   }
-
 }
 
 export default LoginForm;
