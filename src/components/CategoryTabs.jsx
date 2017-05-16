@@ -13,7 +13,10 @@ class CategoryTabs extends Component {
     constructor() {
         super();
         this.state = {
-
+              tops: "light-grey",
+              bottoms: "white",
+              shoes: "white",
+              accessories: "white"
         };
         this.clickTops = this.clickTops.bind(this);
     }
