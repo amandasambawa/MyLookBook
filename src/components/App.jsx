@@ -51,6 +51,7 @@ class App extends Component {
              <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
              <li><Link to="/login">Login</Link></li>
               <li><Link to="/outfitCreation">Create an outfit</Link></li>
+              <li><Link to="/rateView">rate example(ONLY FOR TESTING)</Link></li>
           </ul>
 
           <Switch>
@@ -59,7 +60,7 @@ class App extends Component {
             <PropsRoute path='/feed' component={Feed} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
             <PropsRoute path='/outfitCreation' component={OutfitCreation} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
             <PropsRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute path='/rate/:outfitId' component={RateView} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
+            <PropsRoute path='/rateView/' component={RateView} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
             <PropsRoute component={NoMatch}/>
           </Switch>
         </div>
