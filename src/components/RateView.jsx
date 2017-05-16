@@ -35,6 +35,7 @@ class RateView extends Component {
 
   saveRating() {
     console.log("WHAT DO YOU WANT FROM ME");
+
   }
   render(){
     return(

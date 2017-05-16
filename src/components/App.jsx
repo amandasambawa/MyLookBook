@@ -36,6 +36,13 @@ class App extends Component {
       }
     });
   }
+  // <ul>
+  //    <li><Link to="/feed">feed</Link></li>
+  //    <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
+  //    <li><Link to="/login">Login</Link></li>
+  //    <li><Link to="/outfitCreation">Create an outfit</Link></li>
+  //    <li><Link to="/rateView/1">rate example(ONLY FOR TESTING)</Link></li>
+  // </ul>
 
   render() {
     console.log("APP IS RENDERING")
@@ -43,13 +50,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <ul>
-             <li><Link to="/feed">feed</Link></li>
-             <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
-             <li><Link to="/login">Login</Link></li>
-             <li><Link to="/outfitCreation">Create an outfit</Link></li>
-             <li><Link to="/rateView/1">rate example(ONLY FOR TESTING)</Link></li>
-          </ul>
+
 
           <Switch>
             <Redirect exact from='/' to='/login'/>
@@ -57,7 +58,7 @@ class App extends Component {
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/rateView/:outfitId' component={RateView} uid={this.state.uid}/>
+            <RateRoute path='/rateView/:userId/:outfitId' component={RateView}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
 
