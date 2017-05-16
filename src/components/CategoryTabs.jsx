@@ -2,40 +2,59 @@ import React, { Component } from 'react';
 import { auth } from '../firebase.js';
 import '../styles/CategoryTabs.css';
 
+var isActive = {
+    backgroundColor: 'lightgrey'
+};
+var inactive = {
+    backgroundColor: 'white'
+};
 class CategoryTabs extends Component {
+
     constructor() {
         super();
+        this.state = {
+
+        };
+        this.clickTops = this.clickTops.bind(this);
+    }
+
+    clickTops() {
+        console.log("tops clicked");
+        this.setState(
+            {
+                currentActive: "tops",
+                styles: {
+                    tops: "active",
+                    bottoms: "inactive",
+                    shoes: "inactive",
+                    accessories: "inactive"
+
+                }
+            }
+        );
+    }
+
+
+    clickBottoms() {
+        this.setState({
+            currentActive: "bottoms",
+        })
+    }
+    clickShoes() {
+        console.log("shoes clicked");
+    }
+    clickAccessories() {
+        console.log("accessories clicked");
     }
 
     render() {
         return(
             <div>
-                <h2>Tabs Example</h2>
-                <div className="categoryContainer">
-                    <ul className = "tabs" data-tabs id = "tabs_example">
-                        <li className = "tabs-title is-active"><a href = "#tab1">Tops</a></li>
-                        <li className = "tabs-title"><a href = "#tab2">Bottoms</a></li>
-                        <li className = "tabs-title"><a href = "#tab3">Shoes</a></li>
-                        <li className = "tabs-title"><a href = "#tab4">Accessories</a></li>
-                    </ul>
-
-                    <div className = "tabs-content" data-tabs-content = "tabs_example">
-                        <div className = "tabs-panel is-active" id = "tab1">
-                            <p>Tops</p>
-                        </div>
-
-                        <div className = "tabs-panel" id = "tab2">
-                            <p>Bottoms</p>
-                        </div>
-
-                        <div className = "tabs-panel" id = "tab3">
-                            <p>Shoes</p>
-                        </div>
-
-                        <div className = "tabs-panel" id = "tab4">
-                            <p>Accessories</p>
-                        </div>
-                    </div>
+                <div className="flex-container">
+                    <div onClick={this.clickTops} style={ {backgroundColor:this.state.tops} } className="flex-item item1">Tops</div>
+                    <div onClick={this.clickBottoms} style={ {backgroundColor:this.state.bottoms} } className="flex-item item2">Bottom</div>
+                    <div onClick={this.clickShoes} style={ {backgroundColor:this.state.shoes} } className="flex-item item3">Shoes</div>
+                    <div onClick={this.clickAccessories} style={ {backgroundColor:this.state.accessories} } className="flex-item item4">Accessories</div>
                 </div>
             </div>
         );

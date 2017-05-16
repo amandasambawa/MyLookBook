@@ -1,3 +1,38 @@
-.categoryContainer {
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
     width: 90%;
+    height: 150px;
+    background-color: lightgrey;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.flex-item {
+    background-color: white;
+    text-align: center;
+    height: 30px;
+    font-size: 16px;
+    padding-top: 0.3em;
+}
+
+.item1 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.item2 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.item3 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+.item4 {
+    -webkit-flex: 2;
+    flex: 2;
 }
