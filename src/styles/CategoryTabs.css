@@ -1,13 +1,25 @@
+
+
+.btn {
+    color: black;
+    background: #fff;
+}
+
+.active, .btn:hover {
+    background: lightgrey;
+    color: #fff;
+}
+
 .flex-container {
     display: -webkit-flex;
     display: flex;
     width: 90%;
     height: 150px;
-    background-color: lightgrey;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: lightgrey;
 }
 
 .flex-item {
@@ -32,6 +44,7 @@
     -webkit-flex: 1;
     flex: 1;
 }
+
 .item4 {
     -webkit-flex: 2;
     flex: 2;
