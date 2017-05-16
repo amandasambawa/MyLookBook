@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { auth } from '../firebase.js';
-import PropsRoute from './PropsRoute.jsx';
+import {PrivateRoute, PublicRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
 import SingleOutfitView from './SingleOutfitView.jsx';
 import RateView from './RateView.jsx';
 import NoMatch from './NoMatch.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
-
-
 
 import {
   BrowserRouter as Router,
@@ -23,19 +21,18 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loggedIn: false,
       uid: null
     }
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
+    this.authListener = auth.onAuthStateChanged(user => {
       if (user) {
         console.log("user logged in");
-        this.setState({uid: user.uid, loggedIn: true});
+        this.setState({uid: user.uid});
       } else {
         console.log("user logged out");
-        this.setState({uid: null, loggedIn: false});
+        this.setState({uid: null});
       }
     });
   }
@@ -50,19 +47,20 @@ class App extends Component {
              <li><Link to="/feed">feed</Link></li>
              <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
              <li><Link to="/login">Login</Link></li>
-              <li><Link to="/outfitCreation">Create an outfit</Link></li>
-              <li><Link to="/rateView">rate example(ONLY FOR TESTING)</Link></li>
+             <li><Link to="/outfitCreation">Create an outfit</Link></li>
+             <li><Link to="/rateView">rate example(ONLY FOR TESTING)</Link></li>
           </ul>
 
           <Switch>
             <Redirect exact from='/' to='/login'/>
-            <PropsRoute path='/login' component={LoginPage} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute path='/feed' component={Feed} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute path='/outfitCreation' component={OutfitCreation} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute path='/rateView/' component={RateView} loggedIn={this.state.loggedIn} uid={this.state.uid}/>
-            <PropsRoute component={NoMatch}/>
+            <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
+            <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
+            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
+            <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+            <PublicRoute path='/rateView/' component={RateView} uid={this.state.uid}/>
+            <PublicRoute component={NoMatch}/>
           </Switch>
+
         </div>
       </Router>
 

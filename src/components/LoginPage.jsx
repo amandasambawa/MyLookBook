@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm.jsx';
 import { database } from '../firebase.js';
+import { Redirect } from 'react-router-dom';
 
 class LoginPage extends Component {
   constructor(){
@@ -24,13 +25,18 @@ class LoginPage extends Component {
   }
   render() {
     console.log(this.props);
-    return (
-      <div className="LoginPage">
-        <button onClick={this.makeNPMQuery}>Test button :)</button>
-        <LoginForm/>
-
-      </div>
-    );
+    if (this.props.uid){
+      return (
+      <Redirect to="/feed"/>
+      )
+    } else {
+      return (
+        <div className="LoginPage">
+          <button onClick={this.makeNPMQuery}>Test button :)</button>
+          <LoginForm/>
+        </div>
+      );
+    }
   }
 }
 
