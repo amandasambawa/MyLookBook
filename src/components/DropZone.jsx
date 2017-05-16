@@ -6,7 +6,7 @@ import '../styles/DropZone.css'
 class DropZone extends Component {
   constructor() {
     super();
-    this.startDragging = this.startDragging.bind(this);
+    this.startGesture = this.startGesture.bind(this);
   }
 
   dragMoveListener(event) {
@@ -23,7 +23,12 @@ class DropZone extends Component {
     target.setAttribute('data-y', y);
   }
 
-  startDragging() {
+  startGesture() {
+    var scale = 1,
+      gestureArea = document.getElementsByClassName('DropZoneContainer'),
+      scaleElement = document.getElementsByClassName('draggable'),
+      resetTimeout;
+      //console.log('scaleElement: ',scaleElement);
     interact('.draggable').draggable({
       // enable inertial throwing
       inertia: true,
@@ -39,26 +44,14 @@ class DropZone extends Component {
         }
       },
       // enable autoScroll
-      //autoScroll: true,
+      autoScroll: true,
 
       // call this function on every dragmove event
       onmove: this.dragMoveListener,
       // call this function on every dragend event
       onend: function(event) {
-        var textEl = event.target.querySelector('p');
-
-        textEl && (textEl.textContent = 'moved a distance of ' + (Math.sqrt(event.dx * event.dx + event.dy * event.dy) | 0) + 'px');
       }
-    });
-  }
-
-  pingchZoom() {
-    var scale = 1,
-      gestureArea = document.getElementById('DropZoneContainer'),
-      scaleElement = document.getElementById('draggable'),
-      resetTimeout;
-
-    interact(gestureArea).gesturable({
+    }).gesturable({
       onstart: function(event) {
         clearTimeout(resetTimeout);
         scaleElement.classList.remove('reset');
@@ -74,9 +67,21 @@ class DropZone extends Component {
         //resetTimeout = setTimeout(reset, 1000);
         scaleElement.classList.add('reset');
       }
-    }).draggable({onmove: this.dragMoveListener});
+    }).draggable({onmove: this.dragMoveListener})
+    .resizable({
+    preserveAspectRatio: true,
+    edges: { left: true, right: true, bottom: true, top: true }
+  })
+  .on('resizemove', function (event) {
+    var target = event.target;
+    console.log(target);
+    // update the element's style
+    target.style.width  = event.rect.width + 'px';
+    target.style.height = event.rect.height + 'px';
 
+  });
   }
+
   // reset() {
   //   scale = 1;
   //   scaleElement.style.webkitTransform = scaleElement.style.transform = 'scale(1)';
@@ -91,7 +96,7 @@ class DropZone extends Component {
         <h1>DropZone</h1>
         <div className="DropZoneContainer">
           <div className="draggable"></div>
-          {this.startDragging()}
+          {this.startGesture()}
         </div>
       </div>
     );
