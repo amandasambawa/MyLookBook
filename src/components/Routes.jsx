@@ -21,7 +21,18 @@ const PrivateRoute = ({ component: Component, uid, ...rest }) => (
   />
 );
 
+const RateRoute = ({ component: Component, uid, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      uid
+        ? <Redirect to="/singleOutfit/1"/>
+        : <Component uid={uid} {...props} />}
+  />
+);
+
 module.exports = {
   PublicRoute,
-  PrivateRoute
+  PrivateRoute,
+  RateRoute
 }

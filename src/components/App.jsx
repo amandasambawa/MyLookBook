@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from '../firebase.js';
-import {PrivateRoute, PublicRoute} from './Routes.jsx';
+import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
 import SingleOutfitView from './SingleOutfitView.jsx';
@@ -48,7 +48,7 @@ class App extends Component {
              <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
              <li><Link to="/login">Login</Link></li>
              <li><Link to="/outfitCreation">Create an outfit</Link></li>
-             <li><Link to="/rateView">rate example(ONLY FOR TESTING)</Link></li>
+             <li><Link to="/rateView/1">rate example(ONLY FOR TESTING)</Link></li>
           </ul>
 
           <Switch>
@@ -57,7 +57,7 @@ class App extends Component {
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <PublicRoute path='/rateView/' component={RateView} uid={this.state.uid}/>
+            <RateRoute path='/rateView/:outfitId' component={RateView} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
 
