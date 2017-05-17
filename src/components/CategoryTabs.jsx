@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { auth } from '../firebase.js';
 import '../styles/CategoryTabs.css';
+import BelowBox from "./BelowBox.jsx"
 //import catalogItems from './outfitItems.json'
 
 const itemsArray = {
@@ -24,64 +25,57 @@ class CategoryTabs extends Component {
         super();
         this.state = {
             selected:'tops',
-            imageUrls: itemsArray.tops
+            imageUrls: itemsArray.tops,
+            active: {
+              "tops": "active",
+              "bottoms": "default",
+              "shoes": "default",
+              "accessories": "default"
+            }
         };
         this.setCategory = this.setCategory.bind(this);
-        this.isActive = this.isActive.bind(this);
-        this.returnCatalogItems = this.returnCatalogItems.bind(this);
+        // this.isActive = this.isActive.bind(this);
+        // this.returnCatalogItems = this.returnCatalogItems.bind(this);
     }
 
     setCategory(category) {
-        this.setState({selected: category});
-        if (category === 'tops') {
-            this.setState({imageUrls: itemsArray.tops});
-        }
-        else if (category === 'bottoms') {
-            this.setState({imageUrls: itemsArray.bottoms});
-        }
-        else if (category === 'shoes') {
-            this.setState({imageUrls: itemsArray.shoes});
-        }
-        else if (category === 'accessories') {
-            this.setState({imageUrls: itemsArray.accessories});
-        }
+        let activeState = Object.assign({}, this.state.active);
+        activeState[this.state.selected] = "default";
+        activeState[category] = "active";
+        this.setState({imageUrls: itemsArray[category], selected: category, active: activeState});
     }
 
-    isActive(value){
-        if (value===this.state.selected)
-            return 'btn active';
-        else
-            return 'btn default';
-    }
+    // isActive(value){
+    //     if (value===this.state.selected)
+    //         return 'active';
+    //     else
+    //         return 'default';
+    // }
 
-    returnCatalogItems(){
-        return this.state.imageUrls.map((url)=>{
-
-            return (<img src={url}></img>);
-        })
-    }
+    // returnCatalogItems(){
+    //     return this.state.imageUrls.map((url)=>{
+    //         return (<img src={url}></img>);
+    //     })
+    // }
 
     render() {
-        console.log(this.state);
     return (
         <div>
             <div className="flex-container">
-                <div className={'flex-item item1 ' + this.isActive('tops')} onClick={this.setCategory.bind(this, 'tops')}>
+                <div className={'flex-item item1 btn ' + this.state.active.tops} onClick={() => this.setCategory('tops')}  onTouchStart={() => this.setCategory('tops')}>
                     Tops
                 </div>
-                <div className={'flex-item item2 ' + this.isActive('bottoms')} onClick={this.setCategory.bind(this, 'bottoms')}>
+                <div className={'flex-item item2 btn ' + this.state.active.bottoms} onClick={() => this.setCategory('bottoms')}  onTouchStart={() => this.setCategory('bottoms')}>
                     Bottoms
                 </div>
-                <div className={'flex-item item3 ' + this.isActive('shoes')} onClick={this.setCategory.bind(this, 'shoes')}>
+                <div className={'flex-item item3 btn ' + this.state.active.shoes} onClick={() => this.setCategory('shoes')}  onTouchStart={() => this.setCategory('shoes')}>
                     Shoes
                 </div>
-                <div className={'flex-item item4 ' + this.isActive('accessories')} onClick={this.setCategory.bind(this, 'accessories')}>
+                <div className={'flex-item item4 btn ' + this.state.active.accessories} onClick={() => this.setCategory('accessories')}  onTouchStart={() => this.setCategory('accessories')}>
                     Accessories
                 </div>
             </div>
-            <div className="belowBox">
-                {this.returnCatalogItems()}
-            </div>
+            <BelowBox imageUrls={this.state.imageUrls}/>
         </div>)
     }
 }

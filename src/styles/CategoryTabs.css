@@ -54,8 +54,8 @@ img {
     margin: auto;
     margin-bottom: 10px;
 }
-
-.active, .btn:hover {
+/*, .btn:hover*/
+.active {
     background: #cc0000;
     color: white;
 }
