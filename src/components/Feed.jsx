@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { database, auth } from '../firebase.js';
+import { Link } from 'react-router-dom';
 
 class Feed extends Component {
-
-  constructor(){
-    super();
-    this.state = {
-    }
-  }
 
   logout(){
     auth.signOut().then(function() {
@@ -22,7 +17,7 @@ class Feed extends Component {
   render(){
     return(
       <div>
-        <button onClick={this.logout} className="button">Logout</button>
+        <Link to="/outfitCreation" className="button">Create Outfit</Link>
         Feed
       </div>
     );

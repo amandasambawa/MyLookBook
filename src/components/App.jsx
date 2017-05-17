@@ -7,6 +7,7 @@ import SingleOutfitView from './SingleOutfitView.jsx';
 import RateView from './RateView.jsx';
 import NoMatch from './NoMatch.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
+import Navigation from './Navigation.jsx';
 
 import {
   BrowserRouter as Router,
@@ -36,22 +37,12 @@ class App extends Component {
       }
     });
   }
-  // <ul>
-  //    <li><Link to="/feed">feed</Link></li>
-  //    <li><Link to="/singleOutfit/1">Single Outfit</Link></li>
-  //    <li><Link to="/login">Login</Link></li>
-  //    <li><Link to="/outfitCreation">Create an outfit</Link></li>
-  //    <li><Link to="/rateView/1">rate example(ONLY FOR TESTING)</Link></li>
-  // </ul>
-
+  
   render() {
-    console.log("APP IS RENDERING")
-    // TODO run checkIfLoggedIn only when the event is tirggered
     return (
       <Router>
         <div>
-
-
+          <Navigation uid={this.state.uid}/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
@@ -64,7 +55,6 @@ class App extends Component {
 
         </div>
       </Router>
-
     );
   }
 };

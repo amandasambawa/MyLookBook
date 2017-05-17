@@ -24,7 +24,6 @@ class LoginPage extends Component {
     });
   }
   render() {
-    console.log(this.props);
     if (this.props.uid){
       return (
       <Redirect to="/feed"/>
