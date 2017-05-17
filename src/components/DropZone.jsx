@@ -31,7 +31,9 @@ class DropZone extends Component {
     var scale = 1,
       gestureArea = document.getElementsByClassName('DropZoneContainer'),
       scaleElement = document.getElementsByClassName('draggable'),
-      resetTimeout;
+      resetTimeout,
+      index = 0;
+
       //console.log('scaleElement: ',scaleElement);
     interact('.draggable').draggable({
       // enable inertial throwing
@@ -53,7 +55,12 @@ class DropZone extends Component {
       // call this function on every dragmove event
       onmove: this.dragMoveListener,
       // call this function on every dragend event
+      onstart: function(event) {
+        index++;
+        event.target.style.zIndex = index;
+      },
       onend: function(event) {
+      //  event.target.style.zIndex = 0;
       }
     }).gesturable({
       onstart: function(event) {
@@ -74,7 +81,29 @@ class DropZone extends Component {
     }).draggable({onmove: this.dragMoveListener})
     .resizable({
     preserveAspectRatio: true,
-    edges: { left: true, right: true, bottom: true, top: true }
+    invert: 'none',
+    restrict: {
+      restriction: "parent",
+      endOnly: false,
+      elementRect: {
+        top: 1,
+        left: 1,
+        bottom: 1,
+        right: 1
+      }
+    },
+    edges: { left: true, right: true, bottom: true, top: true },
+    onstart: function (event) {
+
+    },
+    onend  : function (event) {
+      console.log('onend: ',event.target);
+      if(event.target.height <= 80 || event.target.width <= 80){
+        console.log('too small');
+        event.target.style.height='80px';
+        event.target.style.width='80px';
+      }
+    }
   })
   .on('resizemove', function (event) {
     var target = event.target;
