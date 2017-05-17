@@ -54,7 +54,7 @@ class RateView extends Component {
   saveRating() {
     console.log(this.props.match.params);
     if(this.state.haveSaved === false){
-        let ratingRef = database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.objectId}/ratings/`);
+        let ratingRef = database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
         let newRating = ratingRef.push();
 
         newRating.set({

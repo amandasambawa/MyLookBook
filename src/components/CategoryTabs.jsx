@@ -23,37 +23,38 @@ class CategoryTabs extends Component {
     constructor(){
         super();
         this.state = {
-            items: [1,2,3,4],
             selected:'tops',
             imageUrls: itemsArray.tops
         };
-        this.setFilter = this.setFilter.bind(this);
+        this.setCategory = this.setCategory.bind(this);
         this.isActive = this.isActive.bind(this);
-        this.returnSomeItems = this.returnSomeItems.bind(this);
+        this.returnCatalogItems = this.returnCatalogItems.bind(this);
     }
 
-    setFilter(filter) {
-        this.setState({selected: filter});
-        if (filter === 'tops') {
+    setCategory(category) {
+        this.setState({selected: category});
+        if (category === 'tops') {
             this.setState({imageUrls: itemsArray.tops});
         }
-        else if (filter === 'bottoms') {
+        else if (category === 'bottoms') {
             this.setState({imageUrls: itemsArray.bottoms});
         }
-        else if (filter === 'shoes') {
+        else if (category === 'shoes') {
             this.setState({imageUrls: itemsArray.shoes});
         }
-        else if (filter === 'accessories') {
+        else if (category === 'accessories') {
             this.setState({imageUrls: itemsArray.accessories});
         }
-        console.log(this.setState.imageUrls);
     }
 
     isActive(value){
-        return 'btn '+((value===this.state.selected) ?'active':'default');
+        if (value===this.state.selected)
+            return 'btn active';
+        else
+            return 'btn default';
     }
 
-    returnSomeItems(){
+    returnCatalogItems(){
         return this.state.imageUrls.map((url)=>{
 
             return (<img src={url}></img>);
@@ -65,21 +66,21 @@ class CategoryTabs extends Component {
     return (
         <div>
             <div className="flex-container">
-                <div className={'flex-item item1 ' + this.isActive('tops')} onClick={this.setFilter.bind(this, 'tops')}>
+                <div className={'flex-item item1 ' + this.isActive('tops')} onClick={this.setCategory.bind(this, 'tops')}>
                     Tops
                 </div>
-                <div className={'flex-item item2 ' + this.isActive('bottoms')} onClick={this.setFilter.bind(this, 'bottoms')}>
+                <div className={'flex-item item2 ' + this.isActive('bottoms')} onClick={this.setCategory.bind(this, 'bottoms')}>
                     Bottoms
                 </div>
-                <div className={'flex-item item3 ' + this.isActive('shoes')} onClick={this.setFilter.bind(this, 'shoes')}>
+                <div className={'flex-item item3 ' + this.isActive('shoes')} onClick={this.setCategory.bind(this, 'shoes')}>
                     Shoes
                 </div>
-                <div className={'flex-item item4 ' + this.isActive('accessories')} onClick={this.setFilter.bind(this, 'accessories')}>
+                <div className={'flex-item item4 ' + this.isActive('accessories')} onClick={this.setCategory.bind(this, 'accessories')}>
                     Accessories
                 </div>
             </div>
             <div className="belowBox">
-                {this.returnSomeItems()}
+                {this.returnCatalogItems()}
             </div>
         </div>)
     }
