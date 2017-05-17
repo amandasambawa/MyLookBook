@@ -31,7 +31,6 @@ class LoginPage extends Component {
     } else {
       return (
         <div className="LoginPage">
-          <button onClick={this.makeNPMQuery}>Test button :)</button>
           <LoginForm/>
         </div>
       );

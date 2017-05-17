@@ -18,7 +18,6 @@ class Feed extends Component {
     return(
       <div>
         <Link to="/outfitCreation" className="button">Create Outfit</Link>
-        Feed
       </div>
     );
   }

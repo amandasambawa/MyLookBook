@@ -42,22 +42,39 @@ class Navigation extends Component {
   }
 
   render(){
-
-    if (this.props.uid){
-      console.log(this.props);
-      return (
-        <div className="navigation">
-            {this.conditionalBackToFeed()}
-            <div>{this.pageToHeader()}</div>
-            <button className="button" onClick={this.logout}>Logout</button>
-        </div>);
+    if(this.props.uid){
+      return(
+            <div className="mobile-nav-bar title-bar">
+              <div className="title-bar-left">
+                {this.conditionalBackToFeed()}
+              </div>
+              <div className="title-bar-center">
+                <span className="title-bar-text">{this.pageToHeader()}</span>
+              </div>
+              <div className="title-bar-right">
+                <span className="title-bar-text" onClick={this.logout}>Logout</span>
+              </div>
+            </div>
+      );
     }else{
       return(
-        <div></div>
+          <div></div>
       );
     }
   }
 }
+
+// if (this.props.uid){
+//   console.log(this.props);
+//   return (
+//     <div className="navigation">
+//
+//         <div>{this.pageToHeader()}</div>
+//         <button className="button" onClick={this.logout}>Logout</button>
+//     </div>);
+// }else{
+//
+// }
 
 
 export default withRouter(Navigation);

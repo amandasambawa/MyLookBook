@@ -62,12 +62,11 @@ class LoginForm extends Component {
 
   render(){
     return(
-      <div>
-        <input type="text" value={this.state.email} onChange={this.handleUsernameChange}/>
-        <input type="password" onChange={this.handlePasswordChange}/>
-        <input type="submit" value="Submit" onClick={this.printLoginInfo} />
-        <button onClick={this.logout} className="button">Logout</button>
-        <h1>{this.state.username}</h1>
+      <div className="loginForm row">
+
+        <input type="text" className="small-12 small-offset-2" value={this.state.email} placeholder="Email" onChange={this.handleUsernameChange}/>
+        <input type="password" className="small-12 small-offset-2" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange}/>
+        <button onClick={this.printLoginInfo} className="button columns small-12 small-offset-2">Login</button>
       </div>
     );
   }
