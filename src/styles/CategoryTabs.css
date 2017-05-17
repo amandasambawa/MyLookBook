@@ -27,8 +27,8 @@
 }
 
 .item2 {
-    -webkit-flex: 1;
-    flex: 1;
+    -webkit-flex: 1.2;
+    flex: 1.2;
 }
 
 .item3 {
@@ -37,8 +37,8 @@
 }
 
 .item4 {
-    -webkit-flex: 2;
-    flex: 2;
+    -webkit-flex: 1.8;
+    flex: 1.8;
 }
 
 img {
