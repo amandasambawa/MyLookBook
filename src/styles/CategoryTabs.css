@@ -1,5 +1,3 @@
-
-
 .btn {
     color: black;
     background: #fff;
@@ -7,18 +5,15 @@
 
 .active, .btn:hover {
     background: lightgrey;
-    color: #fff;
 }
 
 .flex-container {
     display: -webkit-flex;
     display: flex;
     width: 90%;
-    height: 150px;
     margin: auto;
     font-size: 13px;
     margin-top: 5px;
-    margin-bottom: 5px;
     background-color: lightgrey;
 }
 
@@ -48,4 +43,19 @@
 .item4 {
     -webkit-flex: 2;
     flex: 2;
+}
+
+img {
+    margin-top:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    height: 100px;
+    width: 80px;
+}
+
+.belowBox {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: lightgrey;
 }
