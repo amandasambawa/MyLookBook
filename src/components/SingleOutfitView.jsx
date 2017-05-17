@@ -12,9 +12,10 @@ class SingleOutfitView extends Component {
     super(props);
     this.state = {
         compositionRating: React.PropTypes.number,
-        trendyRating: React.PropTypes.number
+        trendyRating: React.PropTypes.number,
+        ratings: null
     }
-    this.singleOutfitQuery = this.singleOutfitQuery.bind(this);
+    this.loadRatings = this.loadRatings.bind(this);
   }
 
 
@@ -25,14 +26,17 @@ class SingleOutfitView extends Component {
       let compositionTotal = 0;
       let trendyTotal = 0;
       let averageUsers = 0;
+
+      //iterating through each index of the database
       snapshot.forEach(function(childSnapshot){
-        console.log(childSnapshot.toJSON());
+
         let composition = childSnapshot.child("composition").val();
         let trendy = childSnapshot.child("trendy").val();
         compositionTotal += composition;
         trendyTotal += trendy;
         averageUsers += 1;
       });
+
       //setting the states to be the average ratings
       let avgComposition = (compositionTotal / averageUsers);
       avgComposition = (Math.round(avgComposition * 100) / 100);
@@ -43,14 +47,10 @@ class SingleOutfitView extends Component {
 
   }
 
-  singleOutfitQuery(){
+  loadRatings() {
 
+  }
 
-
- }
-
-  //both the ratings of these things should be a state, but for now as an
-  //example, it is random #s
   render(){
     console.log(this.state.compositionRating + " " + typeof(this.state.compositionRating));
     let please = this.state.compositionRating;
@@ -77,9 +77,8 @@ class SingleOutfitView extends Component {
           />
         <h3> Trendy Average Rating = {this.state.trendyRating} </h3>
 
-        <h2>Comment</h2>
-        <div className="commentBox">Really pretty outfit!</div>
-
+        <h2>Ratings and Comments</h2>
+          {this.loadRatings()}
       </div>
     );
   }
