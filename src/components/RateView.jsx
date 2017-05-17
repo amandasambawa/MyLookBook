@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
-import Rater from 'react-rater';
+import Rate from 'rc-rate';
 import "../styles/stars.css"
 
 class RateView extends Component {
@@ -20,30 +20,20 @@ class RateView extends Component {
   }
 
   //handles the composition rating
-  handleComposition({ rating, type }) {
+  handleComposition(rating) {
     if(this.state.haveSaved === false){
       this.setState({
         ratingComposition: rating
       })
-      if (type === 'click') {
-        console.log('You rated Composition as ' + rating);
-      }
-    }else{
-      console.log('You have already voted');
     }
   }
 
   //handles the trendy rating
-  handleTrendy({ rating, type }) {
+  handleTrendy(rating) {
     if(this.state.haveSaved === false){
       this.setState({
         ratingTrendy: rating
       })
-      if (type === 'click') {
-        console.log('You rated Trendy as ' + rating);
-      }
-    }else{
-      console.log('You have already voted!');
     }
   }
 
@@ -79,10 +69,18 @@ class RateView extends Component {
         <h1>Image goes here</h1>
 
         <h2>Composition</h2>
-        <Rater total={5} onRate={this.handleComposition} interactive={true} />
+        <Rate
+           defaultValue={0}
+           onChange={this.handleComposition}
+           style={{ fontSize: 40 }}
+         />
 
         <h2>Trendy</h2>
-        <Rater total={5} onRate={this.handleTrendy} interactive={true} />
+        <Rate
+            defaultValue={0}
+            onChange={this.handleTrendy}
+            style={{ fontSize: 40 }}
+          />
 
         <h2>Comment</h2>
         <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
