@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
-import Rater from 'react-rater';
-import Rating from 'react-rating';
 import Rate from 'rc-rate';
 import "../styles/stars.css"
 import "../styles/SingleOutfitView.css"
