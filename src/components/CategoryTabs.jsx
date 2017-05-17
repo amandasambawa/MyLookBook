@@ -14,8 +14,8 @@ const itemsArray = {
     "shoes": ["https://cdn.shopify.com/s/files/1/0684/4315/products/flightskool-air-jordan-4-thunder.png?v=1419128098",
         "https://cdn.shopify.com/s/files/1/0684/4315/products/FlighSkool-Air-Jordan-5-Fire-Red-GS.png?v=1417584078",
         "http://cdn.1001freedownloads.com/icon/thumb/390973/shoes-icon.png"],
-    "accessories": ["https://cdn.shopify.com/s/files/1/0072/2092/products/layered_silver_necklaces_unique-jewellers-simple_necklace_triple_threat_fredrick_prince.png?v=1472620581",
-        "https://cdn.shopify.com/s/files/1/0072/2092/products/Blue-Sapphire-sterling-silver-layered-necklace-unique-jewellers-st-christopher_main.png?v=1472619822",
+    "accessories": ["https://cdn.shopify.com/s/files/1/0253/1409/products/solid-purple-SFS001-8-no-background.png?v=1477753315",
+        "https://cdn.shopify.com/s/files/1/1286/1781/products/Hammered-Bangle-Bracelet-Rose-Gold-Plated.png?v=1482398239",
         "https://cdn.shopify.com/s/files/1/0104/9632/products/cast-of-vices-ups-and-downs-necklace-ud006.png?v=1328383261"]
 
 };

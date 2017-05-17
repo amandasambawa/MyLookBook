@@ -136,7 +136,6 @@ class DropZone extends Component {
   render() {
     return (
       <div>
-        <h1>DropZone</h1>
         <div className="DropZoneContainer">
             {this.renderImage()}
             {this.startGesture()}
