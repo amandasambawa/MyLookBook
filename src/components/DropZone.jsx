@@ -21,6 +21,9 @@ class DropZone extends Component {
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
+
+    document.body;
+
   }
 
   startGesture() {
@@ -35,7 +38,7 @@ class DropZone extends Component {
       // keep the element within the area of it's parent
       restrict: {
         restriction: "parent",
-        endOnly: true,
+        //endOnly: true,
         elementRect: {
           top: 0,
           left: 0,
@@ -74,7 +77,7 @@ class DropZone extends Component {
   })
   .on('resizemove', function (event) {
     var target = event.target;
-    console.log(target);
+    //console.log(target);
     // update the element's style
     target.style.width  = event.rect.width + 'px';
     target.style.height = event.rect.height + 'px';
