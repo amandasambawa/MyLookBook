@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
 import Rater from 'react-rater';
+import "../styles/stars.css"
 
 class RateView extends Component {
 
