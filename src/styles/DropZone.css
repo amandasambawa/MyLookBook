@@ -5,6 +5,7 @@
   margin: auto;
   border: 2px solid black;
   background-color: grey;
+  touch-action: none;
 }
 .draggable{
   width: 60px;
