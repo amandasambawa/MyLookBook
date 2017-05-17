@@ -75,7 +75,7 @@ class CategoryTabs extends Component {
                     Accessories
                 </div>
             </div>
-            <BelowBox imageUrls={this.state.imageUrls}/>
+            <BelowBox imageUrls={this.state.imageUrls} getClickedItem={this.props.getClickedItem}/>
         </div>)
     }
 }

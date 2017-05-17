@@ -7,6 +7,7 @@ class DropZone extends Component {
   constructor() {
     super();
     this.startGesture = this.startGesture.bind(this);
+    this.renderImage = this.renderImage.bind(this);
   }
 
   dragMoveListener(event) {
@@ -93,13 +94,23 @@ class DropZone extends Component {
   // this is used later in the resizing and gesture demos
   //window.dragMoveListener = dragMoveListener;
 
+    renderImage(){
+        let urls = this.props.clickedItems;
+        console.log("renderImage: ",urls);
+        return(
+            this.props.clickedItems.map(function(item){
+                return <img className="draggable" src={item}/>
+            })
+        );
+    }
+
   render() {
     return (
       <div>
         <h1>DropZone</h1>
         <div className="DropZoneContainer">
-          <div className="draggable"></div>
-          {this.startGesture()}
+            {this.renderImage()}
+            {this.startGesture()}
         </div>
       </div>
     );
