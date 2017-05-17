@@ -92,7 +92,7 @@ class DropZone extends Component {
         right: 1
       }
     },
-    edges: { left: true, right: true, bottom: true, top: true },
+    edges: { left: false, right: true, bottom: true, top: false },
     onstart: function (event) {
 
     },
