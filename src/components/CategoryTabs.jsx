@@ -29,6 +29,7 @@ class CategoryTabs extends Component {
         this.setCategory = this.setCategory.bind(this);
         this.isActive = this.isActive.bind(this);
         this.returnCatalogItems = this.returnCatalogItems.bind(this);
+        this.clicked = this.clicked.bind(this);
     }
 
     setCategory(category) {
@@ -54,10 +55,16 @@ class CategoryTabs extends Component {
             return 'btn default';
     }
 
+    clicked(event) {
+        console.log(event.target);
+    }
+
+
+
     returnCatalogItems(){
         return this.state.imageUrls.map((url)=>{
 
-            return (<img src={url}></img>);
+            return (<img src={url} onClick={this.clicked} ></img>);
         })
     }
 
