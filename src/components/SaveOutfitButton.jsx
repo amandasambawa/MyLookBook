@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm.jsx';
 import { database } from '../firebase.js';
+import { Link } from 'react-router-dom';
 
 
 class SaveOutfitButton extends Component {
@@ -23,9 +24,13 @@ class SaveOutfitButton extends Component {
 
   render(){
     return(
-      <button className="button" onClick={this.saveOutfit}>
-        SaveOutfitButton
-      </button>
+      <div>
+        <button className="button" onClick={this.saveOutfit}>
+          SaveOutfitButton
+        </button>
+        <Link to="/singleOutfit/-KkI2QGzORcXRcSoHT9j">singleOutfit Test</Link>
+      </div>
+
     );
   }
 
