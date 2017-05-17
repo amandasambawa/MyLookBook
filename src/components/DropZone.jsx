@@ -38,7 +38,7 @@ class DropZone extends Component {
       // keep the element within the area of it's parent
       restrict: {
         restriction: "parent",
-        //endOnly: true,
+        endOnly: false,
         elementRect: {
           top: 0,
           left: 0,
@@ -47,7 +47,7 @@ class DropZone extends Component {
         }
       },
       // enable autoScroll
-      autoScroll: true,
+      autoScroll: false,
 
       // call this function on every dragmove event
       onmove: this.dragMoveListener,
