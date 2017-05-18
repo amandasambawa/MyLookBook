@@ -6,6 +6,7 @@
   border: 1px solid grey;
   touch-action: none;
   margin-top: 20px;
+    background-color: #F6F6F6;
 }
 
 .draggable {
