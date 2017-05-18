@@ -13,7 +13,7 @@ class SingleOutfitView extends Component {
     this.state = {
         compositionRating: React.PropTypes.number,
         trendyRating: React.PropTypes.number,
-        ratings: null
+        ratings: []
     }
     this.loadRatings = this.loadRatings.bind(this);
   }
@@ -26,10 +26,10 @@ class SingleOutfitView extends Component {
       let compositionTotal = 0;
       let trendyTotal = 0;
       let averageUsers = 0;
-
+      let ratingArray = [];
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot){
-
+        ratingArray.push(childSnapshot.val());
         let composition = childSnapshot.child("composition").val();
         let trendy = childSnapshot.child("trendy").val();
         compositionTotal += composition;
@@ -42,13 +42,32 @@ class SingleOutfitView extends Component {
       avgComposition = (Math.round(avgComposition * 100) / 100);
       let avgTrendy = (trendyTotal / averageUsers);
       avgTrendy = (Math.round(avgTrendy * 100) / 100);
-      this.setState({compositionRating: avgComposition, trendyRating: avgTrendy } );
+      this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray } );
     });
 
   }
 
   loadRatings() {
-
+    return this.state.ratings.map((rating)=>{
+        return (
+          <div>
+          <h2>Composition</h2>
+          <Rate
+              value={rating.composition}
+              style={{ fontSize: 30 }}
+              allowHalf
+            />
+          <h2>Trendy</h2>
+          <Rate
+              value={rating.trendy}
+              style={{ fontSize: 30 }}
+              allowHalf
+            />
+          <div className='commentBox'>{rating.comment}</div>
+          
+          </div>
+        );
+    })
   }
 
   render(){
