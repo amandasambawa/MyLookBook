@@ -27,6 +27,8 @@ class SingleOutfitView extends Component {
     let averageUsers = 0;
     let ratingArray = [];
     let image = null;
+
+    //grabbing the image from database
     database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`)
     .once("value").then((snapshot)=> {
         image = snapshot.child("img").val();
@@ -35,7 +37,7 @@ class SingleOutfitView extends Component {
 
 
 
-    //grabbing ratings from data base
+    //grabbing ratings from database
     database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`)
     .once("value").then((snapshot)=> {
       //iterating through each index of the database
