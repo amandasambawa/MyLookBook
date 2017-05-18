@@ -22,6 +22,7 @@ class RateView extends Component {
   }
 
   //the alert options for the npm react-alert
+  
   alertOptions = {
     offset: 14,
     position: 'top right',
