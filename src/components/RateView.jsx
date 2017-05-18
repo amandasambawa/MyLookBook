@@ -21,8 +21,18 @@ class RateView extends Component {
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
 
+  componentDidMount() {
+    //grab outfit image in database
+    let image = null;
+    database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
+    .once("value").then((snapshot)=> {
+        image = snapshot.child("img").val();
+        this.setState({ outfitImage: image });
+    });
+  }
+
+
   //the alert options for the npm react-alert
-  
   alertOptions = {
     offset: 14,
     position: 'top right',
@@ -93,7 +103,7 @@ class RateView extends Component {
         <div>
           <h1>RateView</h1>
 
-          <h1>Image goes here</h1>
+          <img className="imageID" src={this.state.outfitImage}/>
 
           <h2>Composition</h2>
           <Rate
