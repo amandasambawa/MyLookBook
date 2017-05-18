@@ -11,8 +11,8 @@ class SingleOutfitView extends Component {
   constructor(props){
     super(props);
     this.state = {
-        compositionRating: React.PropTypes.number,
-        trendyRating: React.PropTypes.number,
+        compositionRating: 0,
+        trendyRating: 0,
         ratings: []
     }
     this.loadRatings = this.loadRatings.bind(this);
@@ -29,7 +29,9 @@ class SingleOutfitView extends Component {
       let ratingArray = [];
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot){
+        //add a Rating object to ratingArray
         ratingArray.push(childSnapshot.val());
+        //getting the total values of composition and trendy
         let composition = childSnapshot.child("composition").val();
         let trendy = childSnapshot.child("trendy").val();
         compositionTotal += composition;
@@ -47,6 +49,8 @@ class SingleOutfitView extends Component {
 
   }
 
+  //this method loads all the rating objects into a component.
+  //this function is called at the bottom of render
   loadRatings() {
     return this.state.ratings.map((rating)=>{
         return (
@@ -64,16 +68,13 @@ class SingleOutfitView extends Component {
               allowHalf
             />
           <div className='commentBox'>{rating.comment}</div>
-          
+
           </div>
         );
     })
   }
 
   render(){
-    console.log(this.state.compositionRating + " " + typeof(this.state.compositionRating));
-    let please = this.state.compositionRating;
-    console.log(please);
     return(
       <div>
         <h1>SingleOutfitView</h1>

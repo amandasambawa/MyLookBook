@@ -3,7 +3,7 @@ import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import {database} from '../firebase.js';
-import AlertContainer from 'react-alert'
+import AlertContainer from 'react-alert';
 
 class OutfitCreation extends Component {
 
