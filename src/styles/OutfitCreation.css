@@ -3,3 +3,21 @@
     height: 30px;
     float: right;
 }
+
+.outfitName {
+    border-radius: 10px;
+    background: lightgrey;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: absolute;
+    text-align: center;
+    top: 50px;
+    margin: auto;
+    box-shadow: 3px 3px 25px grey;
+}
+
+.outfitNameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

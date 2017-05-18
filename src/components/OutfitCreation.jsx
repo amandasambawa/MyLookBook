@@ -59,12 +59,17 @@ class OutfitCreation extends Component {
 
   render() {
     return (
-      <div>
-        <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-        <CategoryTabs getClickedItem={this.getClickedItem}/>
-        <SaveOutfitButton uid={this.props.uid}/>
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-      </div>
+        <div>
+            <div className="outfitNameContainer">
+                <div className="outfitName">OUTFIT #1</div>
+            </div>
+            <div>
+                <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+                <CategoryTabs getClickedItem={this.getClickedItem}/>
+                <SaveOutfitButton uid={this.props.uid}/>
+                <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+            </div>
+        </div>
     );
   }
 

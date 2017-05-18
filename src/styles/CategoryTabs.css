@@ -58,4 +58,5 @@ img {
 .active {
     background: #cc0000;
     color: white;
+    opacity: 0.8;
 }

@@ -1,11 +1,11 @@
 .DropZoneContainer {
   display: block;
   width: 95%;
-  height: 400px;
+  height: 350px;
   margin: auto;
   border: 1px solid grey;
   touch-action: none;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .draggable {

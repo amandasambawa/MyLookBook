@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../styles/BelowBox.css';
 
 class BelowBox extends Component {
     constructor(){
@@ -21,6 +21,7 @@ class BelowBox extends Component {
       return(
         <div className="belowBox">
           {this.returnCatalogItems()}
+          <img className="arrowButton" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-right-b-128.png"/>
         </div>
       )
     }

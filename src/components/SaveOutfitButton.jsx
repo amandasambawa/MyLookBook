@@ -3,6 +3,7 @@ import LoginForm from './LoginForm.jsx';
 import { database } from '../firebase.js';
 import { Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
+import '../styles/SaveOutfitButton.css';
 
 class SaveOutfitButton extends Component {
 
@@ -43,12 +44,14 @@ class SaveOutfitButton extends Component {
 
   render(){
     return(
-      <div>
-        <button className="button" onClick={this.saveOutfit}>
-          Save Outfit
-        </button>
-        <Link to="/singleOutfit/-KkI2QGzORcXRcSoHT9j">singleOutfit Test</Link>
-      </div>
+        <div>
+            <div className="saveOutfitContainer">
+                <button className="button" onClick={this.saveOutfit}>
+                Save Outfit
+                </button>
+            </div>
+            <Link to="/singleOutfit/-KkI2QGzORcXRcSoHT9j">singleOutfit Test</Link>
+        </div>
 
     );
   }
