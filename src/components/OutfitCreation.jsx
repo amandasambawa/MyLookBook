@@ -58,7 +58,6 @@ class OutfitCreation extends Component {
   render() {
     return (
       <div>
-        OutfitCreation
         <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
         <CategoryTabs getClickedItem={this.getClickedItem}/>
         <SaveOutfitButton uid={this.props.uid}/>

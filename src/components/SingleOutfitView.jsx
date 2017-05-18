@@ -60,7 +60,7 @@ class SingleOutfitView extends Component {
               value={rating.composition}
               style={{ fontSize: 30 }}
               allowHalf
-            />
+          />
           <h2>Trendy</h2>
           <Rate
               value={rating.trendy}
@@ -80,25 +80,26 @@ class SingleOutfitView extends Component {
         <h1>SingleOutfitView</h1>
 
         <h1>Image goes here</h1>
+        <div className="ratingsContainer">
+            <h2>Composition</h2>
+            <Rate
+                value={this.state.compositionRating}
+                style={{ fontSize: 30 }}
+                allowHalf
+            />
+            <h3> Composition Average Rating = {this.state.compositionRating} </h3>
 
-        <h2>Composition</h2>
-        <Rate
-            value={this.state.compositionRating}
-            style={{ fontSize: 40 }}
-            allowHalf
-          />
-        <h3> Composition Average Rating = {this.state.compositionRating} </h3>
+            <h2>Trendy</h2>
+            <Rate
+                value={this.state.trendyRating}
+                style={{ fontSize: 30 }}
+                allowHalf
+            />
+            <h3> Trendy Average Rating = {this.state.trendyRating} </h3>
 
-        <h2>Trendy</h2>
-        <Rate
-            value={this.state.trendyRating}
-            style={{ fontSize: 40 }}
-            allowHalf
-          />
-        <h3> Trendy Average Rating = {this.state.trendyRating} </h3>
-
-        <h2>Ratings and Comments</h2>
-          {this.loadRatings()}
+            <h2>Ratings and Comments</h2>
+                {this.loadRatings()}
+        </div>
       </div>
     );
   }
