@@ -3,7 +3,8 @@ import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import {database} from '../firebase.js';
-import AlertContainer from 'react-alert'
+import AlertContainer from 'react-alert';
+import '../styles/OutfitCreation.css'
 
 class OutfitCreation extends Component {
 
@@ -17,12 +18,13 @@ class OutfitCreation extends Component {
   }
 
   alertOptions = {
-    offset: 14,
-    position: 'bottom left',
-    theme: 'light',
-    time: 5000,
-    transition: 'scale'
+    offset: 50,
+    position: 'top right',
+    theme: 'dark',
+    //time: 50000,
+    transition: 'fade'
   }
+
   getClickedItem(item) {
     // get the url and then add it to the array in state
     //console.log(item);
@@ -32,7 +34,7 @@ class OutfitCreation extends Component {
       this.setState({clickedItems: itemsArray});
     } else {
       this.msg.show('Reached Maximun(6) Items', {
-        time: 2000,
+        time: 20000,
         type: 'error'
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
@@ -47,8 +49,8 @@ class OutfitCreation extends Component {
       itemsArray.pop();
       this.setState({clickedItems: itemsArray});
     }else{
-      this.msg.show('There is no more items', {
-        time: 2000,
+      this.msg.show('There are no more items', {
+        time: 20000,
         type: 'error'
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
