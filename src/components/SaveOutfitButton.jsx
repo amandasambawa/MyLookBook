@@ -45,7 +45,7 @@ class SaveOutfitButton extends Component {
     return(
       <div>
         <button className="button" onClick={this.saveOutfit}>
-          SaveOutfitButton
+          Save Outfit
         </button>
         <Link to="/singleOutfit/-KkI2QGzORcXRcSoHT9j">singleOutfit Test</Link>
       </div>

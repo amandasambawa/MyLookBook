@@ -1,3 +1,7 @@
 .commentBox {
   border: 1px solid black;
 }
+
+.ratingsContainer {
+    border: 1px solid grey;
+}
