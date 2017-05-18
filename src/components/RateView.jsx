@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
+import { Redirect } from 'react-router-dom';
 import Rate from 'rc-rate';
-import AlertContainer from 'react-alert';
 import "../styles/stars.css";
-import "../styles/SingleOutfitView.css";
+import AlertContainer from 'react-alert';
 
 class RateView extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      image: 0,
       ratingComposition: 0,
       ratingTrendy: 0,
       ratingComment: "",
@@ -31,18 +30,6 @@ class RateView extends Component {
     transition: 'scale',
 
   }
-
-
-  componentDidMount() {
-    //grab outfit image in database
-    let image = null;
-    database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
-    .once("value").then((snapshot)=> {
-        image = snapshot.child("img").val();
-        this.setState({ outfitImage: image });
-    });
-  }
-
 
   //handles the composition rating
   handleComposition(rating) {
@@ -97,34 +84,40 @@ class RateView extends Component {
 
 
   render(){
-    return(
-      <div>
-        <h1>RateView</h1>
+    console.log(this.props);
+    if (this.props.uid){
+      return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
+    }else{
+      return(
+        <div>
+          <h1>RateView</h1>
 
-        <img className="imageID" src={this.state.outfitImage}/>
+          <h1>Image goes here</h1>
 
-        <h2>Composition</h2>
-        <Rate
-           defaultValue={0}
-           onChange={this.handleComposition}
-           style={{ fontSize: 40 }}
-         />
+          <h2>Composition</h2>
+          <Rate
+             defaultValue={0}
+             onChange={this.handleComposition}
+             style={{ fontSize: 40 }}
+           />
 
-        <h2>Trendy</h2>
-        <Rate
-            defaultValue={0}
-            onChange={this.handleTrendy}
-            style={{ fontSize: 40 }}
-          />
+          <h2>Trendy</h2>
+          <Rate
+              defaultValue={0}
+              onChange={this.handleTrendy}
+              style={{ fontSize: 40 }}
+            />
 
-        <h2>Comment</h2>
-        <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
+          <h2>Comment</h2>
+          <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
 
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-        <button onClick={this.saveRating} className="button">Save</button>
+          <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+          <button onClick={this.saveRating} className="button">Save</button>
 
-      </div>
-    );
+        </div>
+      );
+    }
+
   }
 
 }

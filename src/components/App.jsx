@@ -50,7 +50,7 @@ class App extends Component {
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/rateView/:userId/:outfitId' component={RateView}/>
+            <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
 
