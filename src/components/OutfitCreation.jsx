@@ -4,7 +4,7 @@ import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import {database} from '../firebase.js';
 import AlertContainer from 'react-alert';
-import '../styles/OutfitCreation.css'
+import '../styles/OutfitCreation.css';
 
 class OutfitCreation extends Component {
 

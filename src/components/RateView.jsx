@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
 import Rate from 'rc-rate';
-import "../styles/stars.css"
+import "../styles/stars.css";
+import AlertContainer from 'react-alert';
 
 class RateView extends Component {
 
@@ -17,6 +18,16 @@ class RateView extends Component {
       this.handleTrendy = this.handleTrendy.bind(this);
       this.saveRating = this.saveRating.bind(this);
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
+  }
+
+  //the alert options for the npm react-alert
+  alertOptions = {
+    offset: 14,
+    position: 'top right',
+    theme: 'dark',
+    time: 5000,
+    transition: 'scale',
+
   }
 
   //handles the composition rating
@@ -37,11 +48,13 @@ class RateView extends Component {
     }
   }
 
+  //handles the username state.
   handleUsernameChange(event){
       this.setState({ratingComment: event.target.value});
   }
   //handles saving the rating and comments
   saveRating() {
+    //if the user has not saved once before, we will send that data to the db
     console.log(this.props.match.params);
     if(this.state.haveSaved === false){
         let ratingRef = database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
@@ -55,9 +68,17 @@ class RateView extends Component {
 
         this.setState({haveSaved: true});
     } else {
-      console.log("I AM TRUE");
+      //the user has already pressed save, give them alert denying the option
+      this.msg.show('You have already rated this image!', {
+        offset: 14,
+        position: 'top right',
+        theme: 'dark',
+        time: 5000,
+        transition: 'scale',
+        type: null
+      })
+
     }
-    console.log("WHAT DO YOU WANT FROM ME");
   }
 
 
@@ -85,6 +106,7 @@ class RateView extends Component {
         <h2>Comment</h2>
         <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
 
+        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <button onClick={this.saveRating} className="button">Save</button>
 
       </div>
