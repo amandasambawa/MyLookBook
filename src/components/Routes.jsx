@@ -25,9 +25,7 @@ const RateRoute = ({ component: Component, uid, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      uid
-        ? <Redirect to="/singleOutfit/1"/>
-        : <Component uid={uid} {...props} />}
+        <Component uid={uid} {...props} />}
   />
 );
 

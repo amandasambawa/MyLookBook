@@ -27,6 +27,8 @@ class SingleOutfitView extends Component {
     let averageUsers = 0;
     let ratingArray = [];
     let image = null;
+
+    //grabbing the image from database
     database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`)
     .once("value").then((snapshot)=> {
         image = snapshot.child("img").val();
@@ -35,7 +37,7 @@ class SingleOutfitView extends Component {
 
 
 
-    //grabbing ratings from data base
+    //grabbing ratings from database
     database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`)
     .once("value").then((snapshot)=> {
       //iterating through each index of the database
@@ -52,16 +54,14 @@ class SingleOutfitView extends Component {
 
       //setting the states to be the average ratings
       let avgComposition = (compositionTotal / averageUsers);
-      //avgComposition = (Math.round(avgComposition * 100) / 100);
       let avgTrendy = (trendyTotal / averageUsers);
-      //avgTrendy = (Math.round(avgTrendy * 100) / 100);
-      console.log(avgComposition);
-
-      avgComposition =  ((avgComposition*2)/2).toFixed(1);
-      console.log(avgComposition);
-      avgTrendy =   ((avgTrendy*2)/2).toFixed(1);
+      avgComposition = (Math.round(avgComposition * 2) / 2).toFixed(1);
+      avgTrendy = (Math.round(avgTrendy * 2) / 2).toFixed(1);
       avgComposition = parseFloat(avgComposition);
       avgTrendy = parseFloat(avgTrendy);
+
+
+      //setting the state to be average ratings
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray} );
     });
 
@@ -97,6 +97,8 @@ class SingleOutfitView extends Component {
       <div>
         <h1>SingleOutfitView</h1>
         <img className="imageID" src={this.state.outfitImage}/>
+
+        <div>Link: {`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}</div>
 
         <div className="ratingsContainer">
             <h2>Composition</h2>
