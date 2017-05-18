@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
 import Rate from 'rc-rate';
-import "../styles/stars.css"
-import "../styles/SingleOutfitView.css"
+import "../styles/stars.css";
+import "../styles/SingleOutfitView.css";
 
 
 class SingleOutfitView extends Component {
@@ -11,6 +11,7 @@ class SingleOutfitView extends Component {
   constructor(props){
     super(props);
     this.state = {
+        oufitImage: 0,
         compositionRating: 0,
         trendyRating: 0,
         ratings: []
@@ -20,13 +21,23 @@ class SingleOutfitView extends Component {
 
 
   componentDidMount() {
-    //grabbing from data base
+    //grab outfit image in database
+    let compositionTotal = 0;
+    let trendyTotal = 0;
+    let averageUsers = 0;
+    let ratingArray = [];
+    let image = null;
+    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`)
+    .once("value").then((snapshot)=> {
+        image = snapshot.child("img").val();
+        this.setState({ outfitImage: image });
+    });
+
+
+
+    //grabbing ratings from data base
     database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`)
     .once("value").then((snapshot)=> {
-      let compositionTotal = 0;
-      let trendyTotal = 0;
-      let averageUsers = 0;
-      let ratingArray = [];
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot){
         //add a Rating object to ratingArray
@@ -44,7 +55,7 @@ class SingleOutfitView extends Component {
       avgComposition = (Math.round(avgComposition * 100) / 100);
       let avgTrendy = (trendyTotal / averageUsers);
       avgTrendy = (Math.round(avgTrendy * 100) / 100);
-      this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray } );
+      this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray} );
     });
 
   }
@@ -78,8 +89,8 @@ class SingleOutfitView extends Component {
     return(
       <div>
         <h1>SingleOutfitView</h1>
+        <img className="imageID" src={this.state.outfitImage}/>
 
-        <h1>Image goes here</h1>
         <div className="ratingsContainer">
             <h2>Composition</h2>
             <Rate

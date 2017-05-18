@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { database } from '../firebase.js';
 import Rate from 'rc-rate';
-import "../styles/stars.css";
 import AlertContainer from 'react-alert';
+import "../styles/stars.css";
+import "../styles/SingleOutfitView.css";
 
 class RateView extends Component {
 
   constructor(props){
     super(props);
     this.state = {
+      image: 0,
       ratingComposition: 0,
       ratingTrendy: 0,
       ratingComment: "",
@@ -29,6 +31,18 @@ class RateView extends Component {
     transition: 'scale',
 
   }
+
+
+  componentDidMount() {
+    //grab outfit image in database
+    let image = null;
+    database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
+    .once("value").then((snapshot)=> {
+        image = snapshot.child("img").val();
+        this.setState({ outfitImage: image });
+    });
+  }
+
 
   //handles the composition rating
   handleComposition(rating) {
@@ -87,7 +101,7 @@ class RateView extends Component {
       <div>
         <h1>RateView</h1>
 
-        <h1>Image goes here</h1>
+        <img className="imageID" src={this.state.outfitImage}/>
 
         <h2>Composition</h2>
         <Rate
