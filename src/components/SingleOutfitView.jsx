@@ -52,9 +52,16 @@ class SingleOutfitView extends Component {
 
       //setting the states to be the average ratings
       let avgComposition = (compositionTotal / averageUsers);
-      avgComposition = (Math.round(avgComposition * 100) / 100);
+      //avgComposition = (Math.round(avgComposition * 100) / 100);
       let avgTrendy = (trendyTotal / averageUsers);
-      avgTrendy = (Math.round(avgTrendy * 100) / 100);
+      //avgTrendy = (Math.round(avgTrendy * 100) / 100);
+      console.log(avgComposition);
+
+      avgComposition =  ((avgComposition*2)/2).toFixed(1);
+      console.log(avgComposition);
+      avgTrendy =   ((avgTrendy*2)/2).toFixed(1);
+      avgComposition = parseFloat(avgComposition);
+      avgTrendy = parseFloat(avgTrendy);
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray} );
     });
 
