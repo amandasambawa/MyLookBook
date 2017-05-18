@@ -134,9 +134,11 @@ class DropZone extends Component {
     }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <div className="DropZoneContainer">
+        <img id="undoButton" src="http://www.clker.com/cliparts/f/I/b/7/L/o/undo-hi.png" onClick={this.props.undoItem}></img>
             {this.renderImage()}
             {this.startGesture()}
         </div>

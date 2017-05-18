@@ -1,4 +1,4 @@
-.DropZoneContainer{
+.DropZoneContainer {
   display: block;
   width: 95%;
   height: 400px;
@@ -7,7 +7,14 @@
   touch-action: none;
   margin-top: 10px;
 }
-.draggable{
-    width: 100px;
-    position: absolute;
+
+.draggable {
+  width: 100px;
+  position: absolute;
+}
+
+#undoButton {
+  width: 50px;
+  height: 50px;
+  float: right;
 }
