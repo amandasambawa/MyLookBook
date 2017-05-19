@@ -3,3 +3,16 @@
     /*font-family: 'Montserrat', sans-serif;*/
     /*font-family: 'Raleway', sans-serif; */
 }
+#createOutfitButton{
+  right: 40%;
+  bottom: 5px;
+  z-index: 1;
+  border: none;
+  border-radius: 10%;
+  box-shadow: 3px 3px 5px rgba(0,0,0,.3);
+  cursor: pointer;
+  position: fixed;
+  &:focus {
+    outline: none;
+  }
+}

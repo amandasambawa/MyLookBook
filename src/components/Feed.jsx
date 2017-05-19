@@ -78,8 +78,9 @@ class Feed extends Component {
   render(){
     return(
       <div>
+        <Link to="/outfitCreation" id='createOutfitButton' className="button">Create Outfit</Link>
         {this.loadOutfits()}
-        <Link to="/outfitCreation" className="button">Create Outfit</Link>
+
       </div>
     );
   }
