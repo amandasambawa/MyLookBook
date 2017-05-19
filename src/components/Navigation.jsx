@@ -37,7 +37,7 @@ class Navigation extends Component {
     if (this.props.location.pathname === "/feed"){
       return <div></div>;
     }else{
-      return <div className="feedLink"><Link to="/feed">Feed</Link></div>;
+      return <div className="feedLink"><Link to="/feed">Closet</Link></div>;
     }
   }
 

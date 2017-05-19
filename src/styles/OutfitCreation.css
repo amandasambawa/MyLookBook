@@ -5,6 +5,7 @@
 }
 
 .outfitName {
+    border: none;
     border-radius: 10px;
     background: lightgrey;
     padding-left: 15px;
@@ -16,7 +17,9 @@
     box-shadow: 3px 3px 6px grey;
     font-family: 'Montserrat', sans-serif;
 }
-
+.outfitName:focus{
+    outline: none;
+}
 .outfitNameContainer {
     display: flex;
     align-items: center;

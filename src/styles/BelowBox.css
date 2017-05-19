@@ -9,3 +9,7 @@ div.scrollmenu img {
     text-align: center;
     text-decoration: none;
 }
+
+.belowBox::-webkit-scrollbar {
+    display: none;
+}
