@@ -95,9 +95,10 @@ class SingleOutfitView extends Component {
   render(){
     return(
       <div>
-        <h1>SingleOutfitView</h1>
-        <img className="imageID" src={this.state.outfitImage}/>
-
+        <h3>SingleOutfitView</h3>
+          <div className="imageIDContainer">
+            <img className="imageID" src={this.state.outfitImage}/>
+          </div>
         <div>Link: {`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}</div>
 
         <div className="ratingsContainer">

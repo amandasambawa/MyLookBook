@@ -1,5 +1,11 @@
-.arrowButton {
-    height: 30px;
-    width: 30px;
-    position: absolute;
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu img {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
 }

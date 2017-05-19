@@ -11,9 +11,10 @@
     padding-right: 15px;
     position: absolute;
     text-align: center;
-    top: 50px;
+    top: 55px;
     margin: auto;
-    box-shadow: 3px 3px 25px grey;
+    box-shadow: 3px 3px 6px grey;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .outfitNameContainer {

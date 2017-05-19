@@ -11,6 +11,9 @@
     width: 95%;
     margin: auto;
     margin-top: 5px;
+    font-family: 'Abel', sans-serif;
+    /*font-family: 'Montserrat', sans-serif;*/
+    /*font-family: 'Raleway', sans-serif; */
 }
 
 .flex-item {

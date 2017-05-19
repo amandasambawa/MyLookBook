@@ -9,5 +9,9 @@
 .imageID{
   height: 300px;
   width: 90%;
-  text-align: center;
+  margin: auto;
+}
+
+.imageIDContainer {
+    text-align: center;
 }
