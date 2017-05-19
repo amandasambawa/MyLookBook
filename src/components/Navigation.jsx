@@ -6,7 +6,7 @@ import "../styles/Navigation.css";
 
 const propsToHeader = {
   "login": "Login",
-  "feed": "Feed",
+  "feed": "Closet",
   "outfitCreation": "Create An Outfit",
   'singleOutfit': "Outfit",
   "rateView": "Rate this Outfit"

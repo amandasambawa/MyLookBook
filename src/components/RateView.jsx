@@ -103,7 +103,9 @@ class RateView extends Component {
         <div>
           <h1>RateView</h1>
 
-          <img className="imageID" src={this.state.outfitImage}/>
+          <div className ="imageIDContainer">
+            <img className="imageID" src={this.state.outfitImage}/>
+          </div>
 
           <h2>Composition</h2>
           <Rate
