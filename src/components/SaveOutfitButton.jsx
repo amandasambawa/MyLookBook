@@ -31,11 +31,11 @@ class SaveOutfitButton extends Component {
 
         var url = canvas.toDataURL("image/png");
         let outfitRef = database.ref(`/users/${this.props.uid}/outfitobjects`);
-        let newOutfit = outfitRef.push()
+        let newOutfit = outfitRef.push();
+      //  console.log(this.props.outfitTitle);
         newOutfit.set({
-          outfitimg: "someimg",
           path: "1235",
-          title: "Test Outfit",
+          title: this.props.outfitTitle,
           ratings: {},
           img: url
         });

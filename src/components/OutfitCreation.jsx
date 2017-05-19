@@ -11,10 +11,13 @@ class OutfitCreation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickedItems: []
+      clickedItems: [],
+      title:"Title"
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
+    this.nameOutfit = this.nameOutfit.bind(this);
+
   }
 
   alertOptions = {
@@ -57,16 +60,20 @@ class OutfitCreation extends Component {
     }
   }
 
+  nameOutfit(event){
+    this.setState({title:event.target.value});
+  }
+
   render() {
     return (
         <div>
             <div className="outfitNameContainer">
-                <div className="outfitName">OUTFIT #1</div>
+                <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
             </div>
             <div>
                 <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
                 <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <SaveOutfitButton uid={this.props.uid}/>
+                <SaveOutfitButton uid={this.props.uid} outfitTitle={this.state.title}/>
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
             </div>
         </div>
