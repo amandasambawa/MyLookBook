@@ -43,7 +43,7 @@ class Feed extends Component {
     return this.state.previews.map((preview) => {
       return (
         <div className="small-8 medium-4 large-4 columns">
-            <span className="outfitName2">Outfit Name</span>
+            <span className="outfitName2">{preview.val().title}</span>
             <Link to={`/singleOutfit/${preview.key}`}><img src={preview.val().img}/></Link>
         </div>
       );
