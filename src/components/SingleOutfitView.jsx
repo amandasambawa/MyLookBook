@@ -72,22 +72,24 @@ class SingleOutfitView extends Component {
   loadRatings() {
     return this.state.ratings.map((rating)=>{
         return (
-          <div>
-          <h2>Composition</h2>
-          <Rate
-              value={rating.composition}
-              style={{ fontSize: 30 }}
-              allowHalf
-          />
-          <h2>Trendy</h2>
-          <Rate
-              value={rating.trendy}
-              style={{ fontSize: 30 }}
-              allowHalf
-            />
-          <div className='commentBox'>{rating.comment}</div>
+            <div>
+              <div className="ratingsContainer">
+              <div className="ratingsLabel">Composition</div>
+              <Rate
+                  value={rating.composition}
+                  style={{ fontSize: 30 }}
+                  allowHalf
+              />
+              <div className="ratingsLabel">Trendy</div>
+              <Rate
+                  value={rating.trendy}
+                  style={{ fontSize: 30 }}
+                  allowHalf
+                />
+              <div className='commentBox'>{rating.comment}</div>
 
-          </div>
+              </div>
+            </div>
         );
     })
   }
@@ -95,32 +97,33 @@ class SingleOutfitView extends Component {
   render(){
     return(
       <div>
-        <h3>SingleOutfitView</h3>
-          <div className="imageIDContainer">
-            <img className="imageID" src={this.state.outfitImage}/>
-          </div>
-        <div>Link: <input type="text" value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/></div>
+          <div id="singleOutfitViewContainer">
+            <div className="imageIDContainer">
+                <img className="imageID" src={this.state.outfitImage}/>
+            </div>
+            <div id="linkContainer">
+                <span id="linkTitle">Link:</span>
+                <input className="link" type="text" value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/>
+            </div>
 
-        <div className="ratingsContainer">
-            <h2>Composition</h2>
-            <Rate
-                value={this.state.compositionRating}
-                style={{ fontSize: 30 }}
-                allowHalf
-            />
-            <h3> Composition Average Rating = {this.state.compositionRating} </h3>
+            <div className="ratingsContainer">
+                <div className="ratingsLabel">Overall Composition</div>
+                <Rate
+                    value={this.state.compositionRating}
+                    style={{ fontSize: 30 }}
+                    allowHalf
+                />
 
-            <h2>Trendy</h2>
-            <Rate
-                value={this.state.trendyRating}
-                style={{ fontSize: 30 }}
-                allowHalf
-            />
-            <h3> Trendy Average Rating = {this.state.trendyRating} </h3>
-
-            <h2>Ratings and Comments</h2>
+                <div className="ratingsLabel">Overall Trendy</div>
+                <Rate
+                    value={this.state.trendyRating}
+                    style={{ fontSize: 30 }}
+                    allowHalf
+                />
+            </div>
+            <div className="ratingsLabel">Ratings and Comments</div>
                 {this.loadRatings()}
-        </div>
+          </div>
       </div>
     );
   }

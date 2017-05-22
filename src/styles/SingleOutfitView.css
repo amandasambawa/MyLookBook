@@ -1,9 +1,17 @@
+#singleOutfitViewContainer {
+    margin-top: 20px;
+}
+
 .commentBox {
   border: 1px solid black;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 5px;
 }
 
 .ratingsContainer {
     border: 1px solid grey;
+    text-align: center;
 }
 
 .imageID{
@@ -13,5 +21,26 @@
 }
 
 .imageIDContainer {
+    text-align: center;
+}
+
+
+#linkContainer {
+    padding-top: 10px;
+    width: 90%;
+    margin: auto;
+}
+
+.ratingsLabel {
+    font-size: 20px;
+}
+
+.ratingsContainer {
+    width: 90%;
+    margin: auto;
+}
+
+.averageRatings {
+    font-size: 16px;
     text-align: center;
 }
