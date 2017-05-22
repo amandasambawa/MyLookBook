@@ -99,7 +99,7 @@ class SingleOutfitView extends Component {
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
           </div>
-        <div>Link: {`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}</div>
+        <div>Link: <input type="text" value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/></div>
 
         <div className="ratingsContainer">
             <h2>Composition</h2>

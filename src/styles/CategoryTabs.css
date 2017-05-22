@@ -44,14 +44,6 @@
     flex: 1.8;
 }
 
-img {
-    margin-top:10px;
-    margin-left:10px;
-    margin-right: 10px;
-    height: 90px;
-    width: 25%;
-}
-
 .belowBox {
     width: 90%;
     margin: auto;

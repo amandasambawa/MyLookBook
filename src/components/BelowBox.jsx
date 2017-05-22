@@ -9,7 +9,7 @@ class BelowBox extends Component {
     }
     returnCatalogItems(){
         return this.props.imageUrls.map((url)=>{
-            return (<img src={url} onClick={this.clicked}/>);
+            return (<img className="categoryItems" src={url} onClick={this.clicked}/>);
         })
     }
     clicked(event) {

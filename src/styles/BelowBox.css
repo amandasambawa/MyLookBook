@@ -13,3 +13,11 @@ div.scrollmenu img {
 .belowBox::-webkit-scrollbar {
     display: none;
 }
+
+img.categoryItems {
+    margin-top:10px;
+    margin-left:10px;
+    margin-right: 10px;
+    height: 90px;
+    width: 25%;
+}
