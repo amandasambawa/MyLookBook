@@ -30,7 +30,7 @@ class LoginPage extends Component {
       )
     } else {
       return (
-        <div className="LoginPage">
+        <div className="loginPage">
           <LoginForm/>
         </div>
       );

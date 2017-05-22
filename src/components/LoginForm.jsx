@@ -62,12 +62,18 @@ class LoginForm extends Component {
 
   render(){
     return(
-      <div className="loginForm row">
-        <input type="text" className="small-12 small-offset-2" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange}/>
-        <input type="text" className="small-12 small-offset-2" value={this.state.email} placeholder="Email" onChange={this.handleEmailChange}/>
-        <input type="password" className="small-12 small-offset-2" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange}/>
-        <button onClick={this.login} className="button columns small-6 small-offset-2">Login</button>
-        <button onClick={this.signUp} className="button columns small-6">Sign Up</button>
+      <div className="row loginForm">
+        <div className="formInputs columns small-14 small-offset-1">
+          <input type="text" value={this.state.username} placeholder="Username" onChange={this.handleUsernameChange}/>
+          <input type="text" value={this.state.email} placeholder="Email" onChange={this.handleEmailChange}/>
+          <input type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange}/>
+        </div>
+        <div className="small-12 small-offset-2 loginButtons">
+          <div className="row centered">
+            <div onClick={this.login} className="button small-6 small-offset-1">Login</div>
+            <div onClick={this.signUp} className="button small-6 small-offset-2">Sign Up</div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -39,46 +39,23 @@ class Feed extends Component {
     });
   }
 
-  loadOutfits() {
-    var arr = [];
-    let ctr = this.state.previews.length-1;
-
-    while (ctr > 1)
-    {
-        arr.push(
-            <div className="row">
-                <div className="large-6 columns">
-                    <span className="outfitName2">Outfit Name 1</span>
-                    <Link to={`/singleOutfit/${this.state.previews[ctr].key}`} ><img src={this.state.previews[ctr].val().img}/></Link>
-                </div>
-                <div className="large-6 columns">
-                    <span className="outfitName2">Outfit Name 2</span>
-                    <Link to={`/singleOutfit/${this.state.previews[ctr - 1].key}`}><img src={this.state.previews[ctr - 1].val().img}/></Link>
-                </div>
-            </div>
-        )
-        ctr=ctr-2;
-    }
-    if (ctr === 1) {
-        arr.push(
-            <div className="row">
-                <div className="large-6 columns">
-                    <span className="outfitName2">Outfit Name 1</span>
-                    <Link to={`/singleOutfit/${this.state.previews[ctr].key}`} ><img src={this.state.previews[ctr].val().img}/></Link>
-                </div>
-                <div className="large-6 columns">
-                </div>
-            </div>
-        )
-    }
-
-      return arr;
+  loadOutfits(){
+    return this.state.previews.map((preview) => {
+      return (
+        <div className="small-8 medium-4 large-4 columns">
+            <span className="outfitName2">Outfit Name</span>
+            <Link to={`/singleOutfit/${preview.key}`}><img src={preview.val().img}/></Link>
+        </div>
+      );
+    });
   }
 
   render(){
     return(
-      <div>
-        <Link to="/outfitCreation" id='createOutfitButton' className="button">Create Outfit</Link>
+      <div className="row">
+        <div className="buttonContainer">
+          <Link to="/outfitCreation" id='createOutfitButton' className="button">Create Outfit</Link>
+        </div>
         {this.loadOutfits()}
 
       </div>

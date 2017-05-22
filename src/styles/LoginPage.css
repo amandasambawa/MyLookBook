@@ -1,3 +1,21 @@
 .loginForm{
   background-color: rgba(0, 0, 0, 0.8);
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+}
+
+.formInputs{
+  margin-top: 5%;
+}
+
+.loginButtons{
+  margin-top: 5%;
+}
+
+.loginPage{
+  background-color: #F6F6F6;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }

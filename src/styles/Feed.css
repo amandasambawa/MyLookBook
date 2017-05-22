@@ -3,16 +3,27 @@
     /*font-family: 'Montserrat', sans-serif;*/
     /*font-family: 'Raleway', sans-serif; */
 }
-#createOutfitButton{
-  right: 40%;
-  bottom: 5px;
+
+.buttonContainer {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
   z-index: 1;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#createOutfitButton{
+  position: relative;
+  bottom: 7%;
+  pointer-events: all;
+  width: 60%;
+  max-width: 300px;
   border: none;
-  border-radius: 10%;
+  border-radius: 30px;
   box-shadow: 3px 3px 5px rgba(0,0,0,.3);
   cursor: pointer;
-  position: fixed;
-  &:focus {
-    outline: none;
-  }
 }
