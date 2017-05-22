@@ -30,7 +30,12 @@ class Navigation extends Component {
   }
 
   pageToHeader(){
-    return propsToHeader[this.props.location.pathname.split("/")[1]];
+    //console.log(propsToHeader[this.props.location.pathname.split("/")[1]);
+    if ( propsToHeader[this.props.location.pathname.split("/")[1]] == "Closet"){
+      return  this.props.userName + "'s " + propsToHeader[this.props.location.pathname.split("/")[1]];
+    }else{
+      return propsToHeader[this.props.location.pathname.split("/")[1]];
+    }
   }
 
   conditionalBackToFeed(){

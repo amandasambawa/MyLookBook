@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth } from '../firebase.js';
+import { auth,database } from '../firebase.js';
 import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
@@ -24,8 +24,10 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      uid: null
+      uid: null,
+      uname: null
     }
+    this.getUserName = this.getUserName.bind(this);
   }
 
   componentDidMount() {
@@ -33,10 +35,18 @@ class App extends Component {
       if (user) {
         console.log("user logged in");
         this.setState({uid: user.uid});
+        this.getUserName();
       } else {
         console.log("user logged out");
         this.setState({uid: null});
       }
+    });
+  }
+  getUserName(){
+    database.ref(`/users/${this.state.uid}/`)
+    .once("value").then((snapshot)=> {
+        var userName = snapshot.child("username").val();
+        this.setState({ uname: userName });
     });
   }
 
@@ -44,7 +54,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation uid={this.state.uid}/>
+          <Navigation userName={this.state.uname} uid={this.state.uid}/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
