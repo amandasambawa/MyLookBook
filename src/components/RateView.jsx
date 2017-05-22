@@ -21,6 +21,7 @@ class RateView extends Component {
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
 
+/*
   componentDidMount() {
     //grab outfit image in database
     let image = null;
@@ -30,7 +31,7 @@ class RateView extends Component {
         this.setState({ outfitImage: image });
     });
   }
-
+  */
 
   //the alert options for the npm react-alert
   alertOptions = {
@@ -95,7 +96,6 @@ class RateView extends Component {
 
 
   render(){
-    console.log(this.props);
     if (this.props.uid){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
