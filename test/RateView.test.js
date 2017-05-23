@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {shallow, render, mount} from 'enzyme';
 import RateView from '../src/components/RateView.jsx';
-import renderer from 'react-test-renderer';
 import Rate from 'rc-rate';
 
 //Make sure that the RateView jsx page can even reder.
@@ -11,25 +10,17 @@ it('renders without crashing', () => {
   ReactDOM.render(<RateView />, div);
 });
 
-//Make sure that the RateView jsx page can even reder.
-it('renders without crashing3', () => {
-  render(<RateView />);
-});
-
+//Make sure the Comment UI is loading probably
 it('renders Title of the page', () => {
-  const wrapper = shallow(<RateView />);
-  const title = <h1>RateView</h1>;
+  const wrapper = mount(<RateView />);
+  const title =           <div className="ratingsLabel">
+            Comment
+          </div>;
   // expect(wrapper.contains(welcome)).to.equal(true);
   expect(wrapper.contains(title)).toEqual(true);
 });
 
-
-it('renders correctly', () => {
-  const tree = renderer.create(
-    <RateView />).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
+//make sure the rate stars are appearing on the page
 describe('RateView', () => {
     it('check if we have rates working', () => {
         const wrapper = mount(<RateView />);
@@ -40,13 +31,6 @@ describe('RateView', () => {
         expect(wrapper.contains(title)).toEqual(true);
     });
   });
-
-  describe('RateView', () => {
-      it('we can set our states', () => {
-          const wrapper = mount(<RateView />);
-          expect(wrapper.find('.imageIDContainer')).to.have.length(0);
-      });
-    });
 
 //Make sure that it renders
 /*

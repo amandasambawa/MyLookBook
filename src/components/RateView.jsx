@@ -22,7 +22,7 @@ class RateView extends Component {
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
 
-/*
+
   componentDidMount() {
     //grab outfit image in database
     let image = null;
@@ -32,7 +32,7 @@ class RateView extends Component {
         this.setState({ outfitImage: image });
     });
   }
-  */
+
 
   //the alert options for the npm react-alert
   alertOptions = {
@@ -40,8 +40,7 @@ class RateView extends Component {
     position: 'top right',
     theme: 'dark',
     time: 5000,
-    transition: 'scale',
-
+    transition: 'scale'
   }
 
   //handles the composition rating
