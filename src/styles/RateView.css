@@ -1,3 +1,7 @@
+#rateViewContainer {
+    text-align: center;
+}
+
 .imageID{
   height: 300px;
   width: 90%;
@@ -6,4 +10,17 @@
 
 .imageIDContainer {
     text-align: center;
+}
+
+.ratingsLabel {
+    font-size: 20px;
+    width: 90%;
+    margin: auto;
+    margin-top: 5px;
+}
+
+textarea {
+    max-width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
 }

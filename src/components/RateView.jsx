@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import Rate from 'rc-rate';
 import "../styles/stars.css";
 import AlertContainer from 'react-alert';
+import "../styles/RateView.css"
 
 class RateView extends Component {
 
@@ -21,6 +22,7 @@ class RateView extends Component {
       this.handleUsernameChange = this.handleUsernameChange.bind(this);
   }
 
+
   componentDidMount() {
     //grab outfit image in database
     let image = null;
@@ -30,7 +32,7 @@ class RateView extends Component {
         this.setState({ outfitImage: image });
     });
   }
-
+  
 
   //the alert options for the npm react-alert
   alertOptions = {
@@ -95,33 +97,31 @@ class RateView extends Component {
 
 
   render(){
-    console.log(this.props);
     if (this.props.uid){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
       return(
-        <div>
-          <h1>RateView</h1>
+        <div id="rateViewContainer">
 
           <div className ="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
           </div>
 
-          <h2>Composition</h2>
+          <div className="ratingsLabel">Composition</div>
           <Rate
              defaultValue={0}
              onChange={this.handleComposition}
              style={{ fontSize: 40 }}
            />
 
-          <h2>Trendy</h2>
+          <div className="ratingsLabel">Trendy</div>
           <Rate
               defaultValue={0}
               onChange={this.handleTrendy}
               style={{ fontSize: 40 }}
             />
 
-          <h2>Comment</h2>
+          <div className="ratingsLabel">Comment</div>
           <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
 
           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />

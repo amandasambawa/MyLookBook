@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {shallow, render, mount} from 'enzyme';
-// import {shallow} from 'react-test-renderer'
-import RateView from '../src/components/RateView.jsx';
-import LoginForm from '../src/components/LoginForm.jsx';
-import Feed from '../src/components/Feed.jsx';
-import Rate from 'rc-rate';
-import { Link } from 'react-router-dom';
+import {shallow, mount, render} from 'enzyme';
+import App from '../src/components/App.jsx';
 
+
+//Make sure that the App jsx page can even reder.
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<LoginForm />, div);
@@ -25,4 +22,9 @@ describe('<LoginForm >', () => {
    let wrapper = shallow(<Feed uid={123}/>);
    expect(wrapper.find('input')).to.have.length(1);
  });
+});
+
+//Our state exists in the page and it updates.
+it('renders without crashing part 2', () => {
+  shallow(<App />);
 });
