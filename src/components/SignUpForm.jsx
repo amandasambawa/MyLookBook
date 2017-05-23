@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { auth, database } from '../firebase.js';
 
-class LoginForm extends Component {
+class SignUpForm extends Component {
 
   constructor(){
     super();
     this.state = {
       email: "",
       password: "",
+      name: ""
     }
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
+
   }
 
   handleEmailChange(event) {
@@ -26,15 +29,19 @@ class LoginForm extends Component {
     this.setState({password: event.target.value});
   }
 
-  login(){
-    auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-      // Handle Errors here.
+  signUp(){
+    auth.createUserWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+      let userRef = database.ref(`/users/${user.uid}`);
+      userRef.set({
+        username: this.state.username
+      });
+    }).catch((error, user)=>{
       var errorCode = error.code;
       var errorMessage = error.message;
       if (error){
         console.log("error ->", error.message);
       }else{
-        console.log("successful login");
+        console.log("signing up");
       }
     });
   }
@@ -43,17 +50,18 @@ class LoginForm extends Component {
     return(
       <div>
         <div className="formInputs columns small-14 small-offset-1" id="inputs">
+          <input type="text" value={this.state.username} placeholder="Name" onChange={this.handleUsernameChange}/>
           <input type="text" value={this.state.email} placeholder="Email" onChange={this.handleEmailChange}/>
           <input type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange}/>
         </div>
         <div className="small-12 small-offset-2 loginButtons">
           <div className="row centered">
-            <div onClick={this.login} className="button small-14 small-offset-1">Login</div>
+            <div onClick={this.signUp} className="button small-14 small-offset-1">Sign Up</div>
           </div>
         </div>
-     </div>
+      </div>
     );
   }
 }
 
-export default LoginForm;
+export default SignUpForm;

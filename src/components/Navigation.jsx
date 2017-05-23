@@ -63,7 +63,15 @@ class Navigation extends Component {
       );
     }else{
       return(
-          <div></div>
+          <div className="mobile-nav-bar title-bar">
+            <div className="title-bar-left">
+            </div>
+            <div className="title-bar-center">
+              <span className="title-bar-text">Login</span>
+            </div>
+            <div className="title-bar-right">
+            </div>
+          </div>
       );
     }
   }
