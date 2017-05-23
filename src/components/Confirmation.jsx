@@ -13,7 +13,7 @@ class Confirmation extends Component {
     render(){
         return(
             <div>
-                <img src= 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Check_mark_23x20_02.svg/1081px-Check_mark_23x20_02.svg.png'/>
+                <img src= '../assets/check-mark.png'/>
                 <span>Confirmed</span>
             </div>
         );
