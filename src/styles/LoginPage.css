@@ -1,6 +1,6 @@
 .loginForm{
-  background-color: rgba(0, 0, 0, 0.8);
-  width: 80%;
+  position: relative;
+  bottom: 10%;
   max-width: 500px;
   border-radius: 10px;
 }

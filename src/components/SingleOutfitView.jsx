@@ -4,9 +4,7 @@ import Rate from 'rc-rate';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 
-
 class SingleOutfitView extends Component {
-
 
   constructor(props){
     super(props);
@@ -18,7 +16,6 @@ class SingleOutfitView extends Component {
     }
     this.loadRatings = this.loadRatings.bind(this);
   }
-
 
   componentDidMount() {
     //grab outfit image in database
@@ -34,7 +31,6 @@ class SingleOutfitView extends Component {
         image = snapshot.child("img").val();
         this.setState({ outfitImage: image });
     });
-
 
 
     //grabbing ratings from database
