@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { database } from '../firebase.js';
 import { Redirect } from 'react-router-dom';
 import Rate from 'rc-rate';
-import "../styles/stars.css";
 import AlertContainer from 'react-alert';
+import "../styles/stars.css";
 import "../styles/RateView.css"
 
 class RateView extends Component {
@@ -14,7 +14,8 @@ class RateView extends Component {
       ratingComposition: 0,
       ratingTrendy: 0,
       ratingComment: "",
-      haveSaved: false
+      haveSaved: false,
+      sender: ""
     }
       this.handleComposition = this.handleComposition.bind(this);
       this.handleTrendy = this.handleTrendy.bind(this);
@@ -31,6 +32,12 @@ class RateView extends Component {
         image = snapshot.child("img").val();
         this.setState({ outfitImage: image });
     });
+
+    database.ref(`/users/${this.props.match.params.userId}/`)
+        .once("value").then((snapshot)=> {
+            this.setState({ sender: snapshot.child("username").val() });
+    });
+
   }
   
 
@@ -102,7 +109,7 @@ class RateView extends Component {
     }else{
       return(
         <div id="rateViewContainer">
-
+            <div id="rateTitle">{this.state.sender} would like you to rate this outfit!</div>
           <div className ="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
           </div>
