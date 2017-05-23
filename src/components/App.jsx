@@ -8,8 +8,8 @@ import RateView from './RateView.jsx';
 import NoMatch from './NoMatch.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
 import Navigation from './Navigation.jsx';
-import "../styles/foundation.css"
-import "../styles/foundation2.css"
+import "../styles/foundation.css";
+import "../styles/foundation2.css";
 
 import {
   BrowserRouter as Router,
