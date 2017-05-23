@@ -1,0 +1,182 @@
+exports[`test renders correctly 1`] = `
+<div>
+  <h1>
+    RateView
+  </h1>
+  <div
+    className="imageIDContainer">
+    <img
+      className="imageID"
+      src={undefined} />
+  </div>
+  <h2>
+    Composition
+  </h2>
+  <ul
+    className="rc-rate"
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "fontSize": 40,
+      }
+    }>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+  </ul>
+  <h2>
+    Trendy
+  </h2>
+  <ul
+    className="rc-rate"
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "fontSize": 40,
+      }
+    }>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+    <li
+      className="rc-rate-star rc-rate-star-zero"
+      onClick={[Function]}
+      onMouseMove={[Function]}>
+      <div
+        className="rc-rate-star-first">
+        ★
+      </div>
+      <div
+        className="rc-rate-star-second">
+        ★
+      </div>
+    </li>
+  </ul>
+  <h2>
+    Comment
+  </h2>
+  <textarea
+    onChange={[Function]}
+    placeholder="Leave a comment!" />
+  <div
+    className="css-132hx50">
+    <span />
+  </div>
+  <button
+    className="button"
+    onClick={[Function]}>
+    Save
+  </button>
+</div>
+`;
