@@ -7,6 +7,7 @@ import SingleOutfitView from './SingleOutfitView.jsx';
 import RateView from './RateView.jsx';
 import NoMatch from './NoMatch.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
+import Confirmation from './Confirmation.jsx';
 import Navigation from './Navigation.jsx';
 import "../styles/foundation.css";
 import "../styles/foundation2.css";
@@ -62,6 +63,7 @@ class App extends Component {
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
+            <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
 
