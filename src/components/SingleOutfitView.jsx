@@ -18,6 +18,7 @@ class SingleOutfitView extends Component {
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
+    this.injectRatingsContent = this.injectRatingsContent.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +66,9 @@ class SingleOutfitView extends Component {
   //this method loads all the rating objects into a component.
   //this function is called at the bottom of render
   loadRatings() {
+
+
+
     return this.state.ratings.map((rating) => {
       return (
         <div>
@@ -83,6 +87,38 @@ class SingleOutfitView extends Component {
         </div>
       );
     })
+  }
+
+  injectRatingsContent(){
+    //check if ratings is empty
+    var ratingsContent;
+    console.log("currently injecting");
+    if(this.state.ratings.length===0){
+      console.log("ratings are empty");
+      ratingsContent = <h1> Nothing here </h1>;
+    } else {
+
+      ratingsContent =  (<div> <div className="ratingsContainer">
+
+                  <div className="ratingsLabel">Overall Composition</div>
+                  <Rate value={this.state.compositionRating} style={{
+                    fontSize: 30
+                  }} allowHalf/>
+
+                  <div className="ratingsLabel">Overall Trendy</div>
+                  <Rate value={this.state.trendyRating} style={{
+                    fontSize: 30
+                  }} allowHalf/>
+                </div>
+                <div className="ratingsLabel">Ratings and Comments</div>
+                {this.loadRatings()}
+              </div>
+
+            );
+
+    }
+
+    return ratingsContent;
   }
 
   handleFocus(event) {
@@ -112,6 +148,7 @@ class SingleOutfitView extends Component {
    }
 
   render() {
+
     return (
       <div>
        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
@@ -127,21 +164,8 @@ class SingleOutfitView extends Component {
                 <a id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">twitter</a>
                 <a id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">gp</a>
             </div>
-
-          <div className="ratingsContainer">
-            <div className="ratingsLabel">Overall Composition</div>
-            <Rate value={this.state.compositionRating} style={{
-              fontSize: 30
-            }} allowHalf/>
-
-            <div className="ratingsLabel">Overall Trendy</div>
-            <Rate value={this.state.trendyRating} style={{
-              fontSize: 30
-            }} allowHalf/>
-          </div>
-          <div className="ratingsLabel">Ratings and Comments</div>
-          {this.loadRatings()}
-        </div>
+            {this.injectRatingsContent()}
+            </div>
       </div>
     );
   }
