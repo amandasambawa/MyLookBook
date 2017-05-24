@@ -15,9 +15,10 @@ import Rate from 'rc-rate';
 * The following tests encompass the UI.
 */
 
+
 //Make sure the Composition UI is loading properly
 it('renders the Comment Section of the page', () => {
-  const wrapper = shallow(<RateView />);
+  const wrapper = shallow(<RateView testing={true}/>);
   const title =           <div className="ratingsLabel">
             Composition
           </div>;
@@ -26,7 +27,7 @@ it('renders the Comment Section of the page', () => {
 
 //Make sure the Trendy UI is loading properly.
 it('renders the Trendy section of the page', () => {
-  const wrapper = shallow(<RateView />);
+  const wrapper = shallow(<RateView testing={true}/>);
   const title =           <div className="ratingsLabel">
             Trendy
           </div>;
@@ -36,28 +37,48 @@ it('renders the Trendy section of the page', () => {
 
 //Make sure the Comment UI is loading properly
 it('renders the Comment Section of the page', () => {
-  const wrapper = shallow(<RateView />);
+  const wrapper = shallow(<RateView testing={true}/>);
   const title =           <div className="ratingsLabel">
             Comment
           </div>;
   expect(wrapper.contains(title)).toEqual(true);
 });
 
-//make sure the images are okay
+
+
+//make sure the images have a space in the webpage.
 describe('RateView', () => {
     it('check if the images loading up', () => {
+        //let obj = {params: {outfitId: `-KkI2QGzORcXRcSoHT9j`} };
+        const wrapper = shallow(<RateView testing={true}/>);
+        const image = wrapper.find('img');
+        expect(image.prop('src')).toEqual(undefined);
 
-        const wrapper = shallow(<RateView />);
-        console.log(wrapper.debug());
-        expect(wrapper.contains(title)).toEqual(true);
     });
   });
 
-//Make sure that it renders
-/*
 
-it('should update the src state on clicking fetch', function () {
-  const wrapper = render(<RateView />);
-  wrapper.setState({ haveSaved : false });
-  expect(wrapper.state('haveSaved')).to.equal('false');
-});*/
+/*
+* The following tests encompass the functionality
+*/
+
+  //Make sure handleComposition is changing the handleComposition state properly.
+  it('make sure that handleComposition is working properly.', () => {
+    const wrapper = shallow(<RateView testing={true}/>);
+    wrapper.instance().handleComposition(5);
+    expect(wrapper.state('ratingComposition')).toEqual(5);
+  });
+
+  //Make sure handleTrendy is changing the handleComposition state properly.
+  it('make sure that handleTrendy is working properly.', () => {
+    const wrapper = shallow(<RateView testing={true}/>);
+    wrapper.instance().handleTrendy(1);
+    expect(wrapper.state('ratingTrendy')).toEqual(1);
+  });
+
+  //Make sure handleCommentChange is changing the ratingComment state properly.
+  it('make sure that handleCommentChange is working properly.', () => {
+    const wrapper = mount(<RateView testing={true}/>);
+    wrapper.instance().setState({ratingComposition:'hello world'});
+    expect(wrapper.state('ratingComposition')).toEqual('hello world');
+  });
