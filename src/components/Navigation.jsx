@@ -8,7 +8,7 @@ const propsToHeader = {
   "login": "Login",
   "feed": "Closet",
   "outfitCreation": "Create An Outfit",
-  'singleOutfit': "Outfit",
+  "singleOutfit": "Outfit",
   "rateView": "Rate this Outfit"
 }
 
@@ -17,6 +17,7 @@ class Navigation extends Component {
   constructor(props){
     super(props);
     this.pageToHeader = this.pageToHeader.bind(this);
+    this.conditionalBackToFeed = this.conditionalBackToFeed.bind(this);
   }
 
   logout(){
@@ -31,7 +32,7 @@ class Navigation extends Component {
 
   pageToHeader(){
     //console.log(propsToHeader[this.props.location.pathname.split("/")[1]);
-    if ( propsToHeader[this.props.location.pathname.split("/")[1]] == "Closet"){
+    if ( propsToHeader[this.props.location.pathname.split("/")[1]] === "Closet"){
       return  this.props.userName + "'s " + propsToHeader[this.props.location.pathname.split("/")[1]];
     }else{
       return propsToHeader[this.props.location.pathname.split("/")[1]];
@@ -47,6 +48,7 @@ class Navigation extends Component {
   }
 
   render(){
+    console.log(this.props);
     if(this.props.uid){
       return(
             <div className="mobile-nav-bar title-bar">
@@ -67,7 +69,7 @@ class Navigation extends Component {
             <div className="title-bar-left">
             </div>
             <div className="title-bar-center">
-              <span className="title-bar-text">Login</span>
+              <span className="title-bar-text">{this.pageToHeader()}</span>
             </div>
             <div className="title-bar-right">
             </div>
