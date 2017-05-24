@@ -78,17 +78,5 @@ class Navigation extends Component {
   }
 }
 
-// if (this.props.uid){
-//   console.log(this.props);
-//   return (
-//     <div className="navigation">
-//
-//         <div>{this.pageToHeader()}</div>
-//         <button className="button" onClick={this.logout}>Logout</button>
-//     </div>);
-// }else{
-//
-// }
-
 
 export default withRouter(Navigation);

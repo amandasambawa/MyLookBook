@@ -49,19 +49,6 @@ class CategoryTabs extends Component {
         this.setState({imageUrls: itemsArray[category], selected: category, active: activeState});
     }
 
-    // isActive(value){
-    //     if (value===this.state.selected)
-    //         return 'active';
-    //     else
-    //         return 'default';
-    // }
-
-    // returnCatalogItems(){
-    //     return this.state.imageUrls.map((url)=>{
-    //         return (<img src={url}></img>);
-    //     })
-    // }
-
     render() {
     return (
         <div>
