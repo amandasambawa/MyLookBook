@@ -4,7 +4,8 @@ import { Redirect } from 'react-router-dom';
 import Rate from 'rc-rate';
 import "../styles/stars.css";
 import AlertContainer from 'react-alert';
-import "../styles/RateView.css"
+import "../styles/RateView.css";
+import Confirmation from './Confirmation.jsx';
 
 class RateView extends Component {
 
@@ -107,6 +108,10 @@ class RateView extends Component {
 
 
   render(){
+
+    if(this.state.haveSaved === true){
+      return <Confirmation />
+    } else {
     if ( (this.props.uid || this.state.outfitImage === null) && this.props.testing === undefined ){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
@@ -140,6 +145,8 @@ class RateView extends Component {
         </div>
       );
     }
+
+  }
 
   }
 
