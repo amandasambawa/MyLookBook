@@ -48,7 +48,6 @@ class Navigation extends Component {
   }
 
   render(){
-    console.log(this.props);
     if(this.props.uid){
       return(
             <div className="mobile-nav-bar title-bar">

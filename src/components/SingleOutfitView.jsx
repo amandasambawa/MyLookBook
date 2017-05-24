@@ -18,49 +18,53 @@ class SingleOutfitView extends Component {
   }
 
   componentDidMount() {
-    //grab outfit image in database
-    let compositionTotal = 0;
-    let trendyTotal = 0;
-    let averageUsers = 0;
-    let ratingArray = [];
-    let image = null;
+    if(this.props.testing === true ) {
 
-    //grabbing the image from database
-    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`)
-    .once("value").then((snapshot)=> {
-        image = snapshot.child("img").val();
-        this.setState({ outfitImage: image });
-    });
+    } else {
+      //grab outfit image in database
+      let compositionTotal = 0;
+      let trendyTotal = 0;
+      let averageUsers = 0;
+      let ratingArray = [];
+      let image = null;
 
-
-    //grabbing ratings from database
-    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`)
-    .once("value").then((snapshot)=> {
-      //iterating through each index of the database
-      snapshot.forEach(function(childSnapshot){
-        //add a Rating object to ratingArray
-        ratingArray.push(childSnapshot.val());
-        //getting the total values of composition and trendy
-        let composition = childSnapshot.child("composition").val();
-        let trendy = childSnapshot.child("trendy").val();
-        compositionTotal += composition;
-        trendyTotal += trendy;
-        averageUsers += 1;
+      //grabbing the image from database
+      database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`)
+      .once("value").then((snapshot)=> {
+          image = snapshot.child("img").val();
+          this.setState({ outfitImage: image });
       });
 
-      //setting the states to be the average ratings
-      let avgComposition = (compositionTotal / averageUsers);
-      let avgTrendy = (trendyTotal / averageUsers);
-      avgComposition = (Math.round(avgComposition * 2) / 2).toFixed(1);
-      avgTrendy = (Math.round(avgTrendy * 2) / 2).toFixed(1);
-      avgComposition = parseFloat(avgComposition);
-      avgTrendy = parseFloat(avgTrendy);
+
+      //grabbing ratings from database
+      database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`)
+      .once("value").then((snapshot)=> {
+        //iterating through each index of the database
+        snapshot.forEach(function(childSnapshot){
+          //add a Rating object to ratingArray
+          ratingArray.push(childSnapshot.val());
+          //getting the total values of composition and trendy
+          let composition = childSnapshot.child("composition").val();
+          let trendy = childSnapshot.child("trendy").val();
+          compositionTotal += composition;
+          trendyTotal += trendy;
+          averageUsers += 1;
+        });
+
+        //setting the states to be the average ratings
+        let avgComposition = (compositionTotal / averageUsers);
+        let avgTrendy = (trendyTotal / averageUsers);
+        avgComposition = (Math.round(avgComposition * 2) / 2).toFixed(1);
+        avgTrendy = (Math.round(avgTrendy * 2) / 2).toFixed(1);
+        avgComposition = parseFloat(avgComposition);
+        avgTrendy = parseFloat(avgTrendy);
 
 
-      //setting the state to be average ratings
-      this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray} );
-    });
+        //setting the state to be average ratings
+        this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray} );
 
+      });
+    }
   }
 
   //this method loads all the rating objects into a component.

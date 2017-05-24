@@ -14,7 +14,7 @@ class RateView extends Component {
       ratingComposition: 0,
       ratingTrendy: 0,
       ratingComment: "",
-      outfitImage: true
+      outfitImage: true,
       haveSaved: false,
       sender: ""
     }
