@@ -14,7 +14,7 @@ class Confirmation extends Component {
     render(){
         return(
             <div id="confirmationContainer">
-                <img src= '../assets/check-mark.png'/>
+                <img src= '../../assets/check-mark.png'/>
                 <div id="confirmationText">Thanks for Rating!</div>
             </div>
         );

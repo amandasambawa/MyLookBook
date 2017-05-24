@@ -117,7 +117,7 @@ class RateView extends Component {
     }else{
       return(
         <div id="rateViewContainer">
-            <div id="rateTitle">{this.state.sender} would like you to rate this outfit!</div>
+            <div id="rateTitle"><span id="senderName">{this.state.sender}</span> would like you to rate this outfit!</div>
           <div className ="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
           </div>

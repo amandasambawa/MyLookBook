@@ -51,8 +51,8 @@ class LoginPage extends Component {
         <div className="loginPage row">
           <div className="loginForm columns small-14 small-offset-1">
             <div className="row">
-              <div className="columns small-6 small-offset-1 toggleTab" onClick={this.loginForm} >Login</div>
-              <div className="columns small-6 small-offset-2 toggleTab" onClick={this.signUpForm} >Sign Up</div>
+              <div role="button" className="columns small-6 small-offset-1 toggleTab" onClick={this.loginForm} >Login</div>
+              <div role="button" className="columns small-6 small-offset-2 toggleTab" onClick={this.signUpForm} >Sign Up</div>
             </div>
             {this.innerForm()}
           </div>
