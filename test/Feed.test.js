@@ -49,7 +49,7 @@ describe('Feed', () => {
 //error, it is working properly.
 it('make sure that loadOutfits is working properly.', () => {
     const wrapper = shallow(<Feed />);
-    wrapper.instance().loadOutfits();
+    wrapper.instance().loadingContent();
   });
 
 it('make sure that handleComposition is working properly.', () => {
