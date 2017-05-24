@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../styles/foundation.css";
+import "../styles/Confirmation.css";
 
 class Confirmation extends Component {
 
@@ -12,9 +13,9 @@ class Confirmation extends Component {
 
     render(){
         return(
-            <div>
+            <div id="confirmationContainer">
                 <img src= '../assets/check-mark.png'/>
-                <span>Confirmed</span>
+                <div id="confirmationText">Thanks for Rating!</div>
             </div>
         );
     }
