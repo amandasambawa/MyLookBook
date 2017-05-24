@@ -123,7 +123,10 @@ class SingleOutfitView extends Component {
             <span id="linkTitle">Link:</span>
             <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/>
             <button className="button" onClick={this.copyToClipboard}>Copy</button>
-          </div>
+                <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">fb</a>
+                <a id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">twitter</a>
+                <a id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">gp</a>
+            </div>
 
           <div className="ratingsContainer">
             <div className="ratingsLabel">Overall Composition</div>
