@@ -32,8 +32,6 @@
 .outfitRow {
     margin-top: 10px;
 }
-<<<<<<< HEAD
-=======
 
 #loadingImg{
   position: fixed;
@@ -41,6 +39,5 @@
   top: 50%;
   left: 50%;
   margin-top: -100px;
-  margin-left: -75px; 
+  margin-left: -75px;
 }
->>>>>>> c57757f856bbbd030fab032816728d129f593664
