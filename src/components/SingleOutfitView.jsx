@@ -112,6 +112,7 @@ class SingleOutfitView extends Component {
    }
 
   render() {
+    console.log(`rateView/${this.props.uid}/${this.props.match.params.outfitId}`);
     return (
       <div>
        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
