@@ -14,7 +14,9 @@ class RateView extends Component {
       ratingComposition: 0,
       ratingTrendy: 0,
       ratingComment: "",
-      haveSaved: false
+      outfitImage: true,
+      haveSaved: false,
+      sender: ""
     }
       this.handleComposition = this.handleComposition.bind(this);
       this.handleTrendy = this.handleTrendy.bind(this);
@@ -32,8 +34,14 @@ class RateView extends Component {
       database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
       .once("value").then((snapshot)=> {
           image = snapshot.child("img").val();
+          console.log(image);
           this.setState({ outfitImage: image });
       });
+
+        database.ref(`/users/${this.props.match.params.userId}`)
+            .once("value").then((snapshot)=> {
+            this.setState({ sender: snapshot.child("username").val() });
+        });
     }
   }
 
@@ -99,12 +107,12 @@ class RateView extends Component {
 
 
   render(){
-    if ( (this.props.uid || this.state.img === undefined) && this.props.testing === undefined ){
+    if ( (this.props.uid || this.state.outfitImage === null) && this.props.testing === undefined ){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
       return(
         <div id="rateViewContainer">
-
+            <div id="rateTitle">{this.state.sender} would like you to rate this outfit!</div>
           <div className ="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
           </div>

@@ -10,6 +10,14 @@ import Rate from 'rc-rate';
 *
 */
 
+//Make sure that RateView
+it('RateView renders properly.', () => {
+  const wrapper = shallow(<RateView testing={true} />);
+  const wrapper2 = mount(<RateView testing={true} />);
+  const wrapper3 = render(<RateView testing={true} />)
+});
+
+
 
 /*
 * The following tests encompass the UI.
@@ -52,7 +60,7 @@ describe('RateView', () => {
         //let obj = {params: {outfitId: `-KkI2QGzORcXRcSoHT9j`} };
         const wrapper = shallow(<RateView testing={true}/>);
         const image = wrapper.find('img');
-        expect(image.prop('src')).toEqual(undefined);
+        expect(image.prop('src')).toEqual(true);
 
     });
   });
