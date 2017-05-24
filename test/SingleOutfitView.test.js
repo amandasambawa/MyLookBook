@@ -5,6 +5,10 @@ import SingleOutfitView from '../src/components/SingleOutfitView.jsx';
 import Rate from 'rc-rate';
 
 /*
+* This file is for testing for SingleOutfitView
+*/
+
+/*
 * Declaring the parameters required to run SingleOutfitView
 */
 let obj = {
@@ -23,7 +27,6 @@ it('SingleOutfitView renders properly.', () => {
     testing={true} uid={uid} match={obj} />);
   const wrapper3 = render(<SingleOutfitView
     testing={true} uid={uid} match={obj} />);
-    console.log(wrapper2.debug());
 });
 
 /*
@@ -68,9 +71,8 @@ it('renders the Comment Section of the page', () => {
 describe('SingleOutfitView', () => {
     it('check if the images loading up', () => {
         const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
-        const image = wrapper.find('img');
-        console.log(wrapper.debug());
-        expect(image.prop('src')).toEqual(undefined);
+        const image = wrapper.find('img').exists();
+        expect(image).toEqual(true);
     });
   });
 
@@ -80,7 +82,7 @@ describe('SingleOutfitView', () => {
 */
 
   //Make sure that load ratings works. As long as loadratings does not cause an
-  //error, it is working
+  //error, it is working properly.
   it('make sure that handleComposition is working properly.', () => {
     const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
     wrapper.instance().loadRatings();

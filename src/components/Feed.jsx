@@ -20,10 +20,13 @@ class Feed extends Component {
     auth.signOut().then(function() {
       console.log("successful log out")
       // Sign-out successful.
+
     }).catch(function(error) {
       console.log("error loggin out")
       // An error happened.
+      return false;
     });
+    return true;
   }
 
   componentDidMount() {
