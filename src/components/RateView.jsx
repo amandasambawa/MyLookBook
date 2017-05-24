@@ -19,18 +19,22 @@ class RateView extends Component {
       this.handleComposition = this.handleComposition.bind(this);
       this.handleTrendy = this.handleTrendy.bind(this);
       this.saveRating = this.saveRating.bind(this);
-      this.handleUsernameChange = this.handleUsernameChange.bind(this);
+      this.handleCommentChange = this.handleCommentChange.bind(this);
   }
 
 
   componentDidMount() {
     //grab outfit image in database
-    let image = null;
-    database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
-    .once("value").then((snapshot)=> {
-        image = snapshot.child("img").val();
-        this.setState({ outfitImage: image });
-    });
+    if(this.props.testing === true ) {
+
+    } else {
+      let image = null;
+      database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
+      .once("value").then((snapshot)=> {
+          image = snapshot.child("img").val();
+          this.setState({ outfitImage: image });
+      });
+    }
   }
 
   //the alert options for the npm react-alert
@@ -60,8 +64,8 @@ class RateView extends Component {
     }
   }
 
-  //handles the username state.
-  handleUsernameChange(event){
+  //handles the comment state.
+  handleCommentChange(event){
       this.setState({ratingComment: event.target.value});
   }
   //handles saving the rating and comments
@@ -95,7 +99,7 @@ class RateView extends Component {
 
 
   render(){
-    if (this.props.uid || this.state.img === undefined){
+    if ( (this.props.uid || this.state.img === undefined) && this.props.testing === undefined ){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
       return(
@@ -120,7 +124,7 @@ class RateView extends Component {
             />
 
           <div className="ratingsLabel">Comment</div>
-          <textarea placeholder="Leave a comment!" onChange={this.handleUsernameChange}></textarea>
+          <textarea className="commentBox" placeholder="Leave a comment!" onChange={this.handleCommentChange}></textarea>
 
           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
           <button onClick={this.saveRating} className="button">Save</button>
@@ -130,6 +134,8 @@ class RateView extends Component {
     }
 
   }
+
+
 
 }
 
