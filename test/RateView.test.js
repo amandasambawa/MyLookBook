@@ -54,7 +54,7 @@ it('renders the Comment Section of the page', () => {
 
 
 
-//make sure the images have a space in the webpage.
+//make sure the images load space in the webpage.
 describe('RateView', () => {
     it('check if the images loading up', () => {
         //let obj = {params: {outfitId: `-KkI2QGzORcXRcSoHT9j`} };
