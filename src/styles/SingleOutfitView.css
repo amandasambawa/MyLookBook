@@ -47,3 +47,13 @@
     font-size: 16px;
     text-align: center;
 }
+
+#noRatingsPlaceholder {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+}
+
+#noRatingsHeader {
+
+}
