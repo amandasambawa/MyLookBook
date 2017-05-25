@@ -46,6 +46,7 @@ class SaveOutfitButton extends Component {
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
           globalRef.set({
             title: this.props.outfitTitle,
+            global: this.props.global,
             ratings: {},
             img: url,
             uid: this.props.uid,
