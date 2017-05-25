@@ -14,7 +14,7 @@ it('LoginForm renders properly.', () => {
   //console.log(wrapper.debug());
   let wrapper2 = mount(<LoginForm />);
   let wrapper3 = render(<LoginForm />);
-  console.log(wrapper2.debug());
+  //console.log(wrapper2.debug());
 });
 
 
@@ -49,4 +49,11 @@ it('make sure that password state is changing properly.', () => {
   const wrapper = mount(<LoginForm />);
   wrapper.instance().setState({password:'bobbob'});
   expect(wrapper.state('password')).toEqual('bobbob');
+});
+
+//Make sure that login does not break the code.
+//so long as the test does not error out, this means that login is working
+it('make sure that the code does not break with login', () => {
+  const wrapper = mount(<LoginForm />);
+  const login = wrapper.instance().login();
 });
