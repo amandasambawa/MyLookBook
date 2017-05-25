@@ -93,7 +93,13 @@ class SingleOutfitView extends Component {
     console.log("currently injecting");
     if(this.state.ratings.length===0){
       console.log("ratings are empty");
-      ratingsContent = <h1> Nothing here </h1>;
+      ratingsContent = <div id="noRatingsPlaceholder">
+
+      <h1 id="noRatingsHeader"> No ratings yet </h1>
+      <div> Share the link with your friends and get instant feedback on your outfits!</div>
+
+
+      </div>;
     } else {
 
       ratingsContent =  (<div> <div className="ratingsContainer">
