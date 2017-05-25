@@ -170,6 +170,14 @@ class SingleOutfitView extends Component {
                 <a className="button" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">Twitter</a>
                 <a className="button" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">Google+</a>
                 </div>
+              <div id="shareLinkButtons">
+              <h1>hi</h1>
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+
+                </div>
             </div>
             {this.injectRatingsContent()}
             </div>
