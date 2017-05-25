@@ -1,13 +1,19 @@
 #singleOutfitViewContainer {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #copyButton{
     margin-top: 1em;
+    margin-left: 5px;
+}
+
+.socialMediaLink {
+    margin-left: 0.7em;
 }
 
 .socialMediaIcon {
-    margin-left: 0.7em;
+    height: 30px;
+    width: 30px;
 }
 
 .commentBox {
@@ -21,7 +27,10 @@
     border: 1px solid grey;
     text-align: center;
     margin-bottom: 10px;
+    width: 95%;
+    margin: auto;
 }
+
 
 .imageID{
   height: 300px;
@@ -35,9 +44,9 @@
 
 #linkContainer {
     padding-top: 10px;
-    width: 90%;
+    width: 95%;
     margin: auto;
-    text-align: justify;
+    text-align: center;
 }
 
 .ratingsLabel {
@@ -45,11 +54,6 @@
     width: 90%;
     margin: auto;
     margin-top: 5px;
-}
-
-.ratingsContainer {
-    width: 90%;
-    margin: auto;
 }
 
 .averageRatings {
@@ -64,7 +68,7 @@
 }
 
 #noRatingsHeader {
-
+    margin-top: 5px;
 }
 
 .button {
@@ -79,4 +83,19 @@
 #shareLinkButtons{
   width: auto;
   text-align: center;
+}
+
+#linkCopy {
+    width: 75%;
+    display: inline-block;
+}
+
+#linkTitle {
+    display: block;
+    text-align: left;
+    font-size: 20px;
+}
+
+#container {
+    margin-top: 1em;
 }
