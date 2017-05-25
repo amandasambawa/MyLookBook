@@ -13,7 +13,8 @@ class SingleOutfitView extends Component {
       oufitImage: 0,
       compositionRating: 0,
       trendyRating: 0,
-      ratings: []
+      ratings: [],
+      uid: ""
     }
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -29,14 +30,37 @@ class SingleOutfitView extends Component {
     let ratingArray = [];
     let image = null;
 
+    console.log(this.props.location.pathname);
+
+
+    //initializing the database variables
+    let dataBaseIMG = "";
+    let dataBaseRating = "";
+    //Singleoutview database
+    if(this.props.location.pathname.charAt(1) === 's'){
+          dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
+          dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+    }else{
+    //publicview database
+          dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
+          dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+
+    }
     //grabbing the image from database
-    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).once("value").then((snapshot) => {
+
+    dataBaseIMG.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
-      this.setState({outfitImage: image});
+      let uid = snapshot.child("uid").val();
+      if (this.props.uid){
+        this.setState({outfitImage: image, uid: this.props.uid});
+      }else{
+        this.setState({outfitImage: image, uid: uid});
+      }
+
     });
 
-    //grabbing ratings from database
-    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`).once("value").then((snapshot) => {
+
+    dataBaseRating.once("value").then((snapshot) => {
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot) {
         //add a Rating object to ratingArray
@@ -152,7 +176,7 @@ class SingleOutfitView extends Component {
    }
 
   render() {
-
+    console.log(this.props);
     return (
       <div>
        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
@@ -163,7 +187,7 @@ class SingleOutfitView extends Component {
           <div id="linkContainer">
             <span id="linkTitle">Link:</span>
 
-            <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/>
+            <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.state.uid}/${this.props.match.params.outfitId}`}/>
                 <div id="shareLinkButtons">
                     <button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy</button>
                     <a className="socialMediaIcon" id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img src="../assets/facebook.png" /></a>

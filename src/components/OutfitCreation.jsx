@@ -12,11 +12,13 @@ class OutfitCreation extends Component {
     super(props);
     this.state = {
       clickedItems: [],
-      title:"Title"
+      title:"Title",
+      global: false
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
+    this.handleGlobalLock = this.handleGlobalLock.bind(this);
 
   }
 
@@ -28,6 +30,20 @@ class OutfitCreation extends Component {
     transition: 'fade'
   }
 
+
+
+  //handles the global Lock state
+  handleGlobalLock() {
+    if(this.state.global === false){
+      this.setState({global:true})
+      console.log(this.state.global);
+    }else{
+      this.setState({global:false});
+      console.log(this.state.global);
+    }
+
+  }
+
   getClickedItem(item) {
     // get the url and then add it to the array in state
     //console.log(item);
@@ -36,7 +52,7 @@ class OutfitCreation extends Component {
       itemsArray.push(item);
       this.setState({clickedItems: itemsArray});
     } else {
-      this.msg.show('Reached Maximun(6) Items', {
+      this.msg.show('Reached Maximum(6) Items', {
         time: 20000,
         type: 'error'
         //icon: <img src="path/to/some/img/32x32.png"/>
@@ -73,8 +89,9 @@ class OutfitCreation extends Component {
             <div>
                 <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
                 <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <SaveOutfitButton uid={this.props.uid} outfitTitle={this.state.title}/>
+                <SaveOutfitButton uid={this.props.uid} outfitTitle={this.state.title} global={this.state.global}/>
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+                <button onClick={this.handleGlobalLock} className="button">{this.state.global}</button>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import { auth,database } from '../firebase.js';
 import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
+import GlobalFeed from './GlobalFeed.jsx'
 import SingleOutfitView from './SingleOutfitView.jsx';
 import RateView from './RateView.jsx';
 import NoMatch from './NoMatch.jsx';
@@ -60,8 +61,10 @@ class App extends Component {
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
+            <PublicRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+            <PublicRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>

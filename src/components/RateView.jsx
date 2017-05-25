@@ -23,6 +23,7 @@ class RateView extends Component {
       this.handleTrendy = this.handleTrendy.bind(this);
       this.saveRating = this.saveRating.bind(this);
       this.handleCommentChange = this.handleCommentChange.bind(this);
+      this.handleGlobalLock = this.handleGlobalLock.bind(this);
   }
 
 
