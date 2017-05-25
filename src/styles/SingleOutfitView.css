@@ -4,7 +4,8 @@
 
 #copyButton{
     margin-top: 1em;
-    margin-left: 5px;
+    margin: 0 0 1px 5px;
+    font-size: .75em;
 }
 
 .socialMediaLink {
@@ -71,10 +72,12 @@
     margin-top: 5px;
 }
 
+/*
 .button {
   margin: 0 .7rem 1rem 0rem;
   font-size: .75em;
 }
+*/
 
 .button:hover {
  /* cursor: */
