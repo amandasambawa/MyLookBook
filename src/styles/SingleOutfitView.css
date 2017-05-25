@@ -2,6 +2,14 @@
     margin-top: 20px;
 }
 
+#copyButton{
+    margin-top: 1em;
+}
+
+.socialMediaIcon {
+    margin-left: 0.7em;
+}
+
 .commentBox {
   border: 1px solid black;
     width: 90%;
@@ -65,7 +73,7 @@
 }
 
 .button:hover {
-  cursor:
+ /* cursor: */
 }
 
 #shareLinkButtons{

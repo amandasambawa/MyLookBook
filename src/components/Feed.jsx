@@ -58,14 +58,19 @@ class Feed extends Component {
       return <img id="loadingImg" src="http://apdw.com/images/balls_loading.gif?x13037"/>;
     //if state exists is null, we will prompt the user to create an outfit
     }else if(this.state.exists === null){
-      return <div>CREATE AN OUTFIT BELOW</div>;
+      return (
+          <div id="feedContainer">
+              <h1>Start by creating outfits here</h1>
+              <img src="../assets/curve-down-arrow.png" />
+          </div>
+      );
       //we will default load the rest of the items in the closet.
     }else{
       return this.state.previews.map((preview) => {
       return (
         <div className="small-8 medium-4 large-4 columns">
-        <span className="outfitName2">{preview.val().title}</span>
-        <Link to={`/singleOutfit/${preview.key}`}><img src={preview.val().img}/></Link>
+            <span className="outfitName2">{preview.val().title}</span>
+            <Link to={`/singleOutfit/${preview.key}`}><img className="outfitLink"  src={preview.val().img}/></Link>
         </div>
         );
       });
