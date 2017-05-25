@@ -7,14 +7,9 @@ import Feed from '../src/components/Feed.jsx';
 * This file is for testing for Feed
 */
 
-/*
-* Declaring the parameters required to run Feed
-*/
-
 //Make sure that Feed can even render.
 it('Feed renders properly.', () => {
   const wrapper = shallow(<Feed />);
-    console.log(wrapper.debug());
 });
 
 /*

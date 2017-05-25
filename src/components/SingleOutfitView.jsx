@@ -67,8 +67,6 @@ class SingleOutfitView extends Component {
   //this function is called at the bottom of render
   loadRatings() {
 
-
-
     return this.state.ratings.map((rating) => {
       return (
         <div>
