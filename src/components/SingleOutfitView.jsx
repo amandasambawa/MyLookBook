@@ -164,11 +164,14 @@ class SingleOutfitView extends Component {
           </div>
           <div id="linkContainer">
             <span id="linkTitle">Link:</span>
+
             <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.props.uid}/${this.props.match.params.outfitId}`}/>
+                <div id="shareLinkButtons">
             <button className="button" onClick={this.copyToClipboard}>Copy</button>
-                <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">fb</a>
-                <a id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">twitter</a>
-                <a id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">gp</a>
+                <a className="button" id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">Facebook</a>
+                <a className="button" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">Twitter</a>
+                <a className="button" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}">Google+</a>
+                </div>
             </div>
             {this.injectRatingsContent()}
             </div>
