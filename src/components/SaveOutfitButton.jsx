@@ -34,7 +34,7 @@ class SaveOutfitButton extends Component {
         let newOutfit = outfitRef.push();
         //  console.log(this.props.outfitTitle);
           newOutfit.set({
-            global: this.props.global,
+            global: Boolean(this.props.global),
             title: this.props.outfitTitle,
             ratings: {},
             img: url
@@ -42,11 +42,12 @@ class SaveOutfitButton extends Component {
 
         this.setState({outfitKey: newOutfit.key});
         console.log("Save OutfitButton is " + this.props.global);
+        console.log("props global is " + typeof(this.props.global));
         if(this.props.global === true){
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
           globalRef.set({
             title: this.props.outfitTitle,
-            global: this.props.global,
+            global: Boolean(this.props.global),
             ratings: {},
             img: url,
             uid: this.props.uid,

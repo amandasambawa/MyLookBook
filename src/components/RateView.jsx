@@ -17,7 +17,8 @@ class RateView extends Component {
       ratingComment: "",
       outfitImage: true,
       haveSaved: false,
-      sender: ""
+      sender: "",
+      global: ""
     }
       this.handleComposition = this.handleComposition.bind(this);
       this.handleTrendy = this.handleTrendy.bind(this);
@@ -35,8 +36,7 @@ class RateView extends Component {
       database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
       .once("value").then((snapshot)=> {
           image = snapshot.child("img").val();
-          console.log(image);
-          this.setState({ outfitImage: image });
+          this.setState({ outfitImage: image , global: snapshot.child("global").val() });
       });
 
         database.ref(`/users/${this.props.match.params.userId}`)
@@ -82,6 +82,7 @@ class RateView extends Component {
     //if the user has not saved once before, we will send that data to the db
     console.log(this.props.match.params);
     if(this.state.haveSaved === false){
+
         let ratingRef = database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
         let newRating = ratingRef.push();
 
@@ -90,6 +91,18 @@ class RateView extends Component {
           composition: this.state.ratingComposition,
           trendy: this.state.ratingTrendy
         })
+
+
+        if(this.state.global){
+          console.log("entering the global stuff");
+          let globalRef = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+          let globalRating = globalRef.push();
+          globalRating.set({
+            comment: this.state.ratingComment,
+            composition: this.state.ratingComposition,
+            trendy: this.state.ratingTrendy
+          })
+        }
 
         this.setState({haveSaved: true});
     } else {
@@ -108,7 +121,7 @@ class RateView extends Component {
 
 
   render(){
-
+    console.log(this.props.match.params.outfitId);
     if(this.state.haveSaved === true){
       return <Confirmation />
     } else {
