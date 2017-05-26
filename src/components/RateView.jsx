@@ -158,10 +158,7 @@ class RateView extends Component {
     }
 
   }
-
   }
-
-
 
 }
 

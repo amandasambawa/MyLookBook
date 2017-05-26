@@ -17,14 +17,23 @@ class SignUpForm extends Component {
 
   }
 
+  /*
+  *  handles the email state
+  */
   handleEmailChange(event) {
     this.setState({email: event.target.value});
   }
 
+  /*
+  *  handles the username state
+  */
   handleUsernameChange(event) {
     this.setState({username: event.target.value});
   }
 
+  /*
+  * handles the password state
+  */
   handlePasswordChange(event) {
     this.setState({password: event.target.value});
   }

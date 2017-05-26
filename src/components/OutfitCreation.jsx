@@ -46,7 +46,6 @@ class OutfitCreation extends Component {
 
   getClickedItem(item) {
     // get the url and then add it to the array in state
-    //console.log(item);
     if (this.state.clickedItems.length <= 5) {
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.push(item);

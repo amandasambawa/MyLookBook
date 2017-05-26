@@ -18,8 +18,8 @@ import Navigation from '../src/components/Navigation.jsx';
 //Make sure that LoginForm can even render.
 it('LoginForm renders properly.', () => {
   let wrapper = shallow(<Navigation />);
-  //console.log(wrapper.debug());
-  //let wrapper2 = mount(<Navigation />);
+  console.log(wrapper.debug());
+  let wrapper2 = mount(<Navigation />);
   //let wrapper3 = render(<Navigation />);
-  //console.log(wrapper2.debug());
+  console.log(wrapper2.debug());
 });

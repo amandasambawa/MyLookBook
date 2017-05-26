@@ -14,10 +14,17 @@ class LoginForm extends Component {
     this.login = this.login.bind(this);
   }
 
+  /*
+  * Saving email state
+  */
   handleEmailChange(event) {
     this.setState({email: event.target.value});
   }
 
+
+  /*
+  * Saving password states
+  */
   handlePasswordChange(event) {
     this.setState({password: event.target.value});
   }
