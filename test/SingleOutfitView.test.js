@@ -34,37 +34,15 @@ it('SingleOutfitView renders properly.', () => {
 */
 
 
-//Make sure the Overall Composition section is loading properly
-it('renders the Overall Composition of the page', () => {
+
+
+
+//Make sure prompt the user for feedback
+it('renders call to action for feedback', () => {
   const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
-  const title =  <div className="ratingsLabel">
-  Overall Composition
-  </div>;
+  const title = <span id="linkTitle">Link:</span>;
   expect(wrapper.contains(title)).toEqual(true);
 });
-
-
-//Make sure the Overall Trendy section is loading properly
-it('renders the Overall Trendy of the page', () => {
-  const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
-  const title =  <div className="ratingsLabel">
-  Overall Trendy
-  </div>;
-  expect(wrapper.contains(title)).toEqual(true);
-});
-
-
-
-//Make sure the Ratings and Comments section is loading properly
-it('renders the Comment Section of the page', () => {
-  const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
-  const title =  <div className="ratingsLabel">
-      Ratings and Comments
-      </div>;
-  expect(wrapper.contains(title)).toEqual(true);
-});
-
-
 
 
 //make sure the images load space in the webpage.
@@ -83,7 +61,14 @@ describe('SingleOutfitView', () => {
 
   //Make sure that load ratings works. As long as loadratings does not cause an
   //error, it is working properly.
-  it('make sure that handleComposition is working properly.', () => {
+  it('make sure that loadRatings is working properly.', () => {
     const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
     wrapper.instance().loadRatings();
+  });
+
+  //Make sure the injection is working, this test will only fail
+  //if the code breaks
+  it('make sure that injectRatingsContent is working properly', () => {
+    const wrapper = shallow(<SingleOutfitView testing={true} uid={uid} match={obj} />);
+    wrapper.instance().injectRatingsContent();
   });

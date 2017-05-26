@@ -27,7 +27,7 @@ class SaveOutfitButton extends Component {
       logging: true,
       useCORS: true,
       onrendered: (canvas) => {
-        console.log('generating');
+        //console.log('generating');
 
         var url = canvas.toDataURL("image/png");
         let outfitRef = database.ref(`/users/${this.props.uid}/outfitobjects`);
@@ -41,8 +41,7 @@ class SaveOutfitButton extends Component {
           });
 
         this.setState({outfitKey: newOutfit.key});
-        console.log("Save OutfitButton is " + this.props.global);
-        console.log("props global is " + typeof(this.props.global));
+        //if this outfit is global, save it to the global database.
         if(this.props.global === true){
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
           globalRef.set({

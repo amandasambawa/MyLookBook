@@ -92,9 +92,8 @@ class RateView extends Component {
           trendy: this.state.ratingTrendy
         })
 
-
+        //if this outfit has a global state, we also write the the global outfit database
         if(this.state.global){
-          console.log("entering the global stuff");
           let globalRef = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
           let globalRating = globalRef.push();
           globalRating.set({
@@ -121,7 +120,6 @@ class RateView extends Component {
 
 
   render(){
-    console.log(this.props.match.params.outfitId);
     if(this.state.haveSaved === true){
       return <Confirmation />
     } else {

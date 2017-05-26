@@ -30,14 +30,11 @@ class SingleOutfitView extends Component {
     let ratingArray = [];
     let image = null;
 
-    console.log(this.props.location.pathname);
-
-
     //initializing the database variables
     let dataBaseIMG = "";
     let dataBaseRating = "";
     //Singleoutview database
-    if(this.props.location.pathname.charAt(1) === 's'){
+    if(!this.props.testing && this.props.location.pathname.charAt(1) === 's'){
           dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
           dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
     }else{
@@ -114,9 +111,9 @@ class SingleOutfitView extends Component {
   injectRatingsContent(){
     //check if ratings is empty
     var ratingsContent;
-    console.log("currently injecting");
+    //console.log("currently injecting");
     if(this.state.ratings.length===0){
-      console.log("ratings are empty");
+      //console.log("ratings are empty");
       ratingsContent = <div id="noRatingsPlaceholder">
 
       <h1 id="noRatingsHeader"> No ratings yet </h1>
@@ -176,7 +173,6 @@ class SingleOutfitView extends Component {
    }
 
   render() {
-    console.log(this.props);
     return (
       <div>
        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
@@ -200,10 +196,10 @@ class SingleOutfitView extends Component {
 
                 </div>
               <div id="shareLinkButtons">
-                <i class="fa fa-clipboard" aria-hidden="true"></i>
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                <i className="fa fa-clipboard" aria-hidden="true"></i>
+                <i className="fa fa-facebook" aria-hidden="true"></i>
+                <i className="fa fa-twitter" aria-hidden="true"></i>
+                <i className="fa fa-google-plus" aria-hidden="true"></i>
 
                 </div>
             </div>

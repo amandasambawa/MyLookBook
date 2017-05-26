@@ -55,13 +55,13 @@ class OutfitCreation extends Component {
       this.msg.show('Reached Maximum(6) Items', {
         time: 20000,
         type: 'error'
-        //icon: <img src="path/to/some/img/32x32.png"/>
+
       })
     }
   }
 
   undoItem() {
-    console.log(this.state.clickedItems.length);
+    //console.log(this.state.clickedItems.length);
     if(this.state.clickedItems.length>=1){
       console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
