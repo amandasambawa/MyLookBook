@@ -192,19 +192,11 @@ class SingleOutfitView extends Component {
                     <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg" /></a>
                     <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg" /></a>
                     <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`} ><img className="socialMediaIcon" src="../assets/chatIcon.svg" /></a>
+              </div>
 
-
-                </div>
-              <div id="shareLinkButtons">
-                <i className="fa fa-clipboard" aria-hidden="true"></i>
-                <i className="fa fa-facebook" aria-hidden="true"></i>
-                <i className="fa fa-twitter" aria-hidden="true"></i>
-                <i className="fa fa-google-plus" aria-hidden="true"></i>
-
-                </div>
             </div>
             {this.injectRatingsContent()}
-            </div>
+          </div>
       </div>
     );
   }

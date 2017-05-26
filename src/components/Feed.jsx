@@ -10,7 +10,8 @@ class Feed extends Component {
     super(props);
     this.state = {
       previews: [],
-      exists: false
+      exists: false,
+      title: "   "
 
     }
     this.loadingContent = this.loadingContent.bind(this);
@@ -80,9 +81,6 @@ class Feed extends Component {
   render() {
     return (
       <div className="row">
-        <div className="buttonContainer">
-          <Link to="/outfitCreation" id='createOutfitButton' className="button">Create Outfit</Link>
-        </div>
         {this.loadingContent()}
 
       </div>

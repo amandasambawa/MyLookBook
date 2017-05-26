@@ -53,11 +53,7 @@ class GlobalFeed extends Component {
   render() {
     return (
       <div className="row">
-        <div className="buttonContainer">
-          <Link to="/outfitCreation" id='createOutfitButton' className="button">Create Outfit</Link>
-        </div>
         {this.loadingContent()}
-
       </div>
     );
   }

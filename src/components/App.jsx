@@ -66,7 +66,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
@@ -79,7 +78,7 @@ class App extends Component {
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
-
+          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
         </div>
       </Router>
     );

@@ -32,10 +32,13 @@ class SaveOutfitButton extends Component {
         var url = canvas.toDataURL("image/png");
         let outfitRef = database.ref(`/users/${this.props.uid}/outfitobjects`);
         let newOutfit = outfitRef.push();
-        //  console.log(this.props.outfitTitle);
+        let titleRef = this.props.outfitTitle;
+        if(titleRef === null || titleRef.trim().length === 0){
+            titleRef = "Title";
+        }
           newOutfit.set({
             global: Boolean(this.props.global),
-            title: this.props.outfitTitle,
+            title: titleRef,
             ratings: {},
             img: url
           });
@@ -45,7 +48,7 @@ class SaveOutfitButton extends Component {
         if(this.props.global === true){
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
           globalRef.set({
-            title: this.props.outfitTitle,
+            title: titleRef,
             global: Boolean(this.props.global),
             ratings: {},
             img: url,

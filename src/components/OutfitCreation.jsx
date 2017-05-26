@@ -78,6 +78,8 @@ class OutfitCreation extends Component {
   nameOutfit(event){
     this.setState({title:event.target.value});
     this.props.setTitle(event.target.value);
+
+
   }
 
   render() {
@@ -90,7 +92,6 @@ class OutfitCreation extends Component {
             <div>
                 <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
                 <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <SaveOutfitButton uid={this.props.uid} outfitTitle={this.state.title} global={this.state.global}/>
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
                 <button onClick={this.handleGlobalLock} className="button">{this.state.global}</button>
             </div>
