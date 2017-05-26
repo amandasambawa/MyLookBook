@@ -55,10 +55,6 @@ class SaveOutfitButton extends Component {
 
         }
 
-
-
-
-
       }
     });
   }

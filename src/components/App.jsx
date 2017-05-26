@@ -27,19 +27,21 @@ class App extends Component {
     super(props);
     this.state = {
       uid: null,
-      uname: null
+      uname: null,
+      global: null,
+      title: null
     }
     this.getUserName = this.getUserName.bind(this);
+    this.setGlobal = this.setGlobal.bind(this);
+    this.setTitle = this.setTitle.bind(this);
   }
 
   componentDidMount() {
     this.authListener = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log("user logged in");
         this.setState({uid: user.uid});
         this.getUserName();
       } else {
-        console.log("user logged out");
         this.setState({uid: null});
       }
     });
@@ -52,19 +54,27 @@ class App extends Component {
     });
   }
 
+  setGlobal(global){
+    this.setState({global : Boolean(global)})
+  }
+
+  setTitle(title){
+    this.setState({title : title})
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <Navigation userName={this.state.uname} uid={this.state.uid}/>
+          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
-            <PublicRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
-            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid}/>
+            <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
+            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <PublicRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+            <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>

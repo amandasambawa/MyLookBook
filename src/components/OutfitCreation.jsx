@@ -36,10 +36,10 @@ class OutfitCreation extends Component {
   handleGlobalLock() {
     if(this.state.global === false){
       this.setState({global:true})
-      console.log(this.state.global);
+      this.props.setGlobal(Boolean(true));
     }else{
       this.setState({global:false});
-      console.log(this.state.global);
+      this.props.setGlobal(Boolean(false));
     }
 
   }
@@ -77,9 +77,11 @@ class OutfitCreation extends Component {
 
   nameOutfit(event){
     this.setState({title:event.target.value});
+    this.props.setTitle(event.target.value);
   }
 
   render() {
+    console.log(this.props);
     return (
         <div>
             <div className="outfitNameContainer">

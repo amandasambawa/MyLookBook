@@ -34,6 +34,7 @@ class DropZone extends Component {
       resetTimeout,
       index = 0;
 
+      //console.log('scaleElement: ',scaleElement);
     interact('.draggable').draggable({
       // enable inertial throwing
       inertia: true,

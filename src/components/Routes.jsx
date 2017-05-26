@@ -11,12 +11,12 @@ const PublicRoute = ({ component: Component, uid, ...rest }) => (
   />
 );
 
-const PrivateRoute = ({ component: Component, uid, ...rest }) => (
+const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       uid
-        ? <Component uid={uid} {...props} />
+        ? <Component uid={uid} setTitle={setTitle} setGlobal={setGlobal} {...props} />
         : <Redirect to={{ pathname: "/login" }} />}
   />
 );

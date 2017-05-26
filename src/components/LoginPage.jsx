@@ -13,7 +13,6 @@ class LoginPage extends Component {
     this.innerForm = this.innerForm.bind(this);
     this.loginForm = this.loginForm.bind(this);
     this.signUpForm = this.signUpForm.bind(this);
-    // this.makeQuery = this.makeQuery.bind(this);
   }
 
   innerForm(){
@@ -31,16 +30,7 @@ class LoginPage extends Component {
   signUpForm(){
     this.setState({tab: "signUp"});
   }
-  // makeQuery(){
-  //   fetch('https://brilliant-fire-6778.firebaseio.com/Users.json').then((response) => {
-  //     let obj = response.json();
-  //     return obj;
-  //   }).then((data)=>{
-  //     console.log(data)
-  //
-  //     this.setState({name: data.eddywang.name});
-  //   });
-  // }
+
   render() {
     if (this.props.uid){
       return (
