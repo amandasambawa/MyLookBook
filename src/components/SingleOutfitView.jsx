@@ -20,6 +20,7 @@ class SingleOutfitView extends Component {
     this.handleFocus = this.handleFocus.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
     this.injectRatingsContent = this.injectRatingsContent.bind(this);
+    this.addToWishList = this.addToWishList.bind(this);
   }
 
   componentDidMount() {
@@ -34,13 +35,13 @@ class SingleOutfitView extends Component {
     let dataBaseIMG = "";
     let dataBaseRating = "";
     //Singleoutview database
-    if(!this.props.testing && this.props.location.pathname.charAt(1) === 's'){
-          dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
-          dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-    }else{
-    //publicview database
-          dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
-          dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+    if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
+      dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
+      dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+    } else {
+      //publicview database
+      dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
+      dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
 
     }
     //grabbing the image from database
@@ -48,14 +49,13 @@ class SingleOutfitView extends Component {
     dataBaseIMG.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
-      if (this.props.uid){
+      if (this.props.uid) {
         this.setState({outfitImage: image, uid: this.props.uid});
-      }else{
+      } else {
         this.setState({outfitImage: image, uid: uid});
       }
 
     });
-
 
     dataBaseRating.once("value").then((snapshot) => {
       //iterating through each index of the database
@@ -108,38 +108,42 @@ class SingleOutfitView extends Component {
     })
   }
 
-  injectRatingsContent(){
+  injectRatingsContent() {
     //check if ratings is empty
     var ratingsContent;
     //console.log("currently injecting");
-    if(this.state.ratings.length===0){
+    if (this.state.ratings.length === 0) {
       //console.log("ratings are empty");
       ratingsContent = <div id="noRatingsPlaceholder">
 
-      <h1 id="noRatingsHeader"> No ratings yet </h1>
-      <div> Share the link with your friends and get instant feedback on your outfits!</div>
-
+        <h1 id="noRatingsHeader">
+          No ratings yet
+        </h1>
+        <div>
+          Share the link with your friends and get instant feedback on your outfits!</div>
 
       </div>;
     } else {
 
-      ratingsContent =  (<div id="container"> <div className="ratingsContainer">
+      ratingsContent = (
+        <div id="container">
+          <div className="ratingsContainer">
 
-                  <div className="ratingsLabel">Overall Composition</div>
-                  <Rate value={this.state.compositionRating} style={{
-                    fontSize: 30
-                  }} allowHalf/>
+            <div className="ratingsLabel">Overall Composition</div>
+            <Rate value={this.state.compositionRating} style={{
+              fontSize: 30
+            }} allowHalf/>
 
-                  <div className="ratingsLabel">Overall Trendy</div>
-                  <Rate value={this.state.trendyRating} style={{
-                    fontSize: 30
-                  }} allowHalf/>
-                </div>
-                <div className="ratingsLabel">Ratings and Comments</div>
-                {this.loadRatings()}
-              </div>
+            <div className="ratingsLabel">Overall Trendy</div>
+            <Rate value={this.state.trendyRating} style={{
+              fontSize: 30
+            }} allowHalf/>
+          </div>
+          <div className="ratingsLabel">Ratings and Comments</div>
+          {this.loadRatings()}
+        </div>
 
-            );
+      );
 
     }
 
@@ -150,32 +154,63 @@ class SingleOutfitView extends Component {
     event.target.select();
   }
 
-  copyToClipboard(){
+  copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
     this.showAlert();
   }
 
   alertOptions = {
-     offset: 14,
-     position: 'top right',
-     theme: 'dark',
-     time: 5000,
-     transition: 'scale'
-   }
+    offset: 14,
+    position: 'top right',
+    theme: 'dark',
+    time: 5000,
+    transition: 'scale'
+  }
 
-   showAlert = () => {
-     this.msg.show('Copied to Clipboard!', {
-       time: 2000,
-       type: 'success',
-       //icon: <img src="path/to/some/img/32x32.png" />
-     })
-   }
+  showAlert = () => {
+    this.msg.show('Copied to Clipboard!', {
+      time: 2000,
+      type: 'success',
+      //icon: <img src="path/to/some/img/32x32.png" />
+    })
+  }
 
+  addToWishList() {
+    var userId = "12570015021";
+    var data = JSON.stringify({
+      "list": {
+        "user": {
+          "id": userId
+        },
+        "items": [
+          {
+            "product": {
+              "id": "1822498"
+            },
+            "qtyRequested": 1
+          }
+        ]
+      }
+    });
+    fetch('https://m.macys.com/api/customer/v1/favorites?userGuid', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: data
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      console.log("data", data);
+    });
+  }
   render() {
     return (
       <div>
-       <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+        <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+        <button className="button" onClick={this.addToWishList}>addToWishList</button>
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
@@ -183,20 +218,21 @@ class SingleOutfitView extends Component {
           <div id="linkContainer">
             <span id="linkTitle">Link:</span>
 
-
             <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.state.uid}/${this.props.match.params.outfitId}`}/>
-              <span><button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy link</button></span>
-              <div id="shareLinkButtons">
-                    <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/facebook.svg" /></a>
-                    <a className="socialMediaLink" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/twitter.svg" /></a>
-                    <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg" /></a>
-                    <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg" /></a>
-                    <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`} ><img className="socialMediaIcon" src="../assets/chatIcon.svg" /></a>
-              </div>
-
+            <span>
+              <button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy link</button>
+            </span>
+            <div id="shareLinkButtons">
+              <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/facebook.svg"/></a>
+              <a className="socialMediaLink" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/twitter.svg"/></a>
+              <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg"/></a>
+              <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg"/></a>
+              <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`}><img className="socialMediaIcon" src="../assets/chatIcon.svg"/></a>
             </div>
-            {this.injectRatingsContent()}
+
           </div>
+          {this.injectRatingsContent()}
+        </div>
       </div>
     );
   }
