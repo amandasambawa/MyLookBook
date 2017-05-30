@@ -54,7 +54,6 @@ class GlobalFeed extends Component {
   render() {
     return (
         <div className="feedContainer">
-            <img src="../assets/macysNavBar.png"/>
             <h2 id="feedTitle">Feed</h2>
             {this.loadingContent()}
         </div>

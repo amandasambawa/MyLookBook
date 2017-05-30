@@ -1,5 +1,6 @@
 #outfitCreationContainer {
     text-align: center;
+    margin-top: 5px;
 }
 
 #outfitNameContainer {
@@ -9,7 +10,6 @@
 }
 
 #nameLabel {
-    text-align: left;
     display: inline-block;
 }
 
@@ -17,6 +17,16 @@
     width: 30px;
     height: 30px;
     float: right;
+}
+
+#outfitNameField {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid grey;
+    font-family: 'Abel', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .outfitName {

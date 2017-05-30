@@ -66,6 +66,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+            <img src="../assets/macysNavBar.png"/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>

@@ -82,7 +82,7 @@ class Feed extends Component {
     return (
         <div id="lookbookContainer">
             <h2 id="lookbookHeader">My Macy's Lookbook</h2>
-            <div className="row">
+            <div className="row" id="lookbookRow">
                 {this.loadingContent()}
             </div>
         </div>

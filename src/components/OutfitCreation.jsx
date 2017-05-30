@@ -12,7 +12,7 @@ class OutfitCreation extends Component {
     super(props);
     this.state = {
       clickedItems: [],
-      title:"Title",
+      title:"",
       global: false
     }
     this.getClickedItem = this.getClickedItem.bind(this);
@@ -86,11 +86,7 @@ class OutfitCreation extends Component {
     console.log(this.props);
     return (
         <div id="outfitCreationContainer">
-            <h1>Create an outfit</h1>
-            <div>
-                <h3 id="nameLabel">Outfit Name:</h3>
-                <input maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
-            </div>
+            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
             {/*
             <div id="outfitNameContainer">
                 <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>

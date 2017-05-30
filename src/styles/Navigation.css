@@ -14,3 +14,11 @@
     /*font-family: 'Raleway', sans-serif;*/
     font-size: 20px;
 }
+
+#navBar {
+    border-top: 1px solid lightgrey;
+}
+
+.backgroundImage {
+    background-image: url("../../public/assets/red-shirt.svg");
+}
