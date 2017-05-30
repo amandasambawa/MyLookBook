@@ -68,7 +68,7 @@ class Navigation extends Component {
             <div className="mobile-nav-bar title-bar">
               <div className="title-bar-left">
               <div className="title-bar-right">
-                  {this.backToGlobalFeed()}
+                  {this.backToFeed()}
               </div>
                 <span className="title-bar-text" onClick={this.logout}>Logout</span>
               </div>
@@ -76,7 +76,7 @@ class Navigation extends Component {
                     {this.createOrSaveOutfit()}
               </div>
               <div className="title-bar-right">
-                  {this.backToFeed()}
+                {this.backToGlobalFeed()}
               </div>
             </div>
       );
