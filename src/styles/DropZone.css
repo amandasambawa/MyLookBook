@@ -1,6 +1,5 @@
 .DropZoneContainer {
   display: block;
-  width: 95%;
   height: 350px;
   margin: auto;
   border: 1px solid grey;
@@ -11,4 +10,10 @@
 .draggable {
   width: 100px;
   position: absolute;
+}
+
+#parentContainer {
+    width: 95%;
+    text-align: center;
+    margin: auto;
 }
