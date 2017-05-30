@@ -34,7 +34,7 @@ class OutfitCreation extends Component {
 
   //handles the global Lock state
   handleGlobalLock() {
-    if(this.state.global === false){
+    if(this.state.global === false ){
       this.setState({global:true})
       this.props.setGlobal(Boolean(true));
     }else{
