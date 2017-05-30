@@ -85,10 +85,17 @@ class OutfitCreation extends Component {
   render() {
     console.log(this.props);
     return (
-        <div>
-            <div className="outfitNameContainer">
+        <div id="outfitCreationContainer">
+            <h1>Create an outfit</h1>
+            <div>
+                <h3 id="nameLabel">Outfit Name:</h3>
+                <input maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+            </div>
+            {/*
+            <div id="outfitNameContainer">
                 <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
             </div>
+            */}
             <div>
                 <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
                 <CategoryTabs getClickedItem={this.getClickedItem}/>

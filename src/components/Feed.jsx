@@ -60,7 +60,7 @@ class Feed extends Component {
     //if state exists is null, we will prompt the user to create an outfit
     }else if(this.state.exists === null){
       return (
-          <div id="feedContainer">
+          <div className="feedContainer">
               <h1>Start by creating outfits here</h1>
               <img src="../assets/curve-down-arrow.png" />
           </div>
@@ -71,7 +71,7 @@ class Feed extends Component {
       return (
         <div className="small-8 medium-4 large-4 columns">
             <span className="outfitName2">{preview.val().title}</span>
-            <Link to={`/singleOutfit/${preview.key}`}><img className="outfitLink"  src={preview.val().img}/></Link>
+            <Link to={`/singleOutfit/${preview.key}`}><img className="outfitLink" src={preview.val().img}/></Link>
         </div>
         );
       });
@@ -80,10 +80,12 @@ class Feed extends Component {
 
   render() {
     return (
-      <div className="row">
-        {this.loadingContent()}
-
-      </div>
+        <div id="lookbookContainer">
+            <h2 id="lookbookHeader">My Macy's Lookbook</h2>
+            <div className="row">
+                {this.loadingContent()}
+            </div>
+        </div>
     );
   }
 

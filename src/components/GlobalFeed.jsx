@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
 import "../styles/foundation.css";
+import "../styles/GlobalFeed.css";
 
 class GlobalFeed extends Component {
 
@@ -41,9 +42,9 @@ class GlobalFeed extends Component {
     }else{
       return this.state.previews.map((preview) => {
       return (
-        <div className="small-8 medium-4 large-4 columns">
+        <div>
             <span className="outfitName2">{preview.val().title}</span>
-            <Link to={`publicOutfit/${preview.val().oid}`}><img className="outfitLink"  src={preview.val().img}/></Link>
+            <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
         </div>
         );
       });
@@ -52,9 +53,11 @@ class GlobalFeed extends Component {
 
   render() {
     return (
-      <div className="row">
-        {this.loadingContent()}
-      </div>
+        <div className="feedContainer">
+            <img src="../assets/macysNavBar.png"/>
+            <h2 id="feedTitle">Feed</h2>
+            {this.loadingContent()}
+        </div>
     );
   }
 
