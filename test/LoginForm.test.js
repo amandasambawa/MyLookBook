@@ -55,5 +55,7 @@ it('make sure that password state is changing properly.', () => {
 //so long as the test does not error out, this means that login is working
 it('make sure that the code does not break with login', () => {
   const wrapper = mount(<LoginForm />);
+  wrapper.instance().setState({email:'bob@bob.com'});
+  wrapper.instance().setState({password:'bobbob'});
   const login = wrapper.instance().login();
 });

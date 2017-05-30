@@ -13,13 +13,13 @@ import Navigation from '../src/components/Navigation.jsx';
 /*
 * Declaring the parameters required to run Navigation
 */
-
-
+let userName = "testUser";
+let uid = "1aVzjhagXhPbm0YWgfNyWRJIElf1";
+let title= "test";
 //Make sure that LoginForm can even render.
-it('LoginForm renders properly.', () => {
-  let wrapper = shallow(<Navigation />);
+it('Navigation renders properly.', () => {
+  let wrapper = shallow(<Navigation userName={userName} uid={uid} title={title} />);
+  //let wrapper2 = mount(<Navigation userName={userName} uid={uid} title={title} />);
+  //let wrapper3 = render(<Navigation userName={userName} uid={uid} title={title} />);
   console.log(wrapper.debug());
-  let wrapper2 = mount(<Navigation />);
-  //let wrapper3 = render(<Navigation />);
-  console.log(wrapper2.debug());
 });
