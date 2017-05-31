@@ -65,7 +65,7 @@ class Navigation extends Component {
       //anywhere else and the user will be prompted to make an outfit
         return (
             <div>
-                <Link to="/outfitCreation"><img className="navIcon" src="../assets/plus.svg" /><div className="navLink">Create An Outfit</div></Link>
+                <Link to="/outfitCreation"><img className="navIcon" src="../assets/plus-button.svg" /><div className="navLink">Create An Outfit</div></Link>
             </div>
         );
     }
