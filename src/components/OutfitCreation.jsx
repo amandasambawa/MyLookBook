@@ -13,13 +13,13 @@ class OutfitCreation extends Component {
     this.state = {
       clickedItems: [],
       title:"",
-      global: false
+      global: false,
+      lockImgSrc:"../assets/locked.svg"
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
-
   }
 
   alertOptions = {
@@ -41,6 +41,8 @@ class OutfitCreation extends Component {
       }else{
         this.props.setGlobal(Boolean(true));
       }
+      this.setState({lockImgSrc:"../assets/unlocked.svg"})
+      //console.log("lock img:", this.state.lockImgSrc);
     }else{
       this.setState({global:false});
       if (this.props.testing === true){
@@ -48,8 +50,9 @@ class OutfitCreation extends Component {
       }else{
         this.props.setGlobal(Boolean(false));
       }
+      this.setState({lockImgSrc:"../assets/locked.svg"})
+      //console.log("lock img:", this.state.lockImgSrc);
     }
-
   }
 
   getClickedItem(item) {
@@ -86,14 +89,12 @@ class OutfitCreation extends Component {
   nameOutfit(event){
     this.setState({title:event.target.value});
     this.props.setTitle(event.target.value);
-
-
   }
 
   render() {
     return (
         <div id="outfitCreationContainer">
-            <span onClick={this.handleGlobalLock}>{this.state.global}<img id="lockIcon" src="../assets/locked.svg" /></span>
+            <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
             {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
             <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
             {/*
