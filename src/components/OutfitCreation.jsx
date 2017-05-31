@@ -36,10 +36,18 @@ class OutfitCreation extends Component {
   handleGlobalLock() {
     if(this.state.global === false ){
       this.setState({global:true})
-      this.props.setGlobal(Boolean(true));
+      if (this.props.testing === true){
+        return true;
+      }else{
+        this.props.setGlobal(Boolean(true));
+      }
     }else{
       this.setState({global:false});
-      this.props.setGlobal(Boolean(false));
+      if (this.props.testing === true){
+        return true;
+      }else{
+        this.props.setGlobal(Boolean(false));
+      }
     }
 
   }
@@ -83,7 +91,6 @@ class OutfitCreation extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
         <div id="outfitCreationContainer">
             <span onClick={this.handleGlobalLock}>{this.state.global}<img id="lockIcon" src="../assets/locked.svg" /></span>

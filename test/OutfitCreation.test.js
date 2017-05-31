@@ -12,26 +12,12 @@ import OutfitCreation from '../src/components/OutfitCreation.jsx';
 it('OutfitCreation renders properly.', () => {
   const wrapper = shallow(<OutfitCreation />);
   const wrapper2 = mount(<OutfitCreation />);
-  console.log(wrapper.debug());
 });
 
 
 /*
 * UI tests begin here
 */
-
-//make sure the initial divs are loaded up and proper.
-describe('OutfitCreation', () => {
-    it('check if the title loading up', () => {
-        const wrapper = shallow(<OutfitCreation />);
-        const title =
-        <h3 id="nameLabel">
-        Outfit Name:
-        </h3>;
-        expect(wrapper.contains(title)).toEqual(true);
-    });
-  });
-
 
 //make sure the input space is loaded up in the webpage.
 describe('OutfitCreation', () => {
@@ -48,7 +34,7 @@ describe('OutfitCreation', () => {
         const wrapper = shallow(<OutfitCreation />);
         const input = wrapper.find('input');
         expect(input.prop('maxLength')).toEqual("20");
-        expect(input.prop('value')).toEqual("Title");
+        expect(input.prop('id')).toEqual("outfitNameField");
     });
   });
 
@@ -95,8 +81,7 @@ it('make sure that OutfitCreation state title is working properly', () => {
 
 //Make sure handleGlobalLock is working
 it('make sure that handleGlobalLock', () => {
-  const wrapper = shallow(<OutfitCreation />);
-  wrapper.instance().setState({testing:Boolean(true)});
-  wrapper.instance().setState({global:Boolean(true)});
+  const wrapper = shallow(<OutfitCreation testing={true}/>);
   wrapper.instance().handleGlobalLock();
+  expect(wrapper.state('global')).toEqual(true);
 });
