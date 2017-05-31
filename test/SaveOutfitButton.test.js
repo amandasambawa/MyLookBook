@@ -13,7 +13,6 @@ import SaveOutfitButton from '../src/components/SaveOutfitButton.jsx';
 //Make sure that SaveOutfitButtonis rendering properly.
 it('SaveOutfitButton renders properly.', () => {
   const wrapper = shallow(<SaveOutfitButton />);
-  console.log(wrapper.debug());
   const wrapper2 = mount(<SaveOutfitButton />);
 });
 
