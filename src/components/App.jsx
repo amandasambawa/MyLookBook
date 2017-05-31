@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Joyride from 'react-joyride';
 import { auth,database } from '../firebase.js';
 import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
@@ -29,12 +30,19 @@ class App extends Component {
       uid: null,
       uname: null,
       global: null,
-      title: null
+      title: null,
+      joyrideOverlay: true,
+      joyrideType: 'continuous',
+      isReady: false,
+      isRunning: false,
+      stepIndex: 0,
+      steps: [],
+      selector: '',
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
-    this.walkthrough = this.walkthrough.bind(this);
+
   }
 
   componentDidMount() {
@@ -46,7 +54,72 @@ class App extends Component {
         this.setState({uid: null});
       }
     });
+
+    setTimeout(() => {
+      this.setState({
+        isReady: true,
+        isRunning: true,
+  });
+}, 1000);
   }
+
+  addSteps(steps) {
+  let newSteps = steps;
+
+  if (!Array.isArray(newSteps)) {
+    newSteps = [newSteps];
+  }
+
+  if (!newSteps.length) {
+    return;
+  }
+  this.setState(currentState => {
+      currentState.steps = currentState.steps.concat(newSteps);
+      return currentState;
+    });
+  }
+
+  addTooltip(data) {
+    this.joyride.addTooltip(data);
+  }
+
+  next() {
+    this.joyride.next();
+  }
+
+  callback(data) {
+    console.log('%ccallback', 'color: #47AAAC; font-weight: bold; font-size: 13px;'); //eslint-disable-line no-console
+    console.log(data); //eslint-disable-line no-console
+
+    this.setState({
+      selector: data.type === 'tooltip:before' ? data.step.selector : '',
+    });
+  }
+
+  onClickSwitch(e) {
+    e.preventDefault();
+    const el = e.currentTarget;
+    const state = {};
+
+    if (el.dataset.key === 'joyrideType') {
+      this.joyride.reset();
+
+      setTimeout(() => {
+        this.setState({
+          isRunning: true,
+        });
+      }, 300);
+
+      state.joyrideType = e.currentTarget.dataset.type;
+    }
+
+    if (el.dataset.key === 'joyrideOverlay') {
+      state.joyrideOverlay = el.dataset.type === 'active';
+    }
+
+    this.setState(state);
+  }
+
   getUserName(){
     database.ref(`/users/${this.state.uid}/`)
     .once("value").then((snapshot)=> {
@@ -63,28 +136,58 @@ class App extends Component {
     this.setState({title : title})
   }
 
-  walkthrough() {
-    return (
-     <div className="app">
-     <Joyride
-       ref="joyride"
-       steps={[arrayOfSteps]}
-       run={true} // or some other boolean for when you want to start it
-       debug={true}
 
-       />
-       <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true}/>
 
-     </div>
-   );
- }
 
- 
 
   render() {
-    return (
+
+
+      const {
+      isReady,
+      isRunning,
+      joyrideOverlay,
+      joyrideType,
+      selector,
+      stepIndex,
+      steps,
+    } = this.state;
+
+      if (isReady) {
+       let jr = (
+           <Joyride
+             ref={c => (this.joyride = c)}
+             callback={this.callback}
+             debug={false}
+             disableOverlay={selector === '.card-tickets'}
+             locale={{
+               back: (<span>Back</span>),
+               close: (<span>Close</span>),
+               last: (<span>Last</span>),
+               next: (<span>Next</span>),
+               skip: (<span>Skip</span>),
+             }}
+             run={isRunning}
+             showOverlay={joyrideOverlay}
+             showSkipButton={true}
+             showStepsProgress={true}
+             stepIndex={stepIndex}
+             steps={steps}
+             type={joyrideType}
+
+           />);
+
+         }
+return (
+       <div className="app">
+
+       {self.jr}
+
+         <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true}/>
+
+
       <Router>
-        {walkthrough}
+
         <div>
           <Switch>
             <Redirect exact from='/' to='/login'/>
@@ -101,6 +204,7 @@ class App extends Component {
           <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
         </div>
       </Router>
+       </div>
     );
   }
 };
