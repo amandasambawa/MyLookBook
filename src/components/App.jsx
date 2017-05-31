@@ -34,6 +34,7 @@ class App extends Component {
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
+    this.walkthrough = this.walkthrough.bind(this);
   }
 
   componentDidMount() {
@@ -62,11 +63,123 @@ class App extends Component {
     this.setState({title : title})
   }
 
+  walkthrough() {
+    return (
+     <div className="app">
+     <Joyride
+       ref="joyride"
+       steps={[arrayOfSteps]}
+       run={true} // or some other boolean for when you want to start it
+       debug={true}
+
+       />
+       <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true}/>
+
+     </div>
+   );
+ }
+
+ var stepOne =
+{
+  title: 'First Step',
+  text: 'Start using the <strong>joyride</strong>', // supports html tags
+  selector: '.first-step',
+  position: 'bottom-left',
+  type: 'hover',
+  isFixed: true,
+  // optional styling
+  style: {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    borderRadius: '0',
+    color: '#fff',
+    mainColor: '#ff4456',
+    textAlign: 'center',
+    width: '29rem',
+    arrow: {
+      display: 'none'
+    },
+    beacon: {
+      offsetX: 10,
+      offsetY: 10,
+      inner: '#000',
+      outer: '#000'
+    },
+    header: {
+      textAlign: 'right'
+      // or any style attribute
+    },
+    main: {
+      padding: '20px'
+    },
+    footer: {
+      display: 'none'
+    },
+    skip: {
+      color: '#f04'
+    },
+    hole: {
+      backgroundColor: 'rgba(201, 23, 33, 0.2)',
+    }
+
+  },
+  // custom params...
+  name: 'my-first-step',
+  parent: 'MyComponentName'
+};
+
+var stepOne =
+{
+ title: 'Second Step',
+ text: 'Start using the <strong>joyride</strong>', // supports html tags
+ selector: '.second-step',
+ position: 'bottom-left',
+ type: 'hover',
+ isFixed: true,
+ // optional styling
+ style: {
+   backgroundColor: 'rgba(0, 0, 0, 0.8)',
+   borderRadius: '0',
+   color: '#fff',
+   mainColor: '#ff4456',
+   textAlign: 'center',
+   width: '29rem',
+   arrow: {
+     display: 'none'
+   },
+   beacon: {
+     offsetX: 10,
+     offsetY: 10,
+     inner: '#000',
+     outer: '#000'
+   },
+   header: {
+     textAlign: 'right'
+     // or any style attribute
+   },
+   main: {
+     padding: '20px'
+   },
+   footer: {
+     display: 'none'
+   },
+   skip: {
+     color: '#f04'
+   },
+   hole: {
+     backgroundColor: 'rgba(201, 23, 33, 0.2)',
+   }
+
+ },
+ // custom params...
+ name: 'my-second-step',
+ parent: 'MyComponentName'
+};
+
   render() {
     return (
       <Router>
+        {walkthrough}
         <div>
-            <img src="../assets/macysNavBar.png"/>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
