@@ -13,7 +13,6 @@ import SignUpForm from '../src/components/SignUpForm.jsx';
 it('SignUpForm renders properly.', () => {
   const wrapper = shallow(<SignUpForm />);
   const wrapper2 = mount(<SignUpForm />);
-  console.log(wrapper2.debug());
 });
 
 

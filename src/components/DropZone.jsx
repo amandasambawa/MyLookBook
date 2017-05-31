@@ -125,7 +125,7 @@ class DropZone extends Component {
 
     renderImage(){
         let urls = this.props.clickedItems;
-        console.log("renderImage: ",urls);
+        //console.log("renderImage: ",urls);
         return(
             this.props.clickedItems.map(function(item){
                 return <img className="draggable" src={item}/>
@@ -134,7 +134,7 @@ class DropZone extends Component {
     }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <div id="parentContainer">
         <img id="undoButton" src="../assets/undo.svg" onClick={this.props.undoItem} />
