@@ -125,7 +125,7 @@ class DropZone extends Component {
 
     renderImage(){
         let urls = this.props.clickedItems;
-        console.log("renderImage: ",urls);
+        //console.log("renderImage: ",urls);
         return(
             this.props.clickedItems.map(function(item){
                 return <img className="draggable" src={item}/>
@@ -134,11 +134,11 @@ class DropZone extends Component {
     }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
-      <div>
+      <div id="parentContainer">
+        <img id="undoButton" src="../assets/undo.svg" onClick={this.props.undoItem} />
         <div className="DropZoneContainer">
-        <img id="undoButton" src="https://vignette3.wikia.nocookie.net/animaljam/images/a/ac/Undo-button.png/revision/latest?cb=20150915173321" onClick={this.props.undoItem}></img>
             {this.renderImage()}
             {this.startGesture()}
         </div>

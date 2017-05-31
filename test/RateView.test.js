@@ -10,7 +10,7 @@ import Rate from 'rc-rate';
 *
 */
 
-//Make sure that RateView
+//Make sure that RateView renders properly.
 it('RateView renders properly.', () => {
   const wrapper = shallow(<RateView testing={true} />);
   const wrapper2 = mount(<RateView testing={true} />);

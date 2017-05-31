@@ -13,13 +13,14 @@ class OutfitCreation extends Component {
     this.state = {
       clickedItems: [],
       title:"",
-      global: false
+      global: false,
+      lockImgSrc:"../assets/locked.svg"
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
-
+    this.passItemCount = this.passItemCount.bind(this);
   }
 
   static propTypes = {
@@ -84,12 +85,23 @@ class OutfitCreation extends Component {
   handleGlobalLock() {
     if(this.state.global === false ){
       this.setState({global:true})
-      this.props.setGlobal(Boolean(true));
+      if (this.props.testing === true){
+        return true;
+      }else{
+        this.props.setGlobal(Boolean(true));
+      }
+      this.setState({lockImgSrc:"../assets/unlocked.svg"});
+      //console.log("lock img:", this.state.lockImgSrc);
     }else{
       this.setState({global:false});
-      this.props.setGlobal(Boolean(false));
+      if (this.props.testing === true){
+        return true;
+      }else{
+        this.props.setGlobal(Boolean(false));
+      }
+      this.setState({lockImgSrc:"../assets/locked.svg"});
+      //console.log("lock img:", this.state.lockImgSrc);
     }
-
   }
 
   getClickedItem(item) {
@@ -105,6 +117,7 @@ class OutfitCreation extends Component {
 
       })
     }
+    this.passItemCount();
   }
 
   undoItem() {
@@ -123,18 +136,23 @@ class OutfitCreation extends Component {
     }
   }
 
+  passItemCount(){
+    var itemCounts = this.state.clickedItems.length + 1;
+    //console.log(itemCounts);
+    this.props.setItemCount(itemCounts);
+  }
+
   nameOutfit(event){
     this.setState({title:event.target.value});
     this.props.setTitle(event.target.value);
-
-
   }
 
   render() {
-    console.log(this.props);
     return (
         <div id="outfitCreationContainer">
-            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+            <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
+            {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
             {/*
             <div id="outfitNameContainer">
                 <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
@@ -144,7 +162,6 @@ class OutfitCreation extends Component {
                 <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
                 <CategoryTabs getClickedItem={this.getClickedItem}/>
                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-                <button onClick={this.handleGlobalLock} className="button">{this.state.global}</button>
             </div>
         </div>
     );
