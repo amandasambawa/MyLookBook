@@ -68,9 +68,10 @@ class SaveOutfitButton extends Component {
     }else{
       return(
         <div className="saveOutfitContainer">
-          <button className="button" onClick={this.saveOutfit}>
+            <div className="navLink" onClick={this.saveOutfit}><img className="navIcon" id="saveCloudIcon" src="../assets/save-cloud.svg" /><div className="navLink" id="saveOutfitLabel">Save outfit</div></div>
+            {/*<button className="button" onClick={this.saveOutfit}>
             Save Outfit
-          </button>
+          </button> */}
         </div>
 
       );

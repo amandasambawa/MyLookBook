@@ -17,6 +17,11 @@
 
 #navBar {
     border-top: 1px solid lightgrey;
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .backgroundImage {

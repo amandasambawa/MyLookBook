@@ -1,5 +1,14 @@
-.saveOutfitContainer {
+/* .saveOutfitContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+*/
+
+#saveCloudIcon {
+    margin-top: 5px;
+}
+
+#saveOutfitLabel {
+    font-size: 16px;
 }
