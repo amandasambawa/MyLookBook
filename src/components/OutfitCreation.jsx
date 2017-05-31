@@ -42,7 +42,7 @@ class OutfitCreation extends Component {
       }else{
         this.props.setGlobal(Boolean(true));
       }
-      this.setState({lockImgSrc:"../assets/unlocked.svg"})
+      this.setState({lockImgSrc:"../assets/unlocked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
     }else{
       this.setState({global:false});
@@ -51,7 +51,7 @@ class OutfitCreation extends Component {
       }else{
         this.props.setGlobal(Boolean(false));
       }
-      this.setState({lockImgSrc:"../assets/locked.svg"})
+      this.setState({lockImgSrc:"../assets/locked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
     }
   }
@@ -104,7 +104,7 @@ class OutfitCreation extends Component {
         <div id="outfitCreationContainer">
             <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
             {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
-            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
             {/*
             <div id="outfitNameContainer">
                 <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>

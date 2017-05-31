@@ -45,10 +45,20 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
-.navLink {
-    font-size: 12px;
-}
-
 .middleNav {
     font-size: 16px;
+}
+
+.navLink {
+    font-family: 'Abel', sans-serif;
+    font-size: 12px;
+    background: none;
+    border: none;
+    margin: auto;
+    display: block;
+}
+
+button:focus {
+    color: #af0000;
+    outline: none;
 }

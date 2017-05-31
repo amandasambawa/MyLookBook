@@ -30,7 +30,7 @@ class SaveOutfitButton extends Component {
     //console.log(this.props.itemCount);
     if (this.props.itemCount <= 0) {
       //console.log("need items for outfit!");
-      this.msg.show("Can save empty outfit!", {
+      this.msg.show("Can't save empty outfit!", {
         time: 20000,
         type: 'error'
 
@@ -89,8 +89,15 @@ class SaveOutfitButton extends Component {
     } else {
       return (
         <div className="saveOutfitContainer">
-          <div className="navLink" onClick={this.saveOutfit}><img className="navIcon" id="saveCloudIcon" src="../assets/save-cloud.svg"/>
-            <div className="navLink middleNav">Save outfit</div>
+          <div className="navLink" onClick={this.saveOutfit}>
+              <img className="navIcon" id="saveCloudIcon" src="../assets/save-cloud.svg"/>
+              {/* <div className="navLink middleNav">Save outfit</div> */}
+              <button
+                  className="navLink"
+                  id="saveOutfitButton"
+                  value="Save Outfit"
+                  autoFocus
+              >Save Outfit</button>
           </div>
           {/*<button className="button" onClick={this.saveOutfit}>
             Save Outfit

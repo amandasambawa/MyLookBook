@@ -4,7 +4,11 @@
     justify-content: center;
 }
 */
-
-#saveCloudIcon {
+.saveOutfitContainer {
     margin-top: 5px;
+}
+
+#saveOutfitButton {
+    font-size: 16px;
+    margin-top: 2px;
 }

@@ -42,19 +42,42 @@ class Navigation extends Component {
     }
   }
 
+/*    componentDidMount() {
+        this.refs.theDiv.focus();
+    }
+*/
+
+
+
   backToFeed(){
       return (
           <div className="feedLink">
               <Link to="/feed">
                   <div className="backgroundImage"></div>
                   <img className="navIcon" src="../assets/shirt.svg" />
-                  <div className="navLink">My Lookbook</div>
+                  {/* <div ref = "theDiv" className="navLink">My Lookbook</div> */}
+                  <button
+                      className="navLink"
+                      value="My Lookbook"
+                      autoFocus
+                  >My Lookbook</button>
               </Link>
           </div>);
   }
 
   backToGlobalFeed(){
-      return <div className="globalFeedLink"><Link to="/globalFeed"><img className="navIcon" src="../assets/earth-globe.svg" /><div className="navLink">Global Feed</div></Link></div>;
+      return (
+          <div className="globalFeedLink">
+              <Link to="/globalFeed">
+                  <img className="navIcon" src="../assets/earth-globe.svg" />
+                  {/*<div className="navLink">Global Feed</div> */}
+                  <button
+                      className="navLink"
+                      value="Global Feed"
+                  >Global Feed</button>
+              </Link>
+          </div>
+      );
   }
 
   createOrSaveOutfit(){
@@ -65,7 +88,14 @@ class Navigation extends Component {
       //anywhere else and the user will be prompted to make an outfit
         return (
             <div>
-                <Link to="/outfitCreation"><img className="navIcon" src="../assets/plus-button.svg" /><div className="navLink">Create An Outfit</div></Link>
+                <Link to="/outfitCreation">
+                    <img className="navIcon" src="../assets/plus-button.svg" />
+                    {/*<div className="navLink">Create An Outfit</div> */}
+                    <button
+                        className="navLink"
+                        value="Create an Outfit"
+                    >Create an Outfit</button>
+                </Link>
             </div>
         );
     }

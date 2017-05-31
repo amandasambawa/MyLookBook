@@ -233,6 +233,9 @@ class SingleOutfitView extends Component {
           </div>
           {this.injectRatingsContent()}
         </div>
+        <div id="wishlistContainer">
+
+        </div>
       </div>
     );
   }
