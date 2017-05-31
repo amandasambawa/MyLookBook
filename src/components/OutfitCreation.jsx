@@ -20,6 +20,7 @@ class OutfitCreation extends Component {
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
+    this.passItemCount = this.passItemCount.bind(this);
   }
 
   alertOptions = {
@@ -68,6 +69,7 @@ class OutfitCreation extends Component {
 
       })
     }
+    this.passItemCount();
   }
 
   undoItem() {
@@ -84,6 +86,12 @@ class OutfitCreation extends Component {
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
     }
+  }
+
+  passItemCount(){
+    var itemCounts = this.state.clickedItems.length + 1;
+    //console.log(itemCounts);
+    this.props.setItemCount(itemCounts);
   }
 
   nameOutfit(event){

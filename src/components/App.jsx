@@ -29,11 +29,13 @@ class App extends Component {
       uid: null,
       uname: null,
       global: null,
-      title: null
+      title: null,
+      itemCount:0
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
+    this.setItemCount = this.setItemCount.bind(this);
   }
 
   componentDidMount() {
@@ -62,6 +64,10 @@ class App extends Component {
     this.setState({title : title})
   }
 
+  setItemCount(itemCount){
+    this.setState({itemCount: itemCount});
+  }
+
   render() {
     return (
       <Router>
@@ -72,14 +78,14 @@ class App extends Component {
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
-            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}/>
+            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
-          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
+          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
         </div>
       </Router>
     );
