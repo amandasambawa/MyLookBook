@@ -194,7 +194,11 @@ return (
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
-            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}/>
+            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}             joyrideType={joyrideType}
+              joyrideOverlay={joyrideOverlay}
+              onClickSwitch={this.onClickSwitch}
+              addSteps={this.addSteps}
+              addTooltip={this.addTooltip}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
