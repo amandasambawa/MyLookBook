@@ -22,6 +22,54 @@ class OutfitCreation extends Component {
 
   }
 
+  static propTypes = {
+    addSteps: React.PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    this.props.addSteps([
+      {
+        title: 'Auto Scroll',
+        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+        selector: '#area-chart',
+        position: 'top',
+        style: {
+          mainColor: '#a350f0',
+          beacon: {
+            inner: '#a350f0',
+            outer: '#a350f0',
+          },
+        },
+      },
+      {
+        title: 'Hide Elements',
+        text: <Inline />,
+        textAlign: 'center',
+        selector: '#donut-chart',
+        position: 'left',
+        style: {
+          backgroundColor: '#12d217',
+          borderRadius: 0,
+          color: '#fff',
+          mainColor: '#fff',
+          textAlign: 'center',
+          beacon: {
+            inner: '#12d217',
+            outer: '#12d217',
+          },
+          skip: {
+            display: 'none',
+          },
+          back: {
+            display: 'none',
+          },
+        },
+      },
+    ]);
+  }
+
+
+
   alertOptions = {
     offset: 50,
     position: 'top right',
