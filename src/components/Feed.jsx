@@ -44,6 +44,7 @@ class Feed extends Component {
       snapshot.forEach(function(childSnapshot, key) {
         previewArray.push(childSnapshot);
       });
+      previewArray.reverse();
       this.setState({previews: previewArray, exists: snapshot.val()});
     });
   }

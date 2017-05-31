@@ -62,3 +62,7 @@ button:focus {
     color: #af0000;
     outline: none;
 }
+
+.feedContainer {
+    margin-bottom: 4em;
+}
