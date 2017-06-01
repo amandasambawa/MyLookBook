@@ -8,8 +8,8 @@ class BelowBox extends Component {
       this.clicked = this.clicked.bind(this);
     }
     returnCatalogItems(){
-        //console.log("bb imageUrls: ", this.props.imageUrls);
-        return this.props.imageUrls.map((itemObj)=>{
+        //console.log("bb imageObj: ", this.props.imageObj);
+        return this.props.imageObj.map((itemObj)=>{
             return (<img className="categoryItems" src={itemObj.imgUrl}
             data-itemimgurl={itemObj.imgUrl}
             data-itemproductid={itemObj.productId}
