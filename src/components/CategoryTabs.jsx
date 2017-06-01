@@ -7,30 +7,41 @@ import BelowBox from "./BelowBox.jsx"
 const itemsArray = {
   "tops": [
     {
-      productId: 3004038,
-      imgUrl: "https://cdn.shopify.com/s/files/1/0637/5325/products/14kt_Gold_Oval_Bangle_grande.png?v=1439057856",
-      macysUrl: "https://m.macys.com/shop/product/polished-bangle-bracelet-in-18k-gold?ID=3004038"
-    }
+      productId: 3054382,
+      imgUrl: "http://cdn.allvolleyball.com/images/uploads/category_127_7336.png",
+      macysUrl: "https://www.macys.com/shop/product/under-armour-zinger-upf-30-golf-polo?ID=3054382&CategoryID=255#fn=sp%3D1%26spc%3D20%26ruleId%3D78|BA%26slotId%3D8%26kws%3Dunder%20armour%20polo%26searchPass%3DexactMultiMatch"
+    },
+      {
+          productId: 2353685,
+          imgUrl: "https://fgl.scene7.com/is/image/FGLSportsLtd/332065540_01_a?wid=800&hei=800&bgColor=0,0,0,0&fmt=png-alpha&resMode=sharp2&op_sharpen=1",
+          macysUrl: "https://www.macys.com/shop/product/nike-leg-a-see-just-do-it-dri-fit-leggings?ID=2353685&CategoryID=157&selectedSize=&swatchColor=Black/White#fn=sp%3D1%26spc%3D81%26ruleId%3D84%26slotId%3D30%26kws%3Dnike%20leggings%26searchPass%3DexactMultiMatch"
+      }
   ],
   "bottoms": [
     {
-      productId: 3004038,
-      imgUrl: "https://cdn.shopify.com/s/files/1/0637/5325/products/14kt_Gold_Oval_Bangle_grande.png?v=1439057856",
-      macysUrl: "https://m.macys.com/shop/product/polished-bangle-bracelet-in-18k-gold?ID=3004038"
+      productId: 2353685,
+      imgUrl: "https://fgl.scene7.com/is/image/FGLSportsLtd/332065540_01_a?wid=800&hei=800&bgColor=0,0,0,0&fmt=png-alpha&resMode=sharp2&op_sharpen=1",
+      macysUrl: "https://www.macys.com/shop/product/nike-leg-a-see-just-do-it-dri-fit-leggings?ID=2353685&CategoryID=157&selectedSize=&swatchColor=Black/White#fn=sp%3D1%26spc%3D81%26ruleId%3D84%26slotId%3D30%26kws%3Dnike%20leggings%26searchPass%3DexactMultiMatch"
     }
   ],
   "shoes": [
     {
-      productId: 3004038,
-      imgUrl: "https://cdn.shopify.com/s/files/1/0637/5325/products/14kt_Gold_Oval_Bangle_grande.png?v=1439057856",
-      macysUrl: "https://m.macys.com/shop/product/polished-bangle-bracelet-in-18k-gold?ID=3004038"
+      productId: 4364902,
+      imgUrl: "http://render.nikeid.com/ir/render/nikeidrender/roshetwo1608_v1?obj=/s/shadow/shad&show&color=000000&obj=/s/g8&color=141414&show&obj=/s/g22&color=141414&show&obj=/s/g9&color=bcbdbd&show&obj=/s/g7&color=141414&show&obj=/s/g10&color=535559&show&obj=/s/g11&color=62646a&show&obj=/s/g14&color=141414&show&obj=/s/g15&color=141414&show&obj=/s/g17&color=1d1c1b&show&obj=/s/g1/solid&color=141414&show&obj=/s/g4/solid&color=141414&show&obj=/s/g20&color=141414&show&obj=/s/g21&color=ebff67&show&obj=/s/g12/solid&color=141414&show&obj=/s&req=object&fmt=png-alpha&wid=640",
+      macysUrl: "https://macys.com/shop/product/nike-womens-roshe-two-casual-sneakers-from-finish-line?ID=4364902&CategoryID=63268#fn=sp%3D1%26spc%3D31%26ruleId%3D84%26slotId%3D6%26kws%3Dnike%20roshe%26searchPass%3DallMultiMatchWithSpelling"
+    },
+    {
+        productId: 564801,
+        imgUrl: "https://cdn.shopify.com/s/files/1/1741/1799/products/keds_champion_oxford_sneakers_03_grande.png?v=1485443316",
+        macysUrl: "https://macys.com/shop/product/keds-womens-champion-oxford-sneakers?ID=564801"
     }
+
   ],
   "accessories": [
     {
       productId: 3004038,
       imgUrl: "https://cdn.shopify.com/s/files/1/0637/5325/products/14kt_Gold_Oval_Bangle_grande.png?v=1439057856",
-      macysUrl: "https://m.macys.com/shop/product/polished-bangle-bracelet-in-18k-gold?ID=3004038"
+      macysUrl: "https://macys.com/shop/product/polished-bangle-bracelet-in-18k-gold?ID=3004038"
     }
   ]
 
