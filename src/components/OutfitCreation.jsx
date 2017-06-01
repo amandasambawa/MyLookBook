@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
-import {database} from '../firebase.js';
+import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
 import Navigation from './Navigation.jsx';
 import '../styles/OutfitCreation.css';
@@ -13,9 +13,9 @@ class OutfitCreation extends Component {
     super(props);
     this.state = {
       clickedItems: [],
-      title:"",
+      title: "",
       global: false,
-      lockImgSrc:"../assets/locked.svg"
+      lockImgSrc: "../assets/locked.svg"
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
@@ -32,27 +32,38 @@ class OutfitCreation extends Component {
     transition: 'fade'
   }
 
+  logout() {
+    auth.signOut().then(function() {
+      console.log("successful log out")
+      // Sign-out successful.
 
+    }).catch(function(error) {
+      console.log("error logging out")
+      // An error happened.
+      return false;
+    });
+    return true;
+  }
 
   //handles the global Lock state
   handleGlobalLock() {
-    if(this.state.global === false ){
-      this.setState({global:true})
-      if (this.props.testing === true){
+    if (this.state.global === false) {
+      this.setState({global: true})
+      if (this.props.testing === true) {
         return true;
-      }else{
+      } else {
         this.props.setGlobal(Boolean(true));
       }
-      this.setState({lockImgSrc:"../assets/unlocked.svg"});
+      this.setState({lockImgSrc: "../assets/unlocked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
-    }else{
-      this.setState({global:false});
-      if (this.props.testing === true){
+    } else {
+      this.setState({global: false});
+      if (this.props.testing === true) {
         return true;
-      }else{
+      } else {
         this.props.setGlobal(Boolean(false));
       }
-      this.setState({lockImgSrc:"../assets/locked.svg"});
+      this.setState({lockImgSrc: "../assets/locked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
     }
   }
@@ -76,12 +87,12 @@ class OutfitCreation extends Component {
 
   undoItem() {
     //console.log(this.state.clickedItems.length);
-    if(this.state.clickedItems.length>=1){
+    if (this.state.clickedItems.length >= 1) {
       console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.pop();
       this.setState({clickedItems: itemsArray});
-    }else{
+    } else {
       this.msg.show('There are no more items', {
         time: 20000,
         type: 'error'
@@ -90,38 +101,39 @@ class OutfitCreation extends Component {
     }
   }
 
-  passItemCount(){
+  passItemCount() {
     var itemCounts = this.state.clickedItems.length + 1;
     //console.log(itemCounts);
     this.props.setItemCount(itemCounts);
   }
 
-  nameOutfit(event){
-    this.setState({title:event.target.value});
+  nameOutfit(event) {
+    this.setState({title: event.target.value});
     this.props.setTitle(event.target.value);
   }
 
   render() {
     //console.log(this.state.clickedItems);
     return (
-        <div>
-          <div id="outfitCreationContainer">
-              <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
-              {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
-              <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
-              {/*
+      <div>
+        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <div id="outfitCreationContainer">
+          <span onClick={this.handleGlobalLock}>{this.state.global}
+            <img id="lockIcon" src={this.state.lockImgSrc}/></span>
+          {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+          <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/> {/*
               <div id="outfitNameContainer">
                   <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
               </div>
               */}
-              <div>
-                  <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-                  <CategoryTabs getClickedItem={this.getClickedItem}/>
-                  <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-              </div>
+          <div>
+            <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+            <CategoryTabs getClickedItem={this.getClickedItem}/>
+            <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
           </div>
-          <Navigation render={true} uid={this.props.uid} global={this.state.global} title={this.state.title} clickedItems={this.state.clickedItems} />
         </div>
+        <Navigation render={true} uid={this.props.uid} global={this.state.global} title={this.state.title} clickedItems={this.state.clickedItems}/>
+      </div>
     );
   }
 

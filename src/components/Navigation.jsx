@@ -102,12 +102,12 @@ class Navigation extends Component {
 
   }
 
-
   render(){
     if( this.props.location.pathname.split("/")[1] === "outfitCreation" && this.props.render === undefined){
       return(<div></div>);
     }else if(this.props.uid){
       return(
+          <div>
             <div className="row" id="navBar">
                 <div className="small-5 columns">
                     {this.backToFeed()}
@@ -125,6 +125,7 @@ class Navigation extends Component {
                     </div>
                 */}
             </div>
+          </div>
       );
     }else{
       return(

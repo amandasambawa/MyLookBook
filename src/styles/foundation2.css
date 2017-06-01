@@ -66,3 +66,8 @@ button:focus {
 .feedContainer {
     margin-bottom: 4em;
 }
+
+#logoutContainer {
+    position:absolute;
+    right: 8px;
+}

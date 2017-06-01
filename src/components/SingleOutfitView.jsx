@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {database} from '../firebase.js';
+import {database, auth} from '../firebase.js';
 import Rate from 'rc-rate';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
@@ -22,6 +22,19 @@ class SingleOutfitView extends Component {
     this.injectRatingsContent = this.injectRatingsContent.bind(this);
     this.addToWishList = this.addToWishList.bind(this);
   }
+
+    logout() {
+        auth.signOut().then(function() {
+            console.log("successful log out")
+            // Sign-out successful.
+
+        }).catch(function(error) {
+            console.log("error logging out")
+            // An error happened.
+            return false;
+        });
+        return true;
+    }
 
   componentDidMount() {
     //grab outfit image in database
@@ -209,6 +222,7 @@ class SingleOutfitView extends Component {
   render() {
     return (
       <div>
+          <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>
         <div id="singleOutfitViewContainer">
