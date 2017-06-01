@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth,database } from '../firebase.js';
-import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
+import {PrivateRoute, PublicRoute, RateRoute, GlobalRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
 import GlobalFeed from './GlobalFeed.jsx'
@@ -77,7 +77,7 @@ class App extends Component {
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
-            <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
+            <GlobalRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
