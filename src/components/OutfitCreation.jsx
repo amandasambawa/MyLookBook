@@ -4,6 +4,7 @@ import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import {database} from '../firebase.js';
 import AlertContainer from 'react-alert';
+import Navigation from './Navigation.jsx';
 import '../styles/OutfitCreation.css';
 
 class OutfitCreation extends Component {
@@ -62,6 +63,7 @@ class OutfitCreation extends Component {
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.push(item);
       this.setState({clickedItems: itemsArray});
+      //console.log("clicled items: ", this.state.clickedItems);
     } else {
       this.msg.show('Reached Maximum(6) Items', {
         time: 20000,
@@ -100,21 +102,25 @@ class OutfitCreation extends Component {
   }
 
   render() {
+    //console.log(this.state.clickedItems);
     return (
-        <div id="outfitCreationContainer">
-            <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
-            {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
-            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
-            {/*
-            <div id="outfitNameContainer">
-                <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
-            </div>
-            */}
-            <div>
-                <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-                <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-            </div>
+        <div>
+          <div id="outfitCreationContainer">
+              <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
+              {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+              <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
+              {/*
+              <div id="outfitNameContainer">
+                  <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+              </div>
+              */}
+              <div>
+                  <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+                  <CategoryTabs getClickedItem={this.getClickedItem}/>
+                  <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+              </div>
+          </div>
+          <Navigation render={true} uid={this.props.uid} global={this.state.global} title={this.state.title} clickedItems={this.state.clickedItems} />
         </div>
     );
   }

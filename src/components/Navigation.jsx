@@ -83,7 +83,7 @@ class Navigation extends Component {
   createOrSaveOutfit(){
     //if we are in create outfit, the middle button should be saving the outfit
     if ( this.props.location.pathname.split("/")[1] === "outfitCreation"){
-        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title} global={this.props.global} itemCount={this.props.itemCount} />
+        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title} global={this.props.global} itemCount={this.props.itemCount} clickedItems={this.props.clickedItems} />
     }else{
       //anywhere else and the user will be prompted to make an outfit
         return (
@@ -104,7 +104,9 @@ class Navigation extends Component {
 
 
   render(){
-    if(this.props.uid){
+    if( this.props.location.pathname.split("/")[1] === "outfitCreation" && this.props.render === undefined){
+      return(<div></div>);
+    }else if(this.props.uid){
       return(
             <div className="row" id="navBar">
                 <div className="small-5 columns">

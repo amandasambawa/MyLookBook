@@ -36,6 +36,7 @@ class SaveOutfitButton extends Component {
 
       });
     } else {
+      //console.log("here: ",this.props.clickedItems);
       this.generateImage();
     }
   }
@@ -43,7 +44,7 @@ class SaveOutfitButton extends Component {
   generateImage() {
     html2canvas(document.getElementsByClassName('DropZoneContainer'), {
       //  allowTaint: true,
-      logging: true,
+      logging: false,
       useCORS: true,
       onrendered: (canvas) => {
         //console.log('generating');
@@ -59,7 +60,8 @@ class SaveOutfitButton extends Component {
           global: Boolean(this.props.global),
           title: titleRef,
           ratings: {},
-          img: url
+          img: url,
+          items:this.props.clickedItems
         });
 
         this.setState({outfitKey: newOutfit.key});

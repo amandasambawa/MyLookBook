@@ -8,13 +8,23 @@ class BelowBox extends Component {
       this.clicked = this.clicked.bind(this);
     }
     returnCatalogItems(){
-        return this.props.imageUrls.map((url)=>{
-            return (<img className="categoryItems" src={url} onClick={this.clicked}/>);
+        //console.log("bb imageUrls: ", this.props.imageUrls);
+        return this.props.imageUrls.map((itemObj)=>{
+            return (<img className="categoryItems" src={itemObj.imgUrl}
+            data-itemimgurl={itemObj.imgUrl}
+            data-itemproductid={itemObj.productId}
+            data-itemmacysurl={itemObj.macysUrl}
+            onClick={this.clicked}/>);
         })
     }
     clicked(event) {
-        //console.log("src from", event.target.src);
-        this.props.getClickedItem(event.target.src);
+        var itemObj = {
+            productId: event.target.dataset.itemproductid,
+            imgUrl: event.target.dataset.itemimgurl,
+            macysUrl: event.target.dataset.itemmacysurl
+        }
+        //console.log("clicked:", itemObj);
+        this.props.getClickedItem(itemObj);
     }
 
     render(){

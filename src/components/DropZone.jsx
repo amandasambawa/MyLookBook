@@ -124,11 +124,11 @@ class DropZone extends Component {
   //window.dragMoveListener = dragMoveListener;
 
     renderImage(){
-        let urls = this.props.clickedItems;
+        let urls = this.props.clickedItems.imgUrl;
         //console.log("renderImage: ",urls);
         return(
             this.props.clickedItems.map(function(item){
-                return <img className="draggable" src={item}/>
+                return <img className="draggable" src={item.imgUrl}/>
             })
         );
     }
