@@ -11,14 +11,21 @@ const PublicRoute = ({ component: Component, uid, ...rest }) => (
   />
 );
 
-const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, setItemCount,...rest }) => (
+const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, setItemCount, joyrideType, joyrideOverlay,onClickSwitch,addSteps,addTooltip,...rest }) => (
   <Route
     {...rest}
     render={props =>
       uid
-        ? <Component uid={uid} setTitle={setTitle} setGlobal={setGlobal} setItemCount={setItemCount} {...props} />
+        ? <Component uid={uid} setTitle={setTitle} setGlobal={setGlobal} setItemCount={setItemCount} joyrideType={joyrideType}
+          joyrideOverlay={joyrideOverlay}
+          onClickSwitch={onClickSwitch}
+          addSteps={addSteps}
+          addTooltip={addTooltip}{...props} />
         : <Redirect to={{ pathname: "/login" }} />}
   />
+
+
+
 );
 
 const RateRoute = ({ component: Component, uid, ...rest }) => (

@@ -36,7 +36,9 @@ class App extends Component {
       isReady: false,
       isRunning: false,
       stepIndex: 0,
-      steps: [],
+      steps: [
+
+        ],
       selector: '',
       itemCount:0
     }
@@ -44,7 +46,47 @@ class App extends Component {
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.setItemCount = this.setItemCount.bind(this);
+    this.addSteps = this.addSteps.bind(this);
+
   }
+
+  // {
+  //   title: 'Auto Scroll',
+  //   text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+  //   selector: '#outfitCreationContainer',
+  //   position: 'top',
+  //   style: {
+  //     mainColor: '#a350f0',
+  //     beacon: {
+  //       inner: '#a350f0',
+  //       outer: '#a350f0',
+  //     },
+  //   },
+  // },
+  // {
+  //   title: 'Hide Elements',
+  //   text: 'Sample texti is here',
+  //   textAlign: 'center',
+  //   selector: '#outfitNameField',
+  //   position: 'left',
+  //   style: {
+  //     backgroundColor: '#12d217',
+  //     borderRadius: 0,
+  //     color: '#fff',
+  //     mainColor: '#fff',
+  //     textAlign: 'center',
+  //     beacon: {
+  //       inner: '#12d217',
+  //       outer: '#12d217',
+  //     },
+  //     skip: {
+  //       display: 'none',
+  //     },
+  //     back: {
+  //       display: 'none',
+  //     },
+  //   },
+  // },
 
   componentDidMount() {
     this.authListener = auth.onAuthStateChanged(user => {
@@ -74,11 +116,14 @@ class App extends Component {
   if (!newSteps.length) {
     return;
   }
+
   this.setState(currentState => {
+
       currentState.steps = currentState.steps.concat(newSteps);
       return currentState;
     });
   }
+
 
   addTooltip(data) {
     this.joyride.addTooltip(data);
@@ -143,8 +188,6 @@ class App extends Component {
 
 
   render() {
-
-
       const {
       isReady,
       isRunning,
@@ -185,7 +228,7 @@ return (
 
        {self.jr}
 
-         <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true}/>
+        <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true} autoStart={true} showOverlay={false}/>
 
 
       <Router>
@@ -201,6 +244,7 @@ return (
               joyrideOverlay={joyrideOverlay}
               onClickSwitch={this.onClickSwitch}
               addSteps={this.addSteps}
+
               addTooltip={this.addTooltip}/>
 
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>

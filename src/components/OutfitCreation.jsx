@@ -27,8 +27,87 @@ class OutfitCreation extends Component {
     addSteps: React.PropTypes.func.isRequired,
   }
 
+
   componentDidMount() {
     this.props.addSteps([
+      {
+        title: 'Auto Scroll',
+        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+        selector: '#outfitCreationContainer',
+        position: 'top',
+        style: {
+          mainColor: '#a350f0',
+          beacon: {
+            inner: '#a350f0',
+            outer: '#a350f0',
+          },
+        },
+      }])
+  //  console.log(this.props);
+/*    this.setState({steps: [{
+      title: 'Auto Scroll',
+      text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+      selector: '#area-chart',
+      position: 'top',
+      style: {
+        mainColor: '#a350f0',
+        beacon: {
+          inner: '#a350f0',
+          outer: '#a350f0',
+        },
+      },
+    }]}); */
+
+    // var newSteps = {steps: [
+    //     {
+    //       title: 'Auto Scroll',
+    //       text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+    //       selector: '#area-chart',
+    //       position: 'top',
+    //       style: {
+    //         mainColor: '#a350f0',
+    //         beacon: {
+    //           inner: '#a350f0',
+    //           outer: '#a350f0',
+    //         },
+    //       },
+    //     },
+    //     {
+    //       title: 'Hide Elements',
+    //       text: 'Sample texti is here',
+    //       textAlign: 'center',
+    //       selector: '#outfitNameField',
+    //       position: 'left',
+    //       style: {
+    //         backgroundColor: '#12d217',
+    //         borderRadius: 0,
+    //         color: '#fff',
+    //         mainColor: '#fff',
+    //         textAlign: 'center',
+    //         beacon: {
+    //           inner: '#12d217',
+    //           outer: '#12d217',
+    //         },
+    //         skip: {
+    //           display: 'none',
+    //         },
+    //         back: {
+    //           display: 'none',
+    //         },
+    //       },
+    //     },
+    //   ]};
+
+    // this.setState(newSteps, function() {
+    //   console.log("steps state");
+    //   console.log(this.state.steps);
+    // });
+
+
+
+
+
+  /**   this.props.addSteps([
       {
         title: 'Auto Scroll',
         text: 'Scroll to correct position if required. <i>It can be turned off</i>',
@@ -44,7 +123,7 @@ class OutfitCreation extends Component {
       },
       {
         title: 'Hide Elements',
-        text: <Inline />,
+        text: 'Sample texti is here',
         textAlign: 'center',
         selector: '#donut-chart',
         position: 'left',
@@ -66,7 +145,7 @@ class OutfitCreation extends Component {
           },
         },
       },
-    ]);
+    ]); **/
   }
 
 
