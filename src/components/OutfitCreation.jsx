@@ -15,13 +15,13 @@ class OutfitCreation extends Component {
       clickedItems: [],
       title: "",
       global: false,
-      lockImgSrc: "../assets/locked.svg"
+      lockImgSrc: "../assets/locked.svg",
+      itemCount:0
     }
     this.getClickedItem = this.getClickedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
-    this.passItemCount = this.passItemCount.bind(this);
   }
 
   alertOptions = {
@@ -73,7 +73,7 @@ class OutfitCreation extends Component {
     if (this.state.clickedItems.length <= 5) {
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.push(item);
-      this.setState({clickedItems: itemsArray});
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
       //console.log("clicled items: ", this.state.clickedItems);
     } else {
       this.msg.show('Reached Maximum(6) Items', {
@@ -82,16 +82,15 @@ class OutfitCreation extends Component {
 
       })
     }
-    this.passItemCount();
   }
 
   undoItem() {
     //console.log(this.state.clickedItems.length);
     if (this.state.clickedItems.length >= 1) {
-      console.log("undo item");
+      //console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.pop();
-      this.setState({clickedItems: itemsArray});
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
     } else {
       this.msg.show('There are no more items', {
         time: 20000,
@@ -99,13 +98,9 @@ class OutfitCreation extends Component {
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
     }
+    //console.log(this.state.itemCount);
   }
 
-  passItemCount() {
-    var itemCounts = this.state.clickedItems.length + 1;
-    //console.log(itemCounts);
-    this.props.setItemCount(itemCounts);
-  }
 
   nameOutfit(event) {
     this.setState({title: event.target.value});
@@ -132,7 +127,8 @@ class OutfitCreation extends Component {
             <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
           </div>
         </div>
-        <Navigation render={true} uid={this.props.uid} global={this.state.global} title={this.state.title} clickedItems={this.state.clickedItems}/>
+        <Navigation render={true} uid={this.props.uid} global={this.state.global}
+          title={this.state.title} clickedItems={this.state.clickedItems} itemCount={this.state.itemCount}/>
       </div>
     );
   }

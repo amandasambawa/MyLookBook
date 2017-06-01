@@ -83,7 +83,8 @@ class Navigation extends Component {
   createOrSaveOutfit(){
     //if we are in create outfit, the middle button should be saving the outfit
     if ( this.props.location.pathname.split("/")[1] === "outfitCreation"){
-        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title} global={this.props.global} itemCount={this.props.itemCount} clickedItems={this.props.clickedItems} />
+        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title}
+        global={this.props.global} clickedItems={this.props.clickedItems} itemCount={this.props.itemCount}/>
     }else{
       //anywhere else and the user will be prompted to make an outfit
         return (

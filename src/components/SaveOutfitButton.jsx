@@ -27,7 +27,7 @@ class SaveOutfitButton extends Component {
   }
 
   saveOutfit() {
-    //console.log(this.props.itemCount);
+    //console.log(this.props);
     if (this.props.itemCount <= 0) {
       //console.log("need items for outfit!");
       this.msg.show("Can't save empty outfit!", {

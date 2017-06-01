@@ -28,14 +28,11 @@ class App extends Component {
     this.state = {
       uid: null,
       uname: null,
-      global: null,
-      title: null,
-      itemCount:0
+      global: null
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
-    this.setItemCount = this.setItemCount.bind(this);
   }
 
   componentDidMount() {
@@ -62,10 +59,6 @@ class App extends Component {
 
   setTitle(title){
     this.setState({title : title})
-  }
-
-  setItemCount(itemCount){
-    this.setState({itemCount: itemCount});
   }
 
   render() {
