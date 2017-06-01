@@ -69,7 +69,7 @@ class CategoryTabs extends Component {
     super();
     this.state = {
       selected: 'tops',
-      imageUrls: itemsArray.tops,
+      imageObj: itemsArray.tops,
       active: {
         "tops": "active",
         "bottoms": "default",
@@ -86,8 +86,8 @@ class CategoryTabs extends Component {
     let activeState = Object.assign({}, this.state.active);
     activeState[this.state.selected] = "default";
     activeState[category] = "active";
-    this.setState({imageUrls: itemsArray[category.imgUrl], selected: category, active: activeState});
-    console.log("imageUrls: ",this.state.imageUrls);
+    this.setState({imageObj: itemsArray[category], selected: category, active: activeState});
+    //console.log("imageObj: ",this.state.imageObj);
   }
 
   render() {
@@ -107,7 +107,7 @@ class CategoryTabs extends Component {
             Accessories
           </div>
         </div>
-        <BelowBox imageUrls={this.state.imageUrls} getClickedItem={this.props.getClickedItem}/>
+        <BelowBox imageObj={this.state.imageObj} getClickedItem={this.props.getClickedItem}/>
       </div>
     )
   }
