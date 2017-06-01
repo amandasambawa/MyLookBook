@@ -96,7 +96,6 @@ class SaveOutfitButton extends Component {
                   className="navLink"
                   id="saveOutfitButton"
                   value="Save Outfit"
-                  autoFocus
               >Save Outfit</button>
           </div>
           {/*<button className="button" onClick={this.saveOutfit}>

@@ -62,7 +62,8 @@ class Feed extends Component {
     }else if(this.state.exists === null){
       return (
           <div className="feedContainer">
-              <h1>Start by creating outfits here</h1>
+              <h1>You have no outfits yet.</h1>
+              <h2>Start creating outfits here</h2>
               <img src="../assets/curve-down-arrow.png" />
           </div>
       );
@@ -81,11 +82,14 @@ class Feed extends Component {
 
   render() {
     return (
+        <div>
+            <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <div id="lookbookContainer">
             <h2 id="lookbookHeader">My Macy's Lookbook</h2>
             <div className="row" id="lookbookRow">
                 {this.loadingContent()}
             </div>
+        </div>
         </div>
     );
   }

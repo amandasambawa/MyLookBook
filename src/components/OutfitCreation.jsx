@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
-import {database} from '../firebase.js';
+import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
 import '../styles/OutfitCreation.css';
 
@@ -31,7 +31,18 @@ class OutfitCreation extends Component {
     transition: 'fade'
   }
 
+    logout() {
+        auth.signOut().then(function() {
+            console.log("successful log out")
+            // Sign-out successful.
 
+        }).catch(function(error) {
+            console.log("error logging out")
+            // An error happened.
+            return false;
+        });
+        return true;
+    }
 
   //handles the global Lock state
   handleGlobalLock() {
@@ -101,19 +112,22 @@ class OutfitCreation extends Component {
 
   render() {
     return (
-        <div id="outfitCreationContainer">
-            <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
-            {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
-            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
-            {/*
-            <div id="outfitNameContainer">
-                <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
-            </div>
-            */}
-            <div>
-                <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-                <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+        <div>
+            <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+            <div id="outfitCreationContainer">
+                <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
+                {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+                <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
+                {/*
+                <div id="outfitNameContainer">
+                    <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+                </div>
+                */}
+                <div>
+                    <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+                    <CategoryTabs getClickedItem={this.getClickedItem}/>
+                    <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+                </div>
             </div>
         </div>
     );
