@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import Rate from 'rc-rate';
+import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 import AlertContainer from 'react-alert';
@@ -14,27 +15,47 @@ class SingleOutfitView extends Component {
       compositionRating: 0,
       trendyRating: 0,
       ratings: [],
-      uid: ""
+      uid: "",
+      global: false
     }
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
     this.injectRatingsContent = this.injectRatingsContent.bind(this);
     this.addToWishList = this.addToWishList.bind(this);
+    this.removeOutfit = this.removeOutfit.bind(this);
+
   }
 
-    logout() {
-        auth.signOut().then(function() {
-            console.log("successful log out")
-            // Sign-out successful.
 
-        }).catch(function(error) {
-            console.log("error logging out")
-            // An error happened.
-            return false;
-        });
-        return true;
+  removeOutfit() {
+    if(this.state.global === false){
+
+      if (window.confirm("Are you sure you want to delete this outfit?") === true) {
+        database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
+        database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
+      } else {
+        }
+    }else {
+      (window.alert("You cannot delete objects in global feed!"));
     }
+
+
+  }
+
+
+  logout() {
+      auth.signOut().then(function() {
+          console.log("successful log out")
+          // Sign-out successful.
+
+      }).catch(function(error) {
+          console.log("error logging out")
+          // An error happened.
+          return false;
+      });
+      return true;
+  }
 
   componentDidMount() {
     //grab outfit image in database
@@ -51,11 +72,12 @@ class SingleOutfitView extends Component {
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
       dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+      this.setState({global: false});
     } else {
       //publicview database
       dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-
+      this.setState({global:true});
     }
     //grabbing the image from database
 
@@ -225,6 +247,7 @@ class SingleOutfitView extends Component {
           <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>
+        <button onClick={this.removeOutfit} className="button">removeOutfit</button>>
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
