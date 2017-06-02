@@ -52,25 +52,7 @@ class SingleOutfitView extends Component {
     });
     return true;
   }
->>>>>>> dbf3c681ea2b212e11959aa53cfb036ea872c845
-
-
-  }
-
-
-  logout() {
-      auth.signOut().then(function() {
-          console.log("successful log out")
-          // Sign-out successful.
-
-      }).catch(function(error) {
-          console.log("error logging out")
-          // An error happened.
-          return false;
-      });
-      return true;
-  }
-
+  
   componentDidMount() {
     //grab outfit image in database
     let compositionTotal = 0;
