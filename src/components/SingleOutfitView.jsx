@@ -24,7 +24,6 @@ class SingleOutfitView extends Component {
     this.injectRatingsContent = this.injectRatingsContent.bind(this);
     this.addToWishList = this.addToWishList.bind(this);
     this.removeOutfit = this.removeOutfit.bind(this);
-
   }
 
   removeOutfit() {
