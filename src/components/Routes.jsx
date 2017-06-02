@@ -29,8 +29,19 @@ const RateRoute = ({ component: Component, uid, ...rest }) => (
   />
 );
 
+const GlobalRoute = ({ component: Component, uid, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      uid
+        ? <Component uid={uid} {...props} />
+        : <Redirect to={{ pathname: "/login" }} />}
+  />
+);
+
 module.exports = {
   PublicRoute,
   PrivateRoute,
-  RateRoute
+  RateRoute,
+  GlobalRoute
 }
