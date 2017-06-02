@@ -23,18 +23,18 @@ class SingleOutfitView extends Component {
     this.addToWishList = this.addToWishList.bind(this);
   }
 
-    logout() {
-        auth.signOut().then(function() {
-            console.log("successful log out")
-            // Sign-out successful.
+  logout() {
+    auth.signOut().then(function() {
+      console.log("successful log out")
+      // Sign-out successful.
 
-        }).catch(function(error) {
-            console.log("error logging out")
-            // An error happened.
-            return false;
-        });
-        return true;
-    }
+    }).catch(function(error) {
+      console.log("error logging out")
+      // An error happened.
+      return false;
+    });
+    return true;
+  }
 
   componentDidMount() {
     //grab outfit image in database
@@ -191,26 +191,33 @@ class SingleOutfitView extends Component {
 
   addToWishList() {
     var userId = "12570015021";
+    var productId = 36728786;
     var data = JSON.stringify({
-      "list": {
-        "user": {
-          "id": userId
-        },
-        "items": [
+      "wishlists": {
+        "wishlist": [
           {
-            "product": {
-              "id": "1822498"
-            },
-            "qtyRequested": 1
+            "fromSource": "PDP",
+            "items": [
+              {
+                "upc": {
+                  "id": productId
+                },
+                "qtyRequested": 1
+              }
+            ],
+            "customer": {
+              "id": userId
+            }
           }
         ]
       }
     });
-    fetch('https://m.macys.com/api/customer/v1/favorites?userGuid', {
+    fetch('https://m.macys.com/api/customer/v2/wishlists', {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
       },
       body: data
     }).then(function(response) {
@@ -222,7 +229,7 @@ class SingleOutfitView extends Component {
   render() {
     return (
       <div>
-          <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>
         <div id="singleOutfitViewContainer">
@@ -247,9 +254,7 @@ class SingleOutfitView extends Component {
           </div>
           {this.injectRatingsContent()}
         </div>
-        <div id="wishlistContainer">
-
-        </div>
+        <div id="wishlistContainer"></div>
       </div>
     );
   }
