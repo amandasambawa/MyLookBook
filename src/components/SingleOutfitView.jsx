@@ -38,7 +38,7 @@ class SingleOutfitView extends Component {
     }else {
       (window.alert("You cannot delete objects in global feed!"));
     }
-
+  }
 
   logout() {
     auth.signOut().then(function() {
@@ -52,7 +52,7 @@ class SingleOutfitView extends Component {
     });
     return true;
   }
-  
+
   componentDidMount() {
     //grab outfit image in database
     let compositionTotal = 0;
