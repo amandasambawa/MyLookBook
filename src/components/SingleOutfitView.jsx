@@ -198,12 +198,7 @@ class SingleOutfitView extends Component {
   injectOutfitItems() {
       return this.state.wishlistItems.map((item) => {
           return (
-              <div>
                 <img className="categoryItems" src={item} />
-                  <div>
-                    <img className="navIcon" src="../assets/red-plus.svg"/>
-                  </div>
-              </div>
           );
       })
   }
