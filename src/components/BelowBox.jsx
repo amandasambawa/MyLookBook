@@ -5,17 +5,37 @@ class BelowBox extends Component {
     constructor(){
       super();
       this.returnCatalogItems = this.returnCatalogItems.bind(this);
-      this.clicked = this.clicked.bind(this);
+      // this.starter = this.starter.bind(this);
+      // this.end = this.end.bind(this);
     }
+
+
     returnCatalogItems(){
         return this.props.imageUrls.map((url)=>{
-            return (<img className="categoryItems" src={url} onClick={this.clicked}/>);
+            return (<div className="noTouch"><img className="categoryItems draggable" src={url}
+            />  </div>);
         })
     }
-    clicked(event) {
-        //console.log("src from", event.target.src);
-        this.props.getClickedItem(event.target.src);
-    }
+    //
+    // onMouseUp={this.end}
+    // onTouchEnd={this.end} onMouseDown={this.starter} onTouchStart={this.starter}
+
+    // end(event) {
+    //   // console.log("trying to run function getClickedItem");
+    //   // this.props.getClickedItem(event.target.src);
+    // //     //console.log("src from", event.target.src);
+    // //     // this.props.getClickedItem(event.target.src);
+    // //     event.target.classList.remove('dragging');
+    // //     console.log(event.target.getBoundingClientRect());
+    //     // this.setState({scrollClass: "movemenu"});
+    // //
+    // //     // top and left given, gets img relative to viewport
+    // }
+    // starter(event) {
+    //   // this.setState({scrollClass: "staymenu"});
+    // //
+    // //   event.target.classList.add('dragging');
+    // }
 
     render(){
       return(

@@ -1,6 +1,20 @@
+
 div.scrollmenu {
-    overflow: auto;
-    white-space: nowrap;
+  white-space: nowrap;
+  overflow: auto;
+}
+
+
+.noTouch{
+  touch-action: none;
+  margin-top:10px;
+  margin-left:10px;
+  margin-right: 10px;
+  height: 90px;
+  width: 25%;
+  display: inline-flex;
+  text-align: center;
+  overflow: visible;
 }
 
 div.scrollmenu img {
@@ -14,10 +28,15 @@ div.scrollmenu img {
     display: none;
 }
 
-img.categoryItems {
+
+.dragging{
+  position: absolute;
+}
+
+/*img.categoryItems {
     margin-top:10px;
     margin-left:10px;
     margin-right: 10px;
     height: 90px;
     width: 25%;
-}
+}*/

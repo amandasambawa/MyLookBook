@@ -38,8 +38,6 @@ class CategoryTabs extends Component {
             }
         };
         this.setCategory = this.setCategory.bind(this);
-        // this.isActive = this.isActive.bind(this);
-        // this.returnCatalogItems = this.returnCatalogItems.bind(this);
     }
 
     setCategory(category) {
@@ -66,7 +64,7 @@ class CategoryTabs extends Component {
                     Accessories
                 </div>
             </div>
-                <BelowBox imageUrls={this.state.imageUrls} getClickedItem={this.props.getClickedItem}/>
+                <BelowBox imageUrls={this.state.imageUrls} />
         </div>)
     }
 }
