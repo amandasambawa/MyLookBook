@@ -4,6 +4,7 @@ import Rate from 'rc-rate';
 import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
+import { Redirect } from 'react-router-dom';
 import AlertContainer from 'react-alert';
 
 class SingleOutfitView extends Component {
@@ -16,7 +17,8 @@ class SingleOutfitView extends Component {
       trendyRating: 0,
       ratings: [],
       uid: "",
-      global: false
+      global: false,
+      confirm: false
     }
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -24,21 +26,39 @@ class SingleOutfitView extends Component {
     this.injectRatingsContent = this.injectRatingsContent.bind(this);
     this.addToWishList = this.addToWishList.bind(this);
     this.removeOutfit = this.removeOutfit.bind(this);
+    this.removeConfirm = this.removeConfirm.bind(this);
   }
 
   removeOutfit() {
     if(this.state.global === false){
-
-      if (window.confirm("Are you sure you want to delete this outfit?") === true) {
-        database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
-        database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
-      } else {
-        }
-    }else {
-      (window.alert("You cannot delete objects in global feed!"));
+        return (
+          <div>
+               <button onClick={this.removeConfirm} className="button">removeOutfit</button>
+          </div>
+        );
+      }else {
+      //do nothing
     }
   }
 
+removeConfirm(){
+  if (window.confirm("Are you sure you want to delete this outfit?") === true) {
+    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
+    database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
+    this.setState({confirm: true});
+  } else {
+    this.setState({confirm: false});
+    }
+}
+
+
+  globalAlert = () => {
+    this.msg.show('You cannot delete objects in Global Feed!', {
+      time: 2000,
+      type: 'success',
+      //icon: <img src="path/to/some/img/32x32.png" />
+    })
+  }
   logout() {
     auth.signOut().then(function() {
       console.log("successful log out")
@@ -244,12 +264,17 @@ class SingleOutfitView extends Component {
     });
   }
   render() {
+    if (this.state.confirm === true ){
+      return (
+      <Redirect to="/feed"/>
+      )
+    }
     return (
       <div>
         <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>
-        <button onClick={this.removeOutfit} className="button">removeOutfit</button>>
+        {this.removeOutfit()}
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
