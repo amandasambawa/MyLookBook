@@ -228,7 +228,7 @@ return (
 
        {self.jr}
 
-        <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true} autoStart={true} showOverlay={false}/>
+        <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true} autoStart={false} showOverlay={false}/>
 
 
       <Router>

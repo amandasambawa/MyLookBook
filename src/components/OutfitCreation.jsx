@@ -29,10 +29,14 @@ class OutfitCreation extends Component {
 
 
   componentDidMount() {
-    this.props.addSteps([
-      {
+    this.props.addSteps(
+
+      [
+
+
+      /**{
         title: 'Auto Scroll',
-        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+        text: 'Not a drill',
         selector: '#outfitCreationContainer',
         position: 'top',
         style: {
@@ -42,7 +46,31 @@ class OutfitCreation extends Component {
             outer: '#a350f0',
           },
         },
-      }])
+      }
+
+      , **/
+
+      {
+        title: 'SN',
+        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+        selector: '#outfitNameField',
+        position: 'top',
+        style: {
+          mainColor: '#a350f0',
+          beacon: {
+            inner: '#a350f0',
+            outer: '#a350f0',
+                    skip: {
+                      display: 'inline',
+                    },
+                    back: {
+                      display: 'inline',
+                    },
+          },
+        },
+      }]
+
+    )
   //  console.log(this.props);
 /*    this.setState({steps: [{
       title: 'Auto Scroll',
