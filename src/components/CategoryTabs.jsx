@@ -32,7 +32,7 @@ const itemsArray = {
     "shoes": [
         {
             productId: 4364902,
-            imgUrl: "http://render.nikeid.com/ir/render/nikeidrender/roshetwo1608_v1?obj=/s/shadow/shad&show&color=000000&obj=/s/g8&color=141414&show&obj=/s/g22&color=141414&show&obj=/s/g9&color=bcbdbd&show&obj=/s/g7&color=141414&show&obj=/s/g10&color=535559&show&obj=/s/g11&color=62646a&show&obj=/s/g14&color=141414&show&obj=/s/g15&color=141414&show&obj=/s/g17&color=1d1c1b&show&obj=/s/g1/solid&color=141414&show&obj=/s/g4/solid&color=141414&show&obj=/s/g20&color=141414&show&obj=/s/g21&color=ebff67&show&obj=/s/g12/solid&color=141414&show&obj=/s&req=object&fmt=png-alpha&wid=640",
+            imgUrl: "http://render.nikeid.com/ir/render/nikeidrender/roshetwo1608_v3?obj=/s/shadow/shad&show&color=000000&obj=/s/g8&color=141414&show&obj=/s/g22&color=141414&show&obj=/s/g9&color=bcbdbd&show&obj=/s/g7&color=141414&show&obj=/s/g10&color=535559&show&obj=/s/g11&color=62646a&show&obj=/s/g14&color=141414&show&obj=/s/g15&color=141414&show&obj=/s/g17&color=1d1c1b&show&obj=/s/g1/solid&color=141414&show&obj=/s/g4/solid&color=141414&show&obj=/s/g20&color=141414&show&obj=/s/g21&color=ebff67&show&obj=/s/g12/solid&color=141414&show&obj=/s&req=object&fmt=png-alpha&wid=640",
             macysUrl: "https://macys.com/shop/product/nike-womens-roshe-two-casual-sneakers-from-finish-line?ID=4364902&CategoryID=63268#fn=sp%3D1%26spc%3D31%26ruleId%3D84%26slotId%3D6%26kws%3Dnike%20roshe%26searchPass%3DallMultiMatchWithSpelling"
         },
         {
@@ -41,9 +41,9 @@ const itemsArray = {
             macysUrl: "https://macys.com/shop/product/keds-womens-champion-oxford-sneakers?ID=564801"
         },
         {
-            productId: 4232667,
+            productId: 4745297,
             imgUrl: "https://cdn.shopify.com/s/files/1/1429/9478/products/abbey-grape.png?v=1478098924",
-            macysUrl: ""
+            macysUrl: "https://macys.com/shop/product/aldo-falia-block-heel-pumps?ID=4745297"
         }
     ],
     "accessories": [
@@ -63,24 +63,6 @@ const itemsArray = {
             macysUrl: "https://www.macys.com/shop/product/apple-watch-series-1-42mm-rose-gold-aluminum-case-with-pink-sand-sport-band?ID=4673904&CategoryID=101043#fn=sp%3D1%26spc%3D26%26ruleId%3D105|BS%26slotId%3D22"
         }
     ]
-
-    // "tops": ["http://cdn.shopify.com/s/files/1/0194/3383/products/09_750_b6b49fe4-88d3-4118-a53a-9ecd3d118d20_grande.png?v=1465508934",
-    //     "https://cdn.shopify.com/s/files/1/0152/3191/products/Half_Half_Half.OHHCHGHT17_1.png?v=1486050466",
-    //     "http://cdn.shopify.com/s/files/1/1468/2506/products/Jerome_222_clipped_rev_1_grande.png?v=1478036057",
-    //     "http://cdn.shopify.com/s/files/1/0194/3383/products/09_750_b6b49fe4-88d3-4118-a53a-9ecd3d118d20_grande.png?v=1465508934",
-    //     "https://cdn.shopify.com/s/files/1/0152/3191/products/Half_Half_Half.OHHCHGHT17_1.png?v=1486050466",
-    //     "http://cdn.shopify.com/s/files/1/1468/2506/products/Jerome_222_clipped_rev_1_grande.png?v=1478036057"],
-    // "bottoms": ["http://cdn.shopify.com/s/files/1/0641/8829/products/blacksweatpants_grande.png?v=1418952378",
-    //     "https://cdn.shopify.com/s/files/1/0250/2544/products/Wheat-Oct-59_large.png?v=1478210389"],
-    // "shoes": ["https://cdn.shopify.com/s/files/1/0684/4315/products/flightskool-air-jordan-4-thunder.png?v=1419128098",
-    //     "https://cdn.shopify.com/s/files/1/0684/4315/products/FlighSkool-Air-Jordan-5-Fire-Red-GS.png?v=1417584078"],
-    // "accessories": ["https://cdn.shopify.com/s/files/1/0253/1409/products/solid-purple-SFS001-8-no-background.png?v=1477753315",
-    //     "https://cdn.shopify.com/s/files/1/1286/1781/products/Hammered-Bangle-Bracelet-Rose-Gold-Plated.png?v=1482398239",
-    //     "https://cdn.shopify.com/s/files/1/0104/9632/products/cast-of-vices-ups-and-downs-necklace-ud006.png?v=1328383261",
-    //     "https://cdn.shopify.com/s/files/1/0253/1409/products/solid-purple-SFS001-8-no-background.png?v=1477753315",
-    //     "https://cdn.shopify.com/s/files/1/1286/1781/products/Hammered-Bangle-Bracelet-Rose-Gold-Plated.png?v=1482398239",
-    //     "https://cdn.shopify.com/s/files/1/0104/9632/products/cast-of-vices-ups-and-downs-necklace-ud006.png?v=1328383261"]
-
 };
 
 class CategoryTabs extends Component {

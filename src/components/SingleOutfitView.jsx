@@ -16,6 +16,7 @@ class SingleOutfitView extends Component {
       compositionRating: 0,
       trendyRating: 0,
       ratings: [],
+      wishlistItems: [],
       uid: "",
       global: false,
       confirm: false
@@ -27,6 +28,7 @@ class SingleOutfitView extends Component {
     this.addToWishList = this.addToWishList.bind(this);
     this.removeOutfit = this.removeOutfit.bind(this);
     this.removeConfirm = this.removeConfirm.bind(this);
+    this.injectOutfitItems = this.injectOutfitItems.bind(this);
   }
 
   removeOutfit() {
@@ -87,6 +89,7 @@ removeConfirm(){
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
       dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+
       this.setState({global: false});
     } else {
       //publicview database
@@ -131,6 +134,16 @@ removeConfirm(){
       //setting the state to be average ratings
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
+
+
+      let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+      databaseItems.once("value").then((snapshot) => {
+          let arrayItem = [];
+          snapshot.forEach(function(childSnapshot) {
+              arrayItem.push(childSnapshot.child("imgUrl").val());
+          });
+          this.setState({wishlistItems: arrayItem});
+      });
 
   }
 
@@ -200,6 +213,15 @@ removeConfirm(){
     return ratingsContent;
   }
 
+  injectOutfitItems() {
+
+      return this.state.wishlistItems.map((item) => {
+          return (
+              <img className="categoryItems" src={item} />
+          );
+      })
+  }
+
   handleFocus(event) {
     event.target.select();
   }
@@ -263,6 +285,7 @@ removeConfirm(){
       console.log("data", data);
     });
   }
+
   render() {
     if (this.state.confirm === true ){
       return (
@@ -293,11 +316,15 @@ removeConfirm(){
               <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg"/></a>
               <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`}><img className="socialMediaIcon" src="../assets/chatIcon.svg"/></a>
             </div>
-
+            <div id="wishlistContainer">
+               <h2>Add Items to Wishlist: </h2>
+                <div className="scrollmenu">
+                    {this.injectOutfitItems()}
+                </div>
+            </div>
           </div>
           {this.injectRatingsContent()}
         </div>
-        <div id="wishlistContainer"></div>
       </div>
     );
   }
