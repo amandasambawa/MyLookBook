@@ -121,7 +121,11 @@ class SingleOutfitView extends Component {
       databaseItems.once("value").then((snapshot) => {
           let arrayItem = [];
           snapshot.forEach(function(childSnapshot) {
-              arrayItem.push(childSnapshot.child("imgUrl").val());
+              let arr = [];
+              arr.push(childSnapshot.child("imgUrl").val());
+              arr.push(childSnapshot.child("macysUrl").val());
+              arr.push(childSnapshot.child("productId").val());
+              arrayItem.push(arr);
           });
           this.setState({wishlistItems: arrayItem});
       });
@@ -198,7 +202,11 @@ class SingleOutfitView extends Component {
   injectOutfitItems() {
       return this.state.wishlistItems.map((item) => {
           return (
-                <img className="categoryItems" src={item} />
+              <span>
+                  <a href={item[1]}>
+                    <img className="categoryItems" src={item[0]} />
+                  </a>
+              </span>
           );
       })
   }
