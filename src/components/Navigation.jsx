@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { auth } from '../firebase.js';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
+import Logout from './Logout.jsx'
 import "../styles/Navigation.css";
 
 
@@ -21,16 +22,6 @@ class Navigation extends Component {
     this.pageToHeader = this.pageToHeader.bind(this);
     this.backToFeed = this.backToFeed.bind(this);
     this.createOrSaveOutfit = this.createOrSaveOutfit.bind(this);
-  }
-
-  logout(){
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-    }).catch(function(error) {
-      console.log("error loggin out")
-      // An error happened.
-    });
   }
 
   pageToHeader(){
@@ -120,12 +111,7 @@ class Navigation extends Component {
                 <div className="small-5 columns">
                         {this.backToGlobalFeed()}
                 </div>
-                {/*
-                    <div className="small-4 columns">
-                        <span onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/><div
-                            className="navLink">Logout</div></span>
-                    </div>
-                */}
+              <Logout />
             </div>
           </div>
       );

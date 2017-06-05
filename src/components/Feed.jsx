@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
+import Logout from './Logout.jsx'
 import "../styles/foundation.css";
 import "../styles/Feed.css";
 
@@ -15,23 +16,6 @@ class Feed extends Component {
 
     }
     this.loadingContent = this.loadingContent.bind(this);
-  }
-
-  /*
-  * A simple logout function that returns True if action was successful
-  * and returns false if action was unsuccessful.
-  */
-  logout() {
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-
-    }).catch(function(error) {
-      console.log("error logging out")
-      // An error happened.
-      return false;
-    });
-    return true;
   }
 
   componentDidMount() {
@@ -83,7 +67,7 @@ class Feed extends Component {
   render() {
     return (
         <div>
-            <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <Logout />
         <div id="lookbookContainer">
             <h2 id="lookbookHeader">My Macy's Lookbook</h2>
             <div className="row" id="lookbookRow">

@@ -6,6 +6,7 @@ import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 import { Redirect } from 'react-router-dom';
 import AlertContainer from 'react-alert';
+import Logout from './Logout.jsx'
 
 class SingleOutfitView extends Component {
 
@@ -41,20 +42,6 @@ class SingleOutfitView extends Component {
     })
   }
 
-  //This is the logout method, checks if there is a user logged in and logs out
-  //if they are logged in, else do nothing
-  logout() {
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-
-    }).catch(function(error) {
-      console.log("error logging out")
-      // An error happened.
-      return false;
-    });
-    return true;
-  }
 
   componentDidMount() {
     //grab outfit image in database
@@ -313,7 +300,7 @@ class SingleOutfitView extends Component {
     return (
       <div>
         <h2>{this.state.title}</h2>
-        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>
         {this.removeOutfit()}
@@ -323,7 +310,7 @@ class SingleOutfitView extends Component {
           </div>
           <div id="linkContainer">
             <span id="linkTitle">Link:</span>
-
+            <Logout />
             <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.state.uid}/${this.props.match.params.outfitId}`}/>
             <span>
               <button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy link</button>

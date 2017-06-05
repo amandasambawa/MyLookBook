@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
+import Logout from './Logout.jsx'
 import "../styles/foundation.css";
 import "../styles/GlobalFeed.css";
 
@@ -14,19 +15,6 @@ class GlobalFeed extends Component {
     }
     this.loadingContent = this.loadingContent.bind(this);
   }
-
-    logout() {
-        auth.signOut().then(function() {
-            console.log("successful log out")
-            // Sign-out successful.
-
-        }).catch(function(error) {
-            console.log("error logging out")
-            // An error happened.
-            return false;
-        });
-        return true;
-    }
 
   componentDidMount() {
     let previewArray = [];
@@ -67,8 +55,8 @@ class GlobalFeed extends Component {
   render() {
     return (
         <div>
-            <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
-        <div className="feedContainer">
+            <Logout />
+            <div className="feedContainer">
             <h2 id="feedTitle">Feed</h2>
             {this.loadingContent()}
         </div>

@@ -6,6 +6,7 @@ import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
 import interact from 'interactjs';
 import Navigation from './Navigation.jsx';
+import Logout from './Logout.jsx'
 import '../styles/OutfitCreation.css';
 
 class OutfitCreation extends Component {
@@ -32,19 +33,6 @@ class OutfitCreation extends Component {
     theme: 'dark',
     //time: 50000,
     transition: 'fade'
-  }
-
-  logout() {
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-
-    }).catch(function(error) {
-      console.log("error logging out")
-      // An error happened.
-      return false;
-    });
-    return true;
   }
 
   //handles the global Lock state
@@ -227,7 +215,7 @@ class OutfitCreation extends Component {
     //console.log(this.state.clickedItems);
     return (
       <div>
-        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <Logout />
         <div id="outfitCreationContainer">
           <span onClick={this.handleGlobalLock}>{this.state.global}
             <img id="lockIcon" src={this.state.lockImgSrc}/></span>
