@@ -19,7 +19,8 @@ class SingleOutfitView extends Component {
       wishlistItems: [],
       uid: "",
       global: false,
-      confirm: false
+      confirm: false,
+      title: ""
     }
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -70,7 +71,6 @@ class SingleOutfitView extends Component {
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
       dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-
       this.setState({global: false});
     } else {
       //publicview database
@@ -84,9 +84,9 @@ class SingleOutfitView extends Component {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
       if (this.props.uid) {
-        this.setState({outfitImage: image, uid: this.props.uid});
+        this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
       } else {
-        this.setState({outfitImage: image, uid: uid});
+        this.setState({outfitImage: image, uid: uid , title: snapshot.child("title").val() });
       }
 
     });
@@ -312,6 +312,7 @@ class SingleOutfitView extends Component {
     }
     return (
       <div>
+        <h2>{this.state.title}</h2>
         <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <button className="button" onClick={this.addToWishList}>addToWishList</button>

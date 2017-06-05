@@ -104,7 +104,8 @@ class Navigation extends Component {
   }
 
   render(){
-    if( this.props.location.pathname.split("/")[1] === "outfitCreation" && this.props.render === undefined){
+    if( ( this.props.location.pathname.split("/")[1] === "outfitCreation" || this.props.location.pathname.split("/")[1] === "rateView")
+      && this.props.render === undefined ) {
       return(<div></div>);
     }else if(this.props.uid){
       return(

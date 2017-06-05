@@ -80,7 +80,7 @@ class RateView extends Component {
   //handles saving the rating and comments
   saveRating() {
     //if the user has not saved once before, we will send that data to the db
-    console.log(this.props.match.params);
+
     if(this.state.haveSaved === false){
 
         let ratingRef = database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
@@ -123,7 +123,7 @@ class RateView extends Component {
     if(this.state.haveSaved === true){
       return <Confirmation />
     } else {
-    if ( (this.props.uid || this.state.outfitImage === null) && this.props.testing === undefined ){
+    if ( (this.props.uid || this.state.outfitImage === null) ){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
       return(
