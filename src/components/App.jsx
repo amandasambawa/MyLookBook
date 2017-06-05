@@ -72,8 +72,8 @@ class App extends Component {
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <GlobalRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}/>
-            <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+            <PrivateRoute path='/singleOutfit/:outfitId' navFrom={"privateFeed"} component={SingleOutfitView} uid={this.state.uid}/>
+            <RateRoute path='/publicOutfit/:outfitId' navFrom={"globalFeed"} component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
