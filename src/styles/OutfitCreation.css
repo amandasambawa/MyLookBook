@@ -30,6 +30,35 @@
     margin-bottom: 10px;
 }
 
+.dropZoneAndContainer{
+  touch-action:none;
+}
+
+img.draggable, .inside{
+  z-index: 10;
+  height: 90px;
+  /*transform: translate(-100%, -100%);*/
+}
+
+.drag-drop {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+
+  color: #fff;
+  background-color: #29e;
+  border: solid 2px #fff;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+
+  transition: background-color 0.3s;
+}
+
+.can-drop {
+  border: 1px solid #4e4;
+}
+
 .outfitName {
     border: none;
     border-radius: 10px;

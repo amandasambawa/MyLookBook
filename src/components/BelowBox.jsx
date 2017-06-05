@@ -5,27 +5,41 @@ class BelowBox extends Component {
     constructor(){
       super();
       this.returnCatalogItems = this.returnCatalogItems.bind(this);
-      this.clicked = this.clicked.bind(this);
+      // this.starter = this.starter.bind(this);
+      // this.end = this.end.bind(this);
     }
+
+
     returnCatalogItems(){
-        //console.log("bb imageObj: ", this.props.imageObj);
         return this.props.imageObj.map((itemObj)=>{
-            return (<img className="categoryItems" src={itemObj.imgUrl}
+            return (<div className="noTouch"><img className="draggable" src={itemObj.imgUrl}
             data-itemimgurl={itemObj.imgUrl}
             data-itemproductid={itemObj.productId}
             data-itemmacysurl={itemObj.macysUrl}
-            onClick={this.clicked}/>);
+            onClick={this.clicked}/>
+              </div>);
         })
     }
-    clicked(event) {
-        var itemObj = {
-            productId: event.target.dataset.itemproductid,
-            imgUrl: event.target.dataset.itemimgurl,
-            macysUrl: event.target.dataset.itemmacysurl
-        }
-        //console.log("clicked:", itemObj);
-        this.props.getClickedItem(itemObj);
-    }
+    //
+    // onMouseUp={this.end}
+    // onTouchEnd={this.end} onMouseDown={this.starter} onTouchStart={this.starter}
+
+    // end(event) {
+    //   // console.log("trying to run function getClickedItem");
+    //   // this.props.getClickedItem(event.target.src);
+    // //     //console.log("src from", event.target.src);
+    // //     // this.props.getClickedItem(event.target.src);
+    // //     event.target.classList.remove('dragging');
+    // //     console.log(event.target.getBoundingClientRect());
+    //     // this.setState({scrollClass: "movemenu"});
+    // //
+    // //     // top and left given, gets img relative to viewport
+    // }
+    // starter(event) {
+    //   // this.setState({scrollClass: "staymenu"});
+    // //
+    // //   event.target.classList.add('dragging');
+    // }
 
     render(){
       return(

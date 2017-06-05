@@ -71,3 +71,11 @@ button:focus {
     position:absolute;
     right: 8px;
 }
+
+img.categoryItems {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 90px;
+    width: 25%;
+}
