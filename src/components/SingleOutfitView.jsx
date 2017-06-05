@@ -29,36 +29,17 @@ class SingleOutfitView extends Component {
     this.removeConfirm = this.removeConfirm.bind(this);
   }
 
-  removeOutfit() {
-    if(this.state.global === false){
-        return (
-          <div>
-               <button onClick={this.removeConfirm} className="button">removeOutfit</button>
-          </div>
-        );
-      }else {
-      //do nothing
-    }
-  }
-
-removeConfirm(){
-  if (window.confirm("Are you sure you want to delete this outfit?") === true) {
-    database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
-    database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
-    this.setState({confirm: true});
-  } else {
-    this.setState({confirm: false});
-    }
-}
 
 
   globalAlert = () => {
     this.msg.show('You cannot delete objects in Global Feed!', {
       time: 2000,
       type: 'success',
-      //icon: <img src="path/to/some/img/32x32.png" />
     })
   }
+
+  //This is the logout method, checks if there is a user logged in and logs out
+  //if they are logged in, else do nothing
   logout() {
     auth.signOut().then(function() {
       console.log("successful log out")
@@ -158,12 +139,13 @@ removeConfirm(){
     })
   }
 
+  //a function that works depending on whether or not this outfit has ratings/
+  //coments. If there are any ratings/comments, upload them, else prompt the
+  //user to create an outfit
   injectRatingsContent() {
     //check if ratings is empty
     var ratingsContent;
-    //console.log("currently injecting");
     if (this.state.ratings.length === 0) {
-      //console.log("ratings are empty");
       ratingsContent = <div id="noRatingsPlaceholder">
 
         <h1 id="noRatingsHeader">
@@ -200,31 +182,60 @@ removeConfirm(){
     return ratingsContent;
   }
 
+    alertOptions = {
+      offset: 14,
+      position: 'top right',
+      theme: 'dark',
+      time: 5000,
+      transition: 'scale'
+    }
+
+    showAlert = () => {
+      this.msg.show('Copied to Clipboard!', {
+        time: 2000,
+        type: 'success',
+      })
+    }
+
+  //handleFocus is a function that allows the application to "focus" on the
+  //machine
   handleFocus(event) {
     event.target.select();
   }
 
+  //copyToClipboard is a function that allows us to save a link to the user's
+  //clipboard
   copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
     this.showAlert();
   }
 
-  alertOptions = {
-    offset: 14,
-    position: 'top right',
-    theme: 'dark',
-    time: 5000,
-    transition: 'scale'
+  //removeOutfit is a function that creates a button and hides it depending on
+  //whether or not it is a global view or personal view
+  removeOutfit() {
+    if(this.state.global === false){
+        return (
+          <div>
+               <button onClick={this.removeConfirm} className="button">removeOutfit</button>
+          </div>
+        );
+      }else {
+      //do nothing
+    }
   }
 
-  showAlert = () => {
-    this.msg.show('Copied to Clipboard!', {
-      time: 2000,
-      type: 'success',
-      //icon: <img src="path/to/some/img/32x32.png" />
-    })
-  }
+  //removeConfirm is a function that prompts the user whether or not the user
+  //really wants to delete the outfit.
+  removeConfirm(){
+    if (window.confirm("Are you sure you want to delete this outfit?") === true) {
+      database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
+      database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
+      this.setState({confirm: true});
+    } else {
+      this.setState({confirm: false});
+      }
+    }
 
   addToWishList() {
     var userId = "12570015021";
