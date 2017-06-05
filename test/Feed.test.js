@@ -17,15 +17,6 @@ it('Feed renders properly.', () => {
 */
 
 
-//make sure the link to create an outfit exists
-describe('Feed', () => {
-    it('check if create an outfit exists', () => {
-        const wrapper = shallow(<Feed />);
-        const linkObj = wrapper.find('Link');
-        expect(linkObj.prop('to')).toEqual('/outfitCreation');
-    });
-  });
-
 //make sure the images load space in the webpage.
 describe('Feed', () => {
     it('check if the images loading up', () => {

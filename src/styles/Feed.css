@@ -1,3 +1,13 @@
+#lookbookContainer {
+    text-align: center;
+    margin-bottom: 4em;
+}
+
+#lookbookHeader {
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+
 .outfitName2 {
     font-family: 'Abel', sans-serif;
     /*font-family: 'Montserrat', sans-serif;*/
@@ -42,12 +52,6 @@
   margin-left: -75px;
 }
 
-#feedContainer {
-    text-align: center;
-}
-
-.outfitLink {
-    width: 90%;
-    height: 150px;
-    box-shadow: 3px 3px 6px grey;
+#lookbookRow {
+    margin-top: 15px;
 }

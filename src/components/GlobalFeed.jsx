@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
 import "../styles/foundation.css";
+import "../styles/GlobalFeed.css";
 
 class GlobalFeed extends Component {
 
@@ -14,6 +15,18 @@ class GlobalFeed extends Component {
     this.loadingContent = this.loadingContent.bind(this);
   }
 
+    logout() {
+        auth.signOut().then(function() {
+            console.log("successful log out")
+            // Sign-out successful.
+
+        }).catch(function(error) {
+            console.log("error logging out")
+            // An error happened.
+            return false;
+        });
+        return true;
+    }
 
   componentDidMount() {
     let previewArray = [];
@@ -24,6 +37,7 @@ class GlobalFeed extends Component {
       snapshot.forEach(function(childSnapshot, key) {
         previewArray.push(childSnapshot);
       });
+      previewArray.reverse();
       this.setState({previews: previewArray, exists: snapshot.val()});
     });
   }
@@ -41,9 +55,9 @@ class GlobalFeed extends Component {
     }else{
       return this.state.previews.map((preview) => {
       return (
-        <div className="small-8 medium-4 large-4 columns">
+        <div>
             <span className="outfitName2">{preview.val().title}</span>
-            <Link to={`publicOutfit/${preview.val().oid}`}><img className="outfitLink"  src={preview.val().img}/></Link>
+            <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
         </div>
         );
       });
@@ -52,9 +66,13 @@ class GlobalFeed extends Component {
 
   render() {
     return (
-      <div className="row">
-        {this.loadingContent()}
-      </div>
+        <div>
+            <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <div className="feedContainer">
+            <h2 id="feedTitle">Feed</h2>
+            {this.loadingContent()}
+        </div>
+        </div>
     );
   }
 

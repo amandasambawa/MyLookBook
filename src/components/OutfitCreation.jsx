@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
-import {database} from '../firebase.js';
+import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
 import interact from 'interactjs';
+import Navigation from './Navigation.jsx';
 import '../styles/OutfitCreation.css';
 
 class OutfitCreation extends Component {
@@ -13,17 +14,16 @@ class OutfitCreation extends Component {
     super(props);
     this.state = {
       clickedItems: [],
-      title:"Title",
+      title: "",
       global: false,
-      pos: null,
-      rerender: false
+      lockImgSrc: "../assets/locked.svg",
+      itemCount:0
     }
     this.droppedItem = this.droppedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
     this.startGesture = this.startGesture.bind(this);
-
   }
 
   alertOptions = {
@@ -34,16 +34,39 @@ class OutfitCreation extends Component {
     transition: 'fade'
   }
 
+  logout() {
+    auth.signOut().then(function() {
+      console.log("successful log out")
+      // Sign-out successful.
 
+    }).catch(function(error) {
+      console.log("error logging out")
+      // An error happened.
+      return false;
+    });
+    return true;
+  }
 
   //handles the global Lock state
   handleGlobalLock() {
-    if(this.state.global === false){
-      this.setState({global:true})
-      this.props.setGlobal(Boolean(true));
-    }else{
-      this.setState({global:false});
-      this.props.setGlobal(Boolean(false));
+    if (this.state.global === false) {
+      this.setState({global: true})
+      if (this.props.testing === true) {
+        return true;
+      } else {
+        this.props.setGlobal(Boolean(true));
+      }
+      this.setState({lockImgSrc: "../assets/unlocked.svg"});
+      //console.log("lock img:", this.state.lockImgSrc);
+    } else {
+      this.setState({global: false});
+      if (this.props.testing === true) {
+        return true;
+      } else {
+        this.props.setGlobal(Boolean(false));
+      }
+      this.setState({lockImgSrc: "../assets/locked.svg"});
+      //console.log("lock img:", this.state.lockImgSrc);
     }
   }
 
@@ -56,10 +79,14 @@ class OutfitCreation extends Component {
     if (this.state.clickedItems.length <= 5) {
       let itemsArray = this.state.clickedItems.slice();
       let newPos = Object.assign({}, pos);
-      newPos["url"] = item;
+      newPos.productId =  item.dataset.itemproductid;
+      newPos.imgUrl =  item.dataset.itemimgurl;
+      newPos.macysUrl =  item.dataset.itemmacysurl;
       itemsArray.push(newPos);
-      this.setState({clickedItems: itemsArray});
+      console.log(itemsArray);
       // , pos: pos
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
+      //console.log("clicled items: ", this.state.clickedItems);
     } else {
       this.msg.show('Reached Maximum(6) Items', {
         time: 20000,
@@ -71,20 +98,20 @@ class OutfitCreation extends Component {
 
   undoItem() {
     //console.log(this.state.clickedItems.length);
-    if(this.state.clickedItems.length>=1){
-      console.log("undo item");
+    if (this.state.clickedItems.length >= 1) {
+      //console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.pop();
-      this.setState({clickedItems: itemsArray});
-    }else{
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
+    } else {
       this.msg.show('There are no more items', {
         time: 20000,
         type: 'error'
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
     }
+    //console.log(this.state.itemCount);
   }
-
 
 
   nameOutfit(event){
@@ -144,7 +171,7 @@ class OutfitCreation extends Component {
         event.relatedTarget.classList.remove('can-drop');
         if (event.relatedTarget.classList.contains("draggable")){
           let pos = {top: event.relatedTarget.getBoundingClientRect().top, left: event.relatedTarget.getBoundingClientRect().left};
-          this.droppedItem(event.relatedTarget.src, pos);
+          this.droppedItem(event.relatedTarget, pos);
           //runs when dropped
         }
       },
@@ -197,20 +224,30 @@ class OutfitCreation extends Component {
   }
 
   render() {
+    //console.log(this.state.clickedItems);
     return (
-        <div>
-            <div className="outfitNameContainer">
-                <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
-            </div>
-            <div>
-              <div id="dropZoneAndContainer">
-                <DropZone pos={this.state.pos} clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-                <CategoryTabs rerender={this.state.rerender}/>
+      <div>
+        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <div id="outfitCreationContainer">
+          <span onClick={this.handleGlobalLock}>{this.state.global}
+            <img id="lockIcon" src={this.state.lockImgSrc}/></span>
+          {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+          <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/> {/*
+              <div id="outfitNameContainer">
+                  <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
               </div>
-                <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-                <button onClick={this.handleGlobalLock} className="button">{this.state.global}</button>
+              */}
+          <div>
+            <div id="dropZoneAndContainer">
+              <DropZone pos={this.state.pos} clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+              <CategoryTabs />
             </div>
+            <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+          </div>
         </div>
+        <Navigation render={true} uid={this.props.uid} global={this.state.global}
+          title={this.state.title} clickedItems={this.state.clickedItems} itemCount={this.state.itemCount}/>
+      </div>
     );
   }
 

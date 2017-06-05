@@ -1,10 +1,15 @@
 .DropZoneContainer {
   display: block;
-  width: 95%;
   height: 350px;
   margin: auto;
   border: 1px solid grey;
   touch-action: none;
   margin-top: 20px;
   background-color: #F6F6F6;
+}
+
+#parentContainer {
+    width: 95%;
+    text-align: center;
+    margin: auto;
 }

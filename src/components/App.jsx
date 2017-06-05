@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth,database } from '../firebase.js';
-import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
+import {PrivateRoute, PublicRoute, RateRoute, GlobalRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
 import GlobalFeed from './GlobalFeed.jsx'
@@ -28,8 +28,7 @@ class App extends Component {
     this.state = {
       uid: null,
       uname: null,
-      global: null,
-      title: null
+      global: null
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
@@ -66,19 +65,20 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <a href="https://www.macys.com"><img src="../assets/macysNavBar.png" /></a>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
-            <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
-            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}/>
+            <GlobalRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
+            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}/>
             <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>
           </Switch>
-          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title}/>
+          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
         </div>
       </Router>
     );

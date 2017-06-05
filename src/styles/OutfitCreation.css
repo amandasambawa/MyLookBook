@@ -1,7 +1,33 @@
+#outfitCreationContainer {
+    text-align: center;
+    margin-top: 5px;
+}
+
+#outfitNameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nameLabel {
+    display: inline-block;
+}
+
 #undoButton {
     width: 30px;
     height: 30px;
     float: right;
+    margin: 0.4em;
+}
+
+#outfitNameField {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid grey;
+    font-family: 'Abel', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .dropZoneAndContainer{
@@ -46,11 +72,13 @@ img.draggable, .inside{
     box-shadow: 3px 3px 6px grey;
     font-family: 'Montserrat', sans-serif;
 }
+
 .outfitName:focus{
     outline: none;
 }
-.outfitNameContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+#lockIcon {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
 }

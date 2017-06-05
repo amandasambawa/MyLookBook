@@ -11,9 +11,13 @@ class BelowBox extends Component {
 
 
     returnCatalogItems(){
-        return this.props.imageUrls.map((url)=>{
-            return (<div className="noTouch"><img className="categoryItems draggable" src={url}
-            />  </div>);
+        return this.props.imageObj.map((itemObj)=>{
+            return (<div className="noTouch"><img className="categoryItems draggable" src={itemObj.imgUrl}
+            data-itemimgurl={itemObj.imgUrl}
+            data-itemproductid={itemObj.productId}
+            data-itemmacysurl={itemObj.macysUrl}
+            onClick={this.clicked}/>
+              </div>);
         })
     }
     //

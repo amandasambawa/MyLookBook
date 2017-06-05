@@ -42,43 +42,91 @@ class Navigation extends Component {
     }
   }
 
+/*    componentDidMount() {
+        this.refs.theDiv.focus();
+    }
+*/
+
+
+
   backToFeed(){
-      return <div className="feedLink"><Link to="/feed">Closet</Link></div>;
+      return (
+          <div className="feedLink">
+              <Link to="/feed">
+                  <div className="backgroundImage"></div>
+                  <img className="navIcon" src="../assets/shirt.svg" />
+                  {/* <div ref = "theDiv" className="navLink">My Lookbook</div> */}
+                  <button
+                      className="navLink"
+                      value="My Lookbook"
+                      autoFocus
+                  >My Lookbook</button>
+              </Link>
+          </div>);
   }
 
   backToGlobalFeed(){
-      return <div className="globalFeedLink"><Link to="/globalFeed">GlobalFeed</Link></div>;
+      return (
+          <div className="globalFeedLink">
+              <Link to="/globalFeed">
+                  <img className="navIcon" src="../assets/earth-globe.svg" />
+                  {/*<div className="navLink">Global Feed</div> */}
+                  <button
+                      className="navLink"
+                      value="Global Feed"
+                  >Global Feed</button>
+              </Link>
+          </div>
+      );
   }
 
   createOrSaveOutfit(){
     //if we are in create outfit, the middle button should be saving the outfit
     if ( this.props.location.pathname.split("/")[1] === "outfitCreation"){
-        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title} global={this.props.global} />
+        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title}
+        global={this.props.global} clickedItems={this.props.clickedItems} itemCount={this.props.itemCount}/>
     }else{
       //anywhere else and the user will be prompted to make an outfit
-        return <div className="createOutfitLink"><Link to="/outfitCreation">Create An Outfit</Link></div>;
+        return (
+            <div>
+                <Link to="/outfitCreation">
+                    <img className="navIcon" src="../assets/plus-button.svg" />
+                    {/*<div className="navLink">Create An Outfit</div> */}
+                    <button
+                        className="navLink"
+                        value="Create an Outfit"
+                    >Create an Outfit</button>
+                </Link>
+            </div>
+        );
     }
 
   }
 
-
   render(){
-    if(this.props.uid){
+    if( this.props.location.pathname.split("/")[1] === "outfitCreation" && this.props.render === undefined){
+      return(<div></div>);
+    }else if(this.props.uid){
       return(
-            <div className="mobile-nav-bar title-bar">
-              <div className="title-bar-left">
-              <div className="title-bar-right">
-                  {this.backToGlobalFeed()}
-              </div>
-                <span className="title-bar-text" onClick={this.logout}>Logout</span>
-              </div>
-              <div className="title-bar-center">
+          <div>
+            <div className="row" id="navBar">
+                <div className="small-5 columns">
+                    {this.backToFeed()}
+                </div>
+              <div className="small-6 columns">
                     {this.createOrSaveOutfit()}
               </div>
-              <div className="title-bar-right">
-                  {this.backToFeed()}
-              </div>
+                <div className="small-5 columns">
+                        {this.backToGlobalFeed()}
+                </div>
+                {/*
+                    <div className="small-4 columns">
+                        <span onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/><div
+                            className="navLink">Logout</div></span>
+                    </div>
+                */}
             </div>
+          </div>
       );
     }else{
       return(
