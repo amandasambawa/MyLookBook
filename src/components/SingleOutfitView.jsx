@@ -257,8 +257,8 @@ class SingleOutfitView extends Component {
   removeOutfit() {
     if (this.state.global === false) {
       return (
-        <div>
-          <button onClick={this.removeConfirm} className="button">removeOutfit</button>
+        <div style={ {textAlign: "center", marginTop: "1em"} }>
+          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey" }}>Delete Outfit</button>
         </div>
       );
     } else {
@@ -326,10 +326,11 @@ class SingleOutfitView extends Component {
     }
     return (
       <div>
-        <h2>{this.state.title}</h2>
+          <div style={ {textAlign: "center", marginTop: "5px"} }>
+            <h2>{this.state.title}</h2>
+          </div>
 
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-        {this.removeOutfit()}
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
@@ -345,6 +346,7 @@ class SingleOutfitView extends Component {
             </div>
           </div>
           {this.injectRatingsContent()}
+            {this.removeOutfit()}
         </div>
       </div>
     );

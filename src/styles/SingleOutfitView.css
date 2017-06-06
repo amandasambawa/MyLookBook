@@ -113,7 +113,9 @@
 }
 
 .wishlistAdd {
-    position: relative;
+    position: absolute;
+    top: 154%;
+    left: 67%;
     height: 25px;
     width: 25px;
 }
