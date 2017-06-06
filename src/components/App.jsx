@@ -65,15 +65,15 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <a href="https://www.macys.com"><img src="../assets/macysNavBar.png" /></a>
+          <a href="https://www.macys.com"><img src="https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/macysNavBar.png?alt=media&token=2392f318-136e-49e6-a390-ce0e9b0ec758" /></a>
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
             <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
             <GlobalRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
             <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}/>
-            <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+            <PrivateRoute path='/singleOutfit/:outfitId' navFrom={"privateFeed"} component={SingleOutfitView} uid={this.state.uid}/>
+            <RateRoute path='/publicOutfit/:outfitId' navFrom={"globalFeed"} component={SingleOutfitView} uid={this.state.uid}/>
             <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
             <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
             <PublicRoute component={NoMatch}/>

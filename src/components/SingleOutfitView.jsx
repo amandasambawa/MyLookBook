@@ -4,8 +4,9 @@ import Rate from 'rc-rate';
 import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import AlertContainer from 'react-alert';
+import Logout from './Logout.jsx'
 
 class SingleOutfitView extends Component {
 
@@ -19,7 +20,8 @@ class SingleOutfitView extends Component {
       wishlistItems: [],
       uid: "",
       global: false,
-      confirm: false
+      confirm: false,
+      title: ""
     }
     this.loadRatings = this.loadRatings.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
@@ -29,31 +31,16 @@ class SingleOutfitView extends Component {
     this.removeOutfit = this.removeOutfit.bind(this);
     this.removeConfirm = this.removeConfirm.bind(this);
     this.injectOutfitItems = this.injectOutfitItems.bind(this);
+    this.loadShareLinks = this.loadShareLinks.bind(this);
   }
-
-
 
   globalAlert = () => {
     this.msg.show('You cannot delete objects in Global Feed!', {
       time: 2000,
-      type: 'success',
+      type: 'success'
     })
   }
 
-  //This is the logout method, checks if there is a user logged in and logs out
-  //if they are logged in, else do nothing
-  logout() {
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-
-    }).catch(function(error) {
-      console.log("error logging out")
-      // An error happened.
-      return false;
-    });
-    return true;
-  }
 
   componentDidMount() {
     //grab outfit image in database
@@ -70,13 +57,12 @@ class SingleOutfitView extends Component {
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
       dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-
       this.setState({global: false});
     } else {
       //publicview database
       dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global:true});
+      this.setState({global: true});
     }
     //grabbing the image from database
 
@@ -84,9 +70,9 @@ class SingleOutfitView extends Component {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
       if (this.props.uid) {
-        this.setState({outfitImage: image, uid: this.props.uid});
+        this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
       } else {
-        this.setState({outfitImage: image, uid: uid});
+        this.setState({outfitImage: image, uid: uid , title: snapshot.child("title").val() });
       }
 
     });
@@ -116,19 +102,44 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-
-      let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
-      databaseItems.once("value").then((snapshot) => {
-          let arrayItem = [];
-          snapshot.forEach(function(childSnapshot) {
-              let arr = [];
-              arr.push(childSnapshot.child("imgUrl").val());
-              arr.push(childSnapshot.child("macysUrl").val());
-              arr.push(childSnapshot.child("productId").val());
-              arrayItem.push(arr);
-          });
-          this.setState({wishlistItems: arrayItem});
+    let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    databaseItems.once("value").then((snapshot) => {
+      let arrayItem = [];
+      snapshot.forEach(function(childSnapshot) {
+        let arr = [];
+        arr.push(childSnapshot.child("imgUrl").val());
+        arr.push(childSnapshot.child("macysUrl").val());
+        arr.push(childSnapshot.child("productId").val());
+        arrayItem.push(arr);
       });
+      this.setState({wishlistItems: arrayItem});
+    });
+
+  }
+
+  loadShareLinks() {
+    console.log(this.props.navFrom);
+    if (this.props.navFrom == "globalFeed") {
+      console.log("from globalFeed");
+    } else {
+      console.log("from private Feed");
+      return (
+        <div>
+          <span id="linkTitle">Link:</span>
+          <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.state.uid}/${this.props.match.params.outfitId}`}/>
+          <span>
+            <button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy link</button>
+          </span>
+          <div id="shareLinkButtons">
+            <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/facebook.svg"/></a>
+            <a className="socialMediaLink" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/twitter.svg"/></a>
+            <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg"/></a>
+            <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg"/></a>
+            <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`}><img className="socialMediaIcon" src="../assets/chatIcon.svg"/></a>
+          </div>
+        </div>
+      );
+    }
 
   }
 
@@ -212,20 +223,20 @@ class SingleOutfitView extends Component {
       })
   }
 
-    alertOptions = {
-      offset: 14,
-      position: 'top right',
-      theme: 'dark',
-      time: 5000,
-      transition: 'scale'
-    }
+  alertOptions = {
+    offset: 14,
+    position: 'top right',
+    theme: 'dark',
+    time: 5000,
+    transition: 'scale'
+  }
 
-    showAlert = () => {
-      this.msg.show('Copied to Clipboard!', {
-        time: 2000,
-        type: 'success',
-      })
-    }
+  showAlert = () => {
+    this.msg.show('Copied to Clipboard!', {
+      time: 2000,
+      type: 'success'
+    })
+  }
 
   //handleFocus is a function that allows the application to "focus" on the
   //machine
@@ -244,28 +255,28 @@ class SingleOutfitView extends Component {
   //removeOutfit is a function that creates a button and hides it depending on
   //whether or not it is a global view or personal view
   removeOutfit() {
-    if(this.state.global === false){
-        return (
-          <div>
-               <button onClick={this.removeConfirm} className="button">removeOutfit</button>
-          </div>
-        );
-      }else {
+    if (this.state.global === false) {
+      return (
+        <div>
+          <button onClick={this.removeConfirm} className="button">removeOutfit</button>
+        </div>
+      );
+    } else {
       //do nothing
     }
   }
 
   //removeConfirm is a function that prompts the user whether or not the user
   //really wants to delete the outfit.
-  removeConfirm(){
+  removeConfirm() {
     if (window.confirm("Are you sure you want to delete this outfit?") === true) {
       database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
       database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
       this.setState({confirm: true});
     } else {
       this.setState({confirm: false});
-      }
     }
+  }
 
   addToWishList(productId) {
     var userId = "12564949299"; // "12570015021";
@@ -306,14 +317,13 @@ class SingleOutfitView extends Component {
   }
 
   render() {
-    if (this.state.confirm === true ){
-      return (
-      <Redirect to="/feed"/>
-      )
+    if (this.state.confirm === true) {
+      return (<Redirect to="/feed"/>)
     }
     return (
       <div>
-        <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
+        <h2>{this.state.title}</h2>
+
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         {this.removeOutfit()}
         <div id="singleOutfitViewContainer">
@@ -321,24 +331,13 @@ class SingleOutfitView extends Component {
             <img className="imageID" src={this.state.outfitImage}/>
           </div>
           <div id="linkContainer">
-            <span id="linkTitle">Link:</span>
-
-            <input id="linkCopy" className="link" type="text" onFocus={this.handleFocus} value={`rateView/${this.state.uid}/${this.props.match.params.outfitId}`}/>
-            <span>
-              <button className="button" id="copyButton" onClick={this.copyToClipboard}>Copy link</button>
-            </span>
-            <div id="shareLinkButtons">
-              <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/facebook.svg"/></a>
-              <a className="socialMediaLink" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/twitter.svg"/></a>
-              <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg"/></a>
-              <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg"/></a>
-              <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`}><img className="socialMediaIcon" src="../assets/chatIcon.svg"/></a>
-            </div>
+            {this.loadShareLinks()}
             <div id="wishlistContainer">
-               <h2>Add Items to Wishlist: </h2>
-                <div className="scrollmenu">
-                    {this.injectOutfitItems()}
-                </div>
+              <h2>Add Items to Wishlist:
+              </h2>
+              <div className="scrollmenu">
+                {this.injectOutfitItems()}
+              </div>
             </div>
           </div>
           {this.injectRatingsContent()}
