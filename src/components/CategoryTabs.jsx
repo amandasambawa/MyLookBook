@@ -8,7 +8,7 @@ const itemsArray = {
     "tops": [
         {
             productId: 36734562,
-            imgUrl: "http://cdn.allvolleyball.com/images/uploads/category_127_7336.png",
+            imgUrl: "https://storage.googleapis.com/productpoll-7127e.appspot.com/red%20dress.png",
             macysUrl: "https://www.macys.com/shop/product/under-armour-zinger-upf-30-golf-polo?ID=3054382&CategoryID=255#fn=sp%3D1%26spc%3D20%26ruleId%3D78|BA%26slotId%3D8%26kws%3Dunder%20armour%20polo%26searchPass%3DexactMultiMatch"
         },
         {

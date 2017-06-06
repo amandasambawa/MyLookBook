@@ -118,11 +118,8 @@ class SingleOutfitView extends Component {
   }
 
   loadShareLinks() {
-    console.log(this.props.navFrom);
     if (this.props.navFrom == "globalFeed") {
-      console.log("from globalFeed");
     } else {
-      console.log("from private Feed");
       return (
         <div>
           <span id="linkTitle">Link:</span>

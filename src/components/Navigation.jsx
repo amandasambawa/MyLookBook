@@ -45,7 +45,7 @@ class Navigation extends Component {
           <div className="feedLink">
               <Link to="/feed">
                   <div className="backgroundImage"></div>
-                  <img className="navIcon" src="../assets/shirt.svg" />
+                  <img className="navIcon" src="../../assets/shirt.svg" />
                   {/* <div ref = "theDiv" className="navLink">My Lookbook</div> */}
                   <button
                       className="navLink"
@@ -60,7 +60,7 @@ class Navigation extends Component {
       return (
           <div className="globalFeedLink">
               <Link to="/globalFeed">
-                  <img className="navIcon" src="../assets/earth-globe.svg" />
+                  <img className="navIcon" src="../../assets/earth-globe.svg" />
                   {/*<div className="navLink">Global Feed</div> */}
                   <button
                       className="navLink"
@@ -81,7 +81,7 @@ class Navigation extends Component {
         return (
             <div>
                 <Link to="/outfitCreation">
-                    <img className="navIcon" src="../assets/plus-button.svg" />
+                    <img className="navIcon" src="../../assets/plus-button.svg" />
                     {/*<div className="navLink">Create An Outfit</div> */}
                     <button
                         className="navLink"
@@ -95,7 +95,7 @@ class Navigation extends Component {
   }
 
   render(){
-    if( ( this.props.location.pathname.split("/")[1] === "outfitCreation" || this.props.location.pathname.split("/")[1] === "rateView")
+    if( this.props.location.pathname.split("/")[1] === "outfitCreation"
       && this.props.render === undefined ) {
       return(<div></div>);
     }else if(this.props.uid){
@@ -111,7 +111,6 @@ class Navigation extends Component {
                 <div className="small-5 columns">
                         {this.backToGlobalFeed()}
                 </div>
-              <Logout />
             </div>
           </div>
       );
