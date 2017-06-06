@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {auth} from '../firebase.js';
 import '../styles/CategoryTabs.css';
 import BelowBox from "./BelowBox.jsx"
 //import catalogItems from './outfitItems.json'
