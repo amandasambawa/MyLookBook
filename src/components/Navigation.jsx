@@ -11,8 +11,7 @@ const propsToHeader = {
   "login": "Login",
   "feed": "Closet",
   "outfitCreation": "Create An Outfit",
-  "singleOutfit": "Outfit",
-  "rateView": "Rate this Outfit"
+  "singleOutfit": "Outfit"
 }
 
 class Navigation extends Component {

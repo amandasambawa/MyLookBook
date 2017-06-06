@@ -78,7 +78,7 @@ class RateView extends Component {
       this.setState({ratingComment: event.target.value});
   }
 
-  
+
   //handles saving the rating and comments
   saveRating() {
     //if the user has not saved once before, we will send that data to the db
@@ -153,7 +153,7 @@ class RateView extends Component {
           <textarea className="commentBox" placeholder="Leave a comment!" onChange={this.handleCommentChange}></textarea>
 
           <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-          <button onClick={this.saveRating} className="button">Save</button>
+          <button onClick={this.saveRating} className="button" style= {{ marginBottom: "4em" }}>Save</button>
 
         </div>
       );
