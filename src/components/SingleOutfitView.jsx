@@ -231,13 +231,6 @@ class SingleOutfitView extends Component {
     transition: 'scale'
   }
 
-  showAlert = (message, type) => {
-    this.msg.show(message, {
-      time: 2000,
-      type: 'success'
-    })
-  }
-
   //handleFocus is a function that allows the application to "focus" on the
   //machine
   handleFocus(event) {
@@ -249,7 +242,7 @@ class SingleOutfitView extends Component {
   copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
-    this.showAlert("Copy to Clipboard Success", "success");
+    this.msg.success("Copy to Clipboard Success");
   }
 
   //removeOutfit is a function that creates a button and hides it depending on
@@ -309,14 +302,18 @@ class SingleOutfitView extends Component {
         'Content-Type': 'application/json'
       },
       body: data
-    }).then(function(response) {
+    }).then((response)=> {
+      // console.log(response);
+      // if (!response.ok) {
+      //     throw Error(response.statusText);
+      // }
       return response;
     }).then((data)=> {
-      this.showAlert("Add to Wishlist success", "success");
+      this.msg.success("Add to Wishlist success");
       console.log("Successfully Add to Wishlist");
-    }).catch(function(err){
-      this.showAlert("Fail add to Wishlist","fail");
-      console.log("Add to Wishlist fail: ",err);
+    }).catch((err)=> {
+      this.msg.error("Fail add to Wishlist, "+err);
+      console.log("Fail add to Wishlist",err);
     });
   }
 
