@@ -231,8 +231,8 @@ class SingleOutfitView extends Component {
     transition: 'scale'
   }
 
-  showAlert = () => {
-    this.msg.show('Copied to Clipboard!', {
+  showAlert = (message, type) => {
+    this.msg.show(message, {
       time: 2000,
       type: 'success'
     })
@@ -249,7 +249,7 @@ class SingleOutfitView extends Component {
   copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
-    this.showAlert();
+    this.showAlert("Copy to Clipboard Success", "success");
   }
 
   //removeOutfit is a function that creates a button and hides it depending on
@@ -310,9 +310,13 @@ class SingleOutfitView extends Component {
       },
       body: data
     }).then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      console.log("data", data);
+      return response;
+    }).then((data)=> {
+      this.showAlert("Add to Wishlist success", "success");
+      console.log("Successfully Add to Wishlist");
+    }).catch(function(err){
+      this.showAlert("Fail add to Wishlist","fail");
+      console.log("Add to Wishlist fail: ",err);
     });
   }
 
