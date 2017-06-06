@@ -202,11 +202,12 @@ class SingleOutfitView extends Component {
   injectOutfitItems() {
       return this.state.wishlistItems.map((item) => {
           return (
-              <span>
+              <div className="wishlistItems">
                   <a href={item[1]}>
                     <img className="categoryItems" src={item[0]} />
                   </a>
-              </span>
+                  <img className="wishlistAdd" onClick={() => this.addToWishList(item[2])} src="../assets/plus.svg"/>
+              </div>
           );
       })
   }
@@ -266,9 +267,9 @@ class SingleOutfitView extends Component {
       }
     }
 
-  addToWishList() {
-    var userId = "12570015021";
-    var productId = 36728786;
+  addToWishList(productId) {
+    var userId = "12564949299"; // "12570015021";
+    console.log("Added to wishlist -"+ productId);
     var data = JSON.stringify({
       "wishlists": {
         "wishlist": [
@@ -314,7 +315,6 @@ class SingleOutfitView extends Component {
       <div>
         <div id="logoutContainer" onClick={this.logout}><img className="navIcon" src="../assets/logout.svg"/></div>
         <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-        <button className="button" onClick={this.addToWishList}>addToWishList</button>
         {this.removeOutfit()}
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
