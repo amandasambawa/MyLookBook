@@ -44,22 +44,19 @@ class SingleOutfitView extends Component {
     let globalHolder = false;
 
     //initializing the database variables
-    let dataBaseIMG = "";
-    let dataBaseRating = "";
+    let dataBase = "";
     //Singleoutview database
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
-      dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+      dataBase = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
     } else {
       //publicview database
-      dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
+      dataBase = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
       globalHolder = true;
 
     }
-    //grabbing the image from database
 
-    dataBaseIMG.once("value").then((snapshot) => {
+    //grabbing the image from database
+    dataBase.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
       if (this.props.uid) {
@@ -70,7 +67,7 @@ class SingleOutfitView extends Component {
 
     });
 
-    dataBaseRating.once("value").then((snapshot) => {
+    dataBase.child("ratings").once("value").then((snapshot) => {
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot) {
         //add a Rating object to ratingArray
@@ -95,13 +92,7 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = "";
-    if (globalHolder === true){
-     databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
-   }else{
-     databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
-   }
-
+    let databaseItems = dataBase.child("items");
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
