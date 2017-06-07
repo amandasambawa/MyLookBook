@@ -102,7 +102,7 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    let databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
@@ -111,8 +111,10 @@ class SingleOutfitView extends Component {
         arr.push(childSnapshot.child("macysUrl").val());
         arr.push(childSnapshot.child("productId").val());
         arrayItem.push(arr);
+        console.log("arr", arr);
       });
       this.setState({wishlistItems: arrayItem});
+      console.log("inside array: ", this.state.wishlistItems);
     });
 
   }
@@ -208,7 +210,9 @@ class SingleOutfitView extends Component {
   }
 
   injectOutfitItems() {
+    console.log(this.state);
       return this.state.wishlistItems.map((item) => {
+        console.log("add to wl function");
           return (
               <div className="wishlistItems">
                   <a href={item[1]}>
