@@ -62,3 +62,20 @@ button:focus {
     color: #af0000;
     outline: none;
 }
+
+.feedContainer {
+    margin-bottom: 4em;
+}
+
+#logoutContainer {
+    position:absolute;
+    right: 8px;
+}
+
+img.categoryItems {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 90px;
+    width: 25%;
+}

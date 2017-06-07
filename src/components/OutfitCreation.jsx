@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
-import {database} from '../firebase.js';
+import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
+import interact from 'interactjs';
+import Navigation from './Navigation.jsx';
+import Logout from './Logout.jsx'
 import '../styles/OutfitCreation.css';
 
 class OutfitCreation extends Component {
@@ -12,15 +15,16 @@ class OutfitCreation extends Component {
     super(props);
     this.state = {
       clickedItems: [],
-      title:"",
+      title: "",
       global: false,
-      lockImgSrc:"../assets/locked.svg"
+      lockImgSrc: "../assets/locked.svg",
+      itemCount:0
     }
-    this.getClickedItem = this.getClickedItem.bind(this);
+    this.droppedItem = this.droppedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
-    this.passItemCount = this.passItemCount.bind(this);
+    this.startGesture = this.startGesture.bind(this);
   }
 
   static propTypes = {
@@ -29,6 +33,7 @@ class OutfitCreation extends Component {
 
 
   componentDidMount() {
+    this.startGesture();
     this.props.addSteps([
       {
         title: 'Outfit Title',
@@ -61,37 +66,44 @@ class OutfitCreation extends Component {
     transition: 'fade'
   }
 
-
-
   //handles the global Lock state
   handleGlobalLock() {
-    if(this.state.global === false ){
-      this.setState({global:true})
-      if (this.props.testing === true){
+    if (this.state.global === false) {
+      this.setState({global: true})
+      if (this.props.testing === true) {
         return true;
-      }else{
+      } else {
         this.props.setGlobal(Boolean(true));
       }
-      this.setState({lockImgSrc:"../assets/unlocked.svg"});
+      this.setState({lockImgSrc: "../assets/unlocked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
-    }else{
-      this.setState({global:false});
-      if (this.props.testing === true){
+    } else {
+      this.setState({global: false});
+      if (this.props.testing === true) {
         return true;
-      }else{
+      } else {
         this.props.setGlobal(Boolean(false));
       }
-      this.setState({lockImgSrc:"../assets/locked.svg"});
+      this.setState({lockImgSrc: "../assets/locked.svg"});
       //console.log("lock img:", this.state.lockImgSrc);
     }
   }
 
-  getClickedItem(item) {
-    // get the url and then add it to the array in state
+
+
+  droppedItem(item, pos){
+    console.log(pos, "inside dropped item");
     if (this.state.clickedItems.length <= 5) {
       let itemsArray = this.state.clickedItems.slice();
-      itemsArray.push(item);
-      this.setState({clickedItems: itemsArray});
+      let newPos = Object.assign({}, pos);
+      newPos.productId =  item.dataset.itemproductid;
+      newPos.imgUrl =  item.dataset.itemimgurl;
+      newPos.macysUrl =  item.dataset.itemmacysurl;
+      itemsArray.push(newPos);
+      console.log(itemsArray);
+      // , pos: pos
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
+      //console.log("clicled items: ", this.state.clickedItems);
     } else {
       this.msg.show('Reached Maximum(6) Items', {
         time: 20000,
@@ -99,53 +111,160 @@ class OutfitCreation extends Component {
 
       })
     }
-    this.passItemCount();
   }
 
   undoItem() {
     //console.log(this.state.clickedItems.length);
-    if(this.state.clickedItems.length>=1){
-      console.log("undo item");
+    if (this.state.clickedItems.length >= 1) {
+      //console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.pop();
-      this.setState({clickedItems: itemsArray});
-    }else{
+      this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
+    } else {
       this.msg.show('There are no more items', {
         time: 20000,
         type: 'error'
         //icon: <img src="path/to/some/img/32x32.png"/>
       })
     }
+    //console.log(this.state.itemCount);
   }
 
-  passItemCount(){
-    var itemCounts = this.state.clickedItems.length + 1;
-    //console.log(itemCounts);
-    this.props.setItemCount(itemCounts);
-  }
 
   nameOutfit(event){
+    // passing up to app because saveoutfit is now in navigation
     this.setState({title:event.target.value});
     this.props.setTitle(event.target.value);
   }
 
+  dragMoveListener(event) {
+    var target = event.target,
+      // keep the dragged position in the data-x/data-y attributes
+      x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+
+    document.body;
+
+  }
+
+  startGesture() {
+    var scale = 1,
+    gestureArea = document.getElementById('dropZoneAndContainer'),
+    scaleElement = document.getElementsByClassName('draggable'),
+    resetTimeout,
+    index = 0;
+    let restrict = document.getElementById('dropZoneAndContainer');
+
+    interact('.DropZoneContainer').dropzone({
+      overlap: 1,
+      ondropactivate: (event) => {
+        // add active dropzone feedback, anytime I start dragging an item
+        // console.log("drop-active");
+        // event.target.classList.add('drop-active');
+      },
+      ondragenter: (event) => {
+        // runs whenever something draggable is in the dropzone
+        var draggableElement = event.relatedTarget,
+            dropzoneElement = event.target;
+
+        // feedback the possibility of a drop
+        draggableElement.classList.add('can-drop');
+
+      },
+      ondragleave: (event) => {
+        // runs whenever something draggable exits
+        // remove the drop feedback style
+        event.target.classList.remove('drop-target');
+        event.relatedTarget.classList.remove('can-drop');
+      },
+      ondrop: (event) => {
+        event.relatedTarget.classList.remove('can-drop');
+        if (event.relatedTarget.classList.contains("draggable")){
+          let pos = {top: event.relatedTarget.getBoundingClientRect().top, left: event.relatedTarget.getBoundingClientRect().left};
+          this.droppedItem(event.relatedTarget, pos);
+          //runs when dropped
+        }
+      },
+      ondropdeactivate: (event) => {
+        //when I stop dragging an item
+        event.target.classList.remove('drop-active');
+        event.target.classList.remove('drop-target');
+        if (event.relatedTarget.classList.contains("inside") === false){
+          event.relatedTarget.style = "";
+          event.relatedTarget.setAttribute('data-x', 0);
+          event.relatedTarget.setAttribute('data-y', 0);
+        }
+      }
+    })
+      //console.log('scaleElement: ',scaleElement);
+    interact('.draggable').draggable({
+      // enable inertial throwing
+      inertia: false,
+      // keep the element within the area of it's parent
+      restrict: {
+        restriction: restrict,
+        // endOnly: true,
+        elementRect: {
+          top: 0,
+          left: 0,
+          bottom: 1,
+          right: 1
+        }
+      },
+      // enable autoScroll
+      autoScroll: false,
+
+      // call this function on every dragmove event
+      onmove: this.dragMoveListener,
+      // call this function on every dragend event
+      onstart: (event) => {
+        let something = document.getElementsByClassName("scrollmenu")[0].scrollLeft;
+        event.target.classList.add('dragging');
+        console.log(event.target.getBoundingClientRect().left);
+        event.target.style.left = `${Math.round(event.target.getBoundingClientRect().left - something)}px`;
+        console.log(event.target.style.left);
+        // index++;
+        // event.target.style.zIndex = index;
+      },
+      onend: (event)=> {
+        event.target.classList.remove('dragging');
+      //  event.target.style.zIndex = 0;
+      }
+    })
+  }
+
   render() {
+    //console.log(this.state.clickedItems);
     return (
+      <div>
+        <Logout />
         <div id="outfitCreationContainer">
-            <span onClick={this.handleGlobalLock}>{this.state.global} <img id="lockIcon" src={this.state.lockImgSrc} /></span>
-            {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
-            <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit} />
-            {/*
-            <div id="outfitNameContainer">
-                <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+          <span onClick={this.handleGlobalLock}>{this.state.global}
+            <img id="lockIcon" src={this.state.lockImgSrc}/></span>
+          {/*<button onClick={this.handleGlobalLock} className="button">{this.state.global}</button> */}
+          <input id="outfitNameField" placeholder="Your outfit name here" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/> {/*
+              <div id="outfitNameContainer">
+                  <input className="outfitName" maxLength="20" value={this.state.title} onChange={this.nameOutfit}/>
+              </div>
+              */}
+          <div>
+            <div id="dropZoneAndContainer">
+              <DropZone pos={this.state.pos} clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
+              <CategoryTabs />
             </div>
-            */}
-            <div>
-                <DropZone clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
-                <CategoryTabs getClickedItem={this.getClickedItem}/>
-                <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
-            </div>
+            <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+          </div>
         </div>
+        <Navigation render={true} uid={this.props.uid} global={this.state.global}
+          title={this.state.title} clickedItems={this.state.clickedItems} itemCount={this.state.itemCount}/>
+      </div>
     );
   }
 

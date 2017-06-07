@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
+import Logout from './Logout.jsx'
 import "../styles/foundation.css";
 import "../styles/GlobalFeed.css";
 
@@ -15,7 +16,6 @@ class GlobalFeed extends Component {
     this.loadingContent = this.loadingContent.bind(this);
   }
 
-
   componentDidMount() {
     let previewArray = [];
     //the line below references the database at the folder where the
@@ -25,6 +25,7 @@ class GlobalFeed extends Component {
       snapshot.forEach(function(childSnapshot, key) {
         previewArray.push(childSnapshot);
       });
+      previewArray.reverse();
       this.setState({previews: previewArray, exists: snapshot.val()});
     });
   }
@@ -41,11 +42,11 @@ class GlobalFeed extends Component {
     //if state exists is null, we will prompt the user to create an outfit
     }else{
       return this.state.previews.map((preview) => {
-      return (
-        <div>
-            <span className="outfitName2">{preview.val().title}</span>
-            <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
-        </div>
+        return (
+            <div style={{ marginTop: "1em"}}>
+                <span className="outfitName2">{preview.val().title}</span>
+                <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
+            </div>
         );
       });
     }
@@ -53,9 +54,12 @@ class GlobalFeed extends Component {
 
   render() {
     return (
-        <div className="feedContainer">
+        <div>
+            <Logout />
+            <div className="feedContainer">
             <h2 id="feedTitle">Feed</h2>
             {this.loadingContent()}
+        </div>
         </div>
     );
   }

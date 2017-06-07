@@ -1,5 +1,6 @@
 #singleOutfitViewContainer {
     margin-top: 10px;
+    margin-bottom: 4em;
 }
 
 #copyButton{
@@ -31,7 +32,6 @@
     width: 95%;
     margin: auto;
 }
-
 
 .imageID{
   height: 300px;
@@ -101,4 +101,21 @@
 
 #container {
     margin-top: 1em;
+}
+
+#wishlistContainer {
+    margin-top: 1em;
+}
+
+.wishlistItems, .wishlistItem {
+    display: inline;
+    position: relative;
+}
+
+.wishlistAdd {
+    position: absolute;
+    top: 154%;
+    left: 67%;
+    height: 25px;
+    width: 25px;
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {database, auth} from '../firebase.js';
 import {Link} from 'react-router-dom';
+import Logout from './Logout.jsx'
 import "../styles/foundation.css";
 import "../styles/Feed.css";
 
@@ -17,33 +18,17 @@ class Feed extends Component {
     this.loadingContent = this.loadingContent.bind(this);
   }
 
-  /*
-  * A simple logout function that returns True if action was successful
-  * and returns false if action was unsuccessful.
-  */
-  logout() {
-    auth.signOut().then(function() {
-      console.log("successful log out")
-      // Sign-out successful.
-
-    }).catch(function(error) {
-      console.log("error logging out")
-      // An error happened.
-      return false;
-    });
-    return true;
-  }
-
   componentDidMount() {
     let previewArray = [];
     //the line below references the database at the folder where the
     //outfits exist
     database.ref(`/users/${this.props.uid}/outfitobjects/`).once("value").then((snapshot) => {
       //iterating through each index of the database
-      console.log(snapshot.val());
+      //console.log(snapshot.val());
       snapshot.forEach(function(childSnapshot, key) {
         previewArray.push(childSnapshot);
       });
+      previewArray.reverse();
       this.setState({previews: previewArray, exists: snapshot.val()});
     });
   }
@@ -61,7 +46,8 @@ class Feed extends Component {
     }else if(this.state.exists === null){
       return (
           <div className="feedContainer">
-              <h1>Start by creating outfits here</h1>
+              <h1>You have no outfits yet.</h1>
+              <h2>Start creating outfits here</h2>
               <img src="../assets/curve-down-arrow.png" />
           </div>
       );
@@ -80,11 +66,14 @@ class Feed extends Component {
 
   render() {
     return (
+        <div>
+        <Logout />
         <div id="lookbookContainer">
             <h2 id="lookbookHeader">My Macy's Lookbook</h2>
             <div className="row" id="lookbookRow">
                 {this.loadingContent()}
             </div>
+        </div>
         </div>
     );
   }

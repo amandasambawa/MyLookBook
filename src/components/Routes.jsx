@@ -11,16 +11,13 @@ const PublicRoute = ({ component: Component, uid, ...rest }) => (
   />
 );
 
-const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, setItemCount, joyrideType, joyrideOverlay,onClickSwitch,addSteps,addTooltip,...rest }) => (
+const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, setItemCount, navFrom, addSteps, addTooltip, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       uid
-        ? <Component uid={uid} setTitle={setTitle} setGlobal={setGlobal} setItemCount={setItemCount} joyrideType={joyrideType}
-          joyrideOverlay={joyrideOverlay}
-          onClickSwitch={onClickSwitch}
-          addSteps={addSteps}
-          addTooltip={addTooltip}{...props} />
+        ? <Component uid={uid} setTitle={setTitle} setGlobal={setGlobal} navFrom={navFrom} addSteps={addSteps}
+        addTooltip={addTooltip} {...props} />
         : <Redirect to={{ pathname: "/login" }} />}
   />
 
@@ -28,16 +25,27 @@ const PrivateRoute = ({ component: Component, uid, setTitle,setGlobal, setItemCo
 
 );
 
-const RateRoute = ({ component: Component, uid, ...rest }) => (
+const RateRoute = ({ component: Component, uid, navFrom, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-        <Component uid={uid} {...props} />}
+        <Component uid={uid} navFrom={navFrom} {...props} />}
+  />
+);
+
+const GlobalRoute = ({ component: Component, uid, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      uid
+        ? <Component uid={uid} {...props} />
+        : <Redirect to={{ pathname: "/login" }} />}
   />
 );
 
 module.exports = {
   PublicRoute,
   PrivateRoute,
-  RateRoute
+  RateRoute,
+  GlobalRoute
 }

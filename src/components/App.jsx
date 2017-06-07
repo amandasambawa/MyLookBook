@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Joyride from 'react-joyride';
 import { auth,database } from '../firebase.js';
-import {PrivateRoute, PublicRoute, RateRoute} from './Routes.jsx';
+import {PrivateRoute, PublicRoute, RateRoute, GlobalRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
 import Feed from './Feed.jsx';
 import GlobalFeed from './GlobalFeed.jsx'
@@ -13,6 +13,7 @@ import Confirmation from './Confirmation.jsx';
 import Navigation from './Navigation.jsx';
 import "../styles/foundation.css";
 import "../styles/foundation2.css";
+import "../styles/react-joyride-compiled.css";
 
 import {
   BrowserRouter as Router,
@@ -42,10 +43,8 @@ class App extends Component {
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
-    this.setItemCount = this.setItemCount.bind(this);
     this.addSteps = this.addSteps.bind(this);
     this.callback = this.callback.bind(this);
-
   }
 
   componentDidMount() {
@@ -142,76 +141,67 @@ class App extends Component {
     this.setState({title : title})
   }
 
-  setItemCount(itemCount){
-    this.setState({itemCount: itemCount});
-  }
-
-
   render() {
-      const {
-        isReady,
-        isRunning,
-        joyrideOverlay,
-        joyrideType,
-        selector,
-        stepIndex,
-        steps,
-      } = this.state;
 
-      if (isReady) {
-        var jr =
-                      <Joyride
-                        ref={c => (this.joyride = c)}
-                        callback={this.callback}
-                        debug={true}
-                        locale={{
-                          back: (<span>Back</span>),
-                          close: (<span>Close</span>),
-                          last: (<span>Last</span>),
-                          next: (<span>Next</span>),
-                          skip: (<span>Skip</span>),
-                        }}
-                        run={isRunning}
-                        showOverlay={joyrideOverlay}
-                        showSkipButton={true}
-                        showStepsProgress={true}
-                        stepIndex={stepIndex}
-                        steps={steps}
-                        type={joyrideType}
-                      />;
+    const {
+      isReady,
+      isRunning,
+      joyrideOverlay,
+      joyrideType,
+      selector,
+      stepIndex,
+      steps,
+    } = this.state;
+
+    if (isReady) {
+      var jr =
+                    <Joyride
+                      ref={c => (this.joyride = c)}
+                      callback={this.callback}
+                      debug={true}
+                      locale={{
+                        back: (<span>Back</span>),
+                        close: (<span>Close</span>),
+                        last: (<span>Last</span>),
+                        next: (<span>Next</span>),
+                        skip: (<span>Skip</span>),
+                      }}
+                      run={isRunning}
+                      showOverlay={joyrideOverlay}
+                      showSkipButton={true}
+                      showStepsProgress={true}
+                      stepIndex={stepIndex}
+                      steps={steps}
+                      type={joyrideType}
+                    />;
 
 
-           }
-            return (
-                  <div className="app">
+         }
 
-                   {jr}
-
-                    <Router>
-
-                      <div>
-                        <Switch>
-                          <Redirect exact from='/' to='/login'/>
-                          <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
-                          <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
-                          <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
-
-                          <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}
-                            addSteps={this.addSteps}
-
-                            addTooltip={this.addTooltip}/>
-
-                          <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-                          <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-                          <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
-                          <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
-                          <PublicRoute component={NoMatch}/>
-                        </Switch>
-                        <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
-                      </div>
-                    </Router>
-                  </div>
-                );
+    return (
+      <div className="app">
+       {jr}
+        <Router>
+          <div>
+            <a href="https://www.macys.com"><img src="https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/macysNavBar.png?alt=media&token=2392f318-136e-49e6-a390-ce0e9b0ec758" /></a>
+            <Switch>
+              <Redirect exact from='/' to='/login'/>
+              <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
+              <PrivateRoute path='/feed' component={Feed} uid={this.state.uid} addSteps={this.addSteps} />
+              <GlobalRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
+              <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle}
+              addSteps={this.addSteps} addTooltip={this.addTooltip}/>
+              <PrivateRoute path='/singleOutfit/:outfitId' navFrom={"privateFeed"} component={SingleOutfitView} uid={this.state.uid}/>
+              <RateRoute path='/publicOutfit/:outfitId' navFrom={"globalFeed"} component={SingleOutfitView} uid={this.state.uid}/>
+              <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
+              <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
+              <PublicRoute component={NoMatch}/>
+            </Switch>
+            <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
+          </div>
+        </Router>
+      </div>
+    );
   }
 };
 

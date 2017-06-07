@@ -27,7 +27,7 @@ class SaveOutfitButton extends Component {
   }
 
   saveOutfit() {
-    //console.log(this.props.itemCount);
+    //console.log(this.props);
     if (this.props.itemCount <= 0) {
       //console.log("need items for outfit!");
       this.msg.show("Can't save empty outfit!", {
@@ -36,6 +36,7 @@ class SaveOutfitButton extends Component {
 
       });
     } else {
+      //console.log("here: ",this.props.clickedItems);
       this.generateImage();
     }
   }
@@ -43,7 +44,7 @@ class SaveOutfitButton extends Component {
   generateImage() {
     html2canvas(document.getElementsByClassName('DropZoneContainer'), {
       //  allowTaint: true,
-      logging: true,
+      logging: false,
       useCORS: true,
       onrendered: (canvas) => {
         //console.log('generating');
@@ -59,7 +60,8 @@ class SaveOutfitButton extends Component {
           global: Boolean(this.props.global),
           title: titleRef,
           ratings: {},
-          img: url
+          img: url,
+          items:this.props.clickedItems
         });
 
         this.setState({outfitKey: newOutfit.key});
@@ -96,7 +98,6 @@ class SaveOutfitButton extends Component {
                   className="navLink"
                   id="saveOutfitButton"
                   value="Save Outfit"
-                  autoFocus
               >Save Outfit</button>
           </div>
           {/*<button className="button" onClick={this.saveOutfit}>
