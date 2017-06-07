@@ -33,60 +33,20 @@ class App extends Component {
       title: null,
       joyrideOverlay: true,
       joyrideType: 'continuous',
-      isReady: false,
-      isRunning: false,
+      isReady: true,
+      isRunning: true,
       stepIndex: 0,
-      steps: [
-
-        ],
+      steps: [],
       selector: '',
-      itemCount:0
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.setItemCount = this.setItemCount.bind(this);
     this.addSteps = this.addSteps.bind(this);
+    this.callback = this.callback.bind(this);
 
   }
-
-  // {
-  //   title: 'Auto Scroll',
-  //   text: 'Scroll to correct position if required. <i>It can be turned off</i>',
-  //   selector: '#outfitCreationContainer',
-  //   position: 'top',
-  //   style: {
-  //     mainColor: '#a350f0',
-  //     beacon: {
-  //       inner: '#a350f0',
-  //       outer: '#a350f0',
-  //     },
-  //   },
-  // },
-  // {
-  //   title: 'Hide Elements',
-  //   text: 'Sample texti is here',
-  //   textAlign: 'center',
-  //   selector: '#outfitNameField',
-  //   position: 'left',
-  //   style: {
-  //     backgroundColor: '#12d217',
-  //     borderRadius: 0,
-  //     color: '#fff',
-  //     mainColor: '#fff',
-  //     textAlign: 'center',
-  //     beacon: {
-  //       inner: '#12d217',
-  //       outer: '#12d217',
-  //     },
-  //     skip: {
-  //       display: 'none',
-  //     },
-  //     back: {
-  //       display: 'none',
-  //     },
-  //   },
-  // },
 
   componentDidMount() {
     this.authListener = auth.onAuthStateChanged(user => {
@@ -102,23 +62,23 @@ class App extends Component {
       this.setState({
         isReady: true,
         isRunning: true,
-  });
-}, 1000);
+      });
+    }, 1000);
   }
 
   addSteps(steps) {
-  let newSteps = steps;
+    let newSteps = steps;
 
-  if (!Array.isArray(newSteps)) {
-    newSteps = [newSteps];
-  }
+    if (!Array.isArray(newSteps)) {
+      newSteps = [newSteps];
+    }
 
-  if (!newSteps.length) {
-    return;
-  }
+    if (!newSteps.length) {
+      return;
+    }
 
-  this.setState(currentState => {
-
+    // Force setState to be synchronous to keep step order.
+    this.setState(currentState => {
       currentState.steps = currentState.steps.concat(newSteps);
       return currentState;
     });
@@ -189,75 +149,69 @@ class App extends Component {
 
   render() {
       const {
-      isReady,
-      isRunning,
-      joyrideOverlay,
-      joyrideType,
-      selector,
-      stepIndex,
-      steps,
-    } = this.state;
+        isReady,
+        isRunning,
+        joyrideOverlay,
+        joyrideType,
+        selector,
+        stepIndex,
+        steps,
+      } = this.state;
 
       if (isReady) {
-       let jr = (
-           <Joyride
-             ref={c => (this.joyride = c)}
-             callback={this.callback}
-             debug={false}
-             disableOverlay={selector === '.card-tickets'}
-             locale={{
-               back: (<span>Back</span>),
-               close: (<span>Close</span>),
-               last: (<span>Last</span>),
-               next: (<span>Next</span>),
-               skip: (<span>Skip</span>),
-             }}
-             run={isRunning}
-             showOverlay={joyrideOverlay}
-             showSkipButton={true}
-             showStepsProgress={true}
-             stepIndex={stepIndex}
-             steps={steps}
-             type={joyrideType}
-
-           />);
-
-         }
-return (
-       <div className="app">
-
-       {self.jr}
-
-        <Joyride ref={c => (this.joyride = c)} run={true} steps={this.state.steps} debug={true} autoStart={false} showOverlay={false}/>
+        var jr =
+                      <Joyride
+                        ref={c => (this.joyride = c)}
+                        callback={this.callback}
+                        debug={true}
+                        locale={{
+                          back: (<span>Back</span>),
+                          close: (<span>Close</span>),
+                          last: (<span>Last</span>),
+                          next: (<span>Next</span>),
+                          skip: (<span>Skip</span>),
+                        }}
+                        run={isRunning}
+                        showOverlay={joyrideOverlay}
+                        showSkipButton={true}
+                        showStepsProgress={true}
+                        stepIndex={stepIndex}
+                        steps={steps}
+                        type={joyrideType}
+                      />;
 
 
-      <Router>
+           }
+            return (
+                  <div className="app">
 
-        <div>
-          <Switch>
-            <Redirect exact from='/' to='/login'/>
-            <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
-            <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
-            <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
+                   {jr}
 
-            <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount} joyrideType={joyrideType}
-              joyrideOverlay={joyrideOverlay}
-              onClickSwitch={this.onClickSwitch}
-              addSteps={this.addSteps}
+                    <Router>
 
-              addTooltip={this.addTooltip}/>
+                      <div>
+                        <Switch>
+                          <Redirect exact from='/' to='/login'/>
+                          <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>
+                          <PrivateRoute path='/feed' component={Feed} uid={this.state.uid}/>
+                          <RateRoute path='/globalFeed' component={GlobalFeed} uid={this.state.uid}/>
 
-            <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
-            <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
-            <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
-            <PublicRoute component={NoMatch}/>
-          </Switch>
-          <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
-        </div>
-      </Router>
-       </div>
-    );
+                          <PrivateRoute path='/outfitCreation' component={OutfitCreation} uid={this.state.uid} setGlobal={this.setGlobal} setTitle={this.setTitle} setItemCount={this.setItemCount}
+                            addSteps={this.addSteps}
+
+                            addTooltip={this.addTooltip}/>
+
+                          <PrivateRoute path='/singleOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+                          <RateRoute path='/publicOutfit/:outfitId' component={SingleOutfitView} uid={this.state.uid}/>
+                          <RateRoute path='/rateView/:userId/:outfitId' component={RateView} uid={this.state.uid}/>
+                          <RateRoute path='/confirmation' component={Confirmation} uid={this.state.uid}/>
+                          <PublicRoute component={NoMatch}/>
+                        </Switch>
+                        <Navigation userName={this.state.uname} uid={this.state.uid} global={this.state.global} title={this.state.title} itemCount={this.state.itemCount}/>
+                      </div>
+                    </Router>
+                  </div>
+                );
   }
 };
 

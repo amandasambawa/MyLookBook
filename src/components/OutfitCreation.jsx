@@ -29,151 +29,26 @@ class OutfitCreation extends Component {
 
 
   componentDidMount() {
-    this.props.addSteps(
-
-      [
-
-
-      /**{
-        title: 'Auto Scroll',
-        text: 'Not a drill',
-        selector: '#outfitCreationContainer',
-        position: 'top',
-        style: {
-          mainColor: '#a350f0',
-          beacon: {
-            inner: '#a350f0',
-            outer: '#a350f0',
-          },
-        },
-      }
-
-      , **/
-
+    this.props.addSteps([
       {
-        title: 'SN',
-        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
+        title: 'Outfit Title',
+        text: 'Add a title to your oufit',
         selector: '#outfitNameField',
-        position: 'top',
-        style: {
-          mainColor: '#a350f0',
-          beacon: {
-            inner: '#a350f0',
-            outer: '#a350f0',
-                    skip: {
-                      display: 'inline',
-                    },
-                    back: {
-                      display: 'inline',
-                    },
-          },
-        },
-      }]
-
-    )
-  //  console.log(this.props);
-/*    this.setState({steps: [{
-      title: 'Auto Scroll',
-      text: 'Scroll to correct position if required. <i>It can be turned off</i>',
-      selector: '#area-chart',
-      position: 'top',
-      style: {
-        mainColor: '#a350f0',
-        beacon: {
-          inner: '#a350f0',
-          outer: '#a350f0',
-        },
-      },
-    }]}); */
-
-    // var newSteps = {steps: [
-    //     {
-    //       title: 'Auto Scroll',
-    //       text: 'Scroll to correct position if required. <i>It can be turned off</i>',
-    //       selector: '#area-chart',
-    //       position: 'top',
-    //       style: {
-    //         mainColor: '#a350f0',
-    //         beacon: {
-    //           inner: '#a350f0',
-    //           outer: '#a350f0',
-    //         },
-    //       },
-    //     },
-    //     {
-    //       title: 'Hide Elements',
-    //       text: 'Sample texti is here',
-    //       textAlign: 'center',
-    //       selector: '#outfitNameField',
-    //       position: 'left',
-    //       style: {
-    //         backgroundColor: '#12d217',
-    //         borderRadius: 0,
-    //         color: '#fff',
-    //         mainColor: '#fff',
-    //         textAlign: 'center',
-    //         beacon: {
-    //           inner: '#12d217',
-    //           outer: '#12d217',
-    //         },
-    //         skip: {
-    //           display: 'none',
-    //         },
-    //         back: {
-    //           display: 'none',
-    //         },
-    //       },
-    //     },
-    //   ]};
-
-    // this.setState(newSteps, function() {
-    //   console.log("steps state");
-    //   console.log(this.state.steps);
-    // });
-
-
-
-
-
-  /**   this.props.addSteps([
-      {
-        title: 'Auto Scroll',
-        text: 'Scroll to correct position if required. <i>It can be turned off</i>',
-        selector: '#area-chart',
-        position: 'top',
-        style: {
-          mainColor: '#a350f0',
-          beacon: {
-            inner: '#a350f0',
-            outer: '#a350f0',
-          },
-        },
+        position: 'bottom',
       },
       {
-        title: 'Hide Elements',
-        text: 'Sample texti is here',
-        textAlign: 'center',
-        selector: '#donut-chart',
-        position: 'left',
-        style: {
-          backgroundColor: '#12d217',
-          borderRadius: 0,
-          color: '#fff',
-          mainColor: '#fff',
-          textAlign: 'center',
-          beacon: {
-            inner: '#12d217',
-            outer: '#12d217',
-          },
-          skip: {
-            display: 'none',
-          },
-          back: {
-            display: 'none',
-          },
-        },
+        title: 'Pick an item',
+        text: 'Drag and drop any item onto the canvas',
+        selector: '.belowBox',
+        position: 'top',
       },
-    ]); **/
+      {
+        title: 'Save Outfit',
+        text: 'When your done click here to save the outfit to your closet!',
+        selector: '.small-6',
+        position: 'top',
+      },
+    ]);
   }
 
 
