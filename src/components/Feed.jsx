@@ -46,7 +46,7 @@ class Feed extends Component {
     }else if(this.state.exists === null){
       return (
           <div className="feedContainer">
-              <h1>You have no outfits yet.</h1>
+              <h1 className="redText">You have no outfits yet.</h1>
               <h2>Start creating outfits here</h2>
               <img src="../assets/curve-down-arrow.png" />
           </div>

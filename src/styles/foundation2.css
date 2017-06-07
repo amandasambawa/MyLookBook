@@ -29,6 +29,7 @@ h1, h2, h3, h4 {
 .feedContainer {
     text-align: center;
     width: 100%;
+
 }
 
 .outfitLink {
@@ -79,4 +80,8 @@ img.categoryItems {
     margin-right: 10px;
     height: 90px;
     width: 25%;
+}
+
+.redText {
+  color: #cc0000;
 }
