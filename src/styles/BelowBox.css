@@ -23,7 +23,6 @@ div.scrollmenu img {
     color: white;
     text-align: center;
     text-decoration: none;
-    z-index: -1;
 }
 
 .belowBox::-webkit-scrollbar {
