@@ -33,13 +33,14 @@ class RateView extends Component {
 
     } else {
       let image = null;
-      database.ref(`/users/${this.props.match.params.userId}/outfitobjects/${this.props.match.params.outfitId}`)
+      let dataBase = database.ref(`/users/${this.props.match.params.userId}`);
+      dataBase.child("outfitobjects").child(`${this.props.match.params.outfitId}`)
       .once("value").then((snapshot)=> {
           image = snapshot.child("img").val();
           this.setState({ outfitImage: image , global: snapshot.child("global").val() });
       });
 
-        database.ref(`/users/${this.props.match.params.userId}`)
+        dataBase
             .once("value").then((snapshot)=> {
             this.setState({ sender: snapshot.child("username").val() });
         });

@@ -52,13 +52,15 @@ class SingleOutfitView extends Component {
       //publicview database
       dataBase = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
       globalHolder = true;
-
     }
+    this.setState({global:globalHolder});
 
     //grabbing the image from database
     dataBase.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
+      let title = snapshot.child("title".val());
+      
       if (this.props.uid) {
         this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
       } else {
@@ -161,7 +163,7 @@ class SingleOutfitView extends Component {
   injectRatingsContent() {
     //check if ratings is empty
     var ratingsContent;
-    if (this.state.ratings.length === 0) {
+    if (this.state.ratings.length === 0 && this.state.global === false) {
       ratingsContent = <div id="noRatingsPlaceholder">
 
         <h1 id="noRatingsHeader">
