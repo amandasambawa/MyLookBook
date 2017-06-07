@@ -59,14 +59,11 @@ class SingleOutfitView extends Component {
     dataBase.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
-      let title = snapshot.child("title".val());
-      
       if (this.props.uid) {
-        this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
-      } else {
-        this.setState({outfitImage: image, uid: uid , title: snapshot.child("title").val() });
+        uid = this.props.uid;
       }
-
+      let title = snapshot.child("title").val();
+      this.setState({outfitImage: image, uid: uid , title: title });
     });
 
     dataBase.child("ratings").once("value").then((snapshot) => {
@@ -150,8 +147,6 @@ class SingleOutfitView extends Component {
             }} allowHalf/>
             <div className='commentBox'>{rating.comment}</div>
           </div>
-
-
         </div>
       );
     })
