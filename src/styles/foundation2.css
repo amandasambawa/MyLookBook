@@ -61,8 +61,9 @@ h1, h2, h3, h4 {
     display: block;
 }
 
+
 button:focus {
-    color: #af0000;
+    /*color: #af0000; */
     outline: none;
 }
 
@@ -89,5 +90,5 @@ img.categoryItems {
 }
 
 .spaceUnder{
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }

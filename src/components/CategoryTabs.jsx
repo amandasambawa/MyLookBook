@@ -6,26 +6,41 @@ import BelowBox from "./BelowBox.jsx"
 const itemsArray = {
     "tops": [
         {
-            productId: 36734562,
-            imgUrl: "https://storage.googleapis.com/productpoll-7127e.appspot.com/red%20dress.png",
-            macysUrl: "https://www.macys.com/shop/product/under-armour-zinger-upf-30-golf-polo?ID=3054382&CategoryID=255#fn=sp%3D1%26spc%3D20%26ruleId%3D78|BA%26slotId%3D8%26kws%3Dunder%20armour%20polo%26searchPass%3DexactMultiMatch"
+            productId: 37331529,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/top_striped.png?alt=media&token=c1b5ea91-724b-4d0b-95ac-383bed724208",
+            macysUrl: "https://www.macys.com/shop/product/polo-ralph-lauren-striped-cotton-t-shirt?ID=4701909&CategoryID=85842&LinkType=&selectedSize=#fn=BRAND%3DPolo Ralph Lauren;;Weekend Max Mara%26sp%3D1%26spc%3D268%26ruleId%3D64|BS%26slotId%3D8"
         },
         {
-            productId: 36101945,
-            imgUrl: "http://cdn-tp1.mozu.com/6653-25789/cms/25789/files/dbeb19d3-5984-46a9-85dd-40b8e42c70b4?max=800",
-            macysUrl: "https://www.macys.com/shop/product/the-north-face-denali-fleece-hoodie?ID=2712814&CategoryID=120#fn=sp%3D1%26spc%3D35%26ruleId%3D84%26slotId%3D5%26kws%3Dnorth%20face%20jacket%26searchPass%3DexactMultiMatch"
+            productId: 37331559,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/top_americanflag.png?alt=media&token=ed369d44-dfdc-4c64-a9e8-c7ef3833037a",
+            macysUrl: "https://www.macys.com/shop/product/polo-ralph-lauren-graphic-print-cotton-t-shirt?ID=4701913&CategoryID=85842#fn=BRAND%3DPolo Ralph Lauren%26sp%3D1%26spc%3D169%26ruleId%3D64|BS%26slotId%3D14"
+        },
+        {
+            productId: 37116205,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/top_buttonup.gif?alt=media&token=b801bab9-9811-498c-bb4c-4a5fbe8cc3fe",
+            macysUrl: "https://www.macys.com/shop/product/polo-ralph-lauren-relaxed-fit-striped-linen-shirt?ID=4578139&CategoryID=85842&selectedSize=#fn=BRAND%3DPolo Ralph Lauren%26sp%3D1%26spc%3D169%26ruleId%3D64|BS%26slotId%3D43'"
+        },
+        {
+            productId: 37198301,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/top_lightblue.png?alt=media&token=4b9a8d92-f7f6-4b23-ac55-e21f27d36ab4",
+            macysUrl: "https://m.macys.com/shop/product/polo-ralph-lauren-striped-off-the-shoulder-cotton-dress?ID=4646313&CategoryID=85842&LinkType=&selectedSize=#fn=BRAND%3DPolo Ralph Lauren%26sp%3D1%26spc%3D169%26ruleId%3D64|BS%26slotId%3D64"
         }
     ],
     "bottoms": [
         {
-            productId: 35449734,
-            imgUrl: "https://fgl.scene7.com/is/image/FGLSportsLtd/332065540_01_a?wid=800&hei=800&bgColor=0,0,0,0&fmt=png-alpha&resMode=sharp2&op_sharpen=1",
-            macysUrl: "https://www.macys.com/shop/product/nike-leg-a-see-just-do-it-dri-fit-leggings?ID=2353685&CategoryID=157&selectedSize=&swatchColor=Black/White#fn=sp%3D1%26spc%3D81%26ruleId%3D84%26slotId%3D30%26kws%3Dnike%20leggings%26searchPass%3DexactMultiMatch"
+            productId: 36852885,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/tompkins-jeans.png?alt=media&token=41a7bde5-5e98-4e9a-8198-24615b87d545",
+            macysUrl: "https://macys.com/shop/product/polo-ralph-lauren-tompkins-skinny-jeans?ID=4412138"
         },
         {
-            productId: 36937123,
-            imgUrl: "https://cdn.shopify.com/s/files/1/0873/0770/products/BLACK_RIPPED_SKINNY_JEANS_-_NEW_LOOK_1024x1024.png?v=1436357302",
-            macysUrl: "https://macys.com/shop/product/7-for-all-mankind-slim-illusion-skinny-jeans?ID=4460413&CategoryID=3111&LinkType=&selectedSize=#fn=sp%3D3%26spc%3D193%26ruleId%3D65%26slotId%3D168%26kws%3Ddistressed%20skinny%20jeans%26searchPass%3DexactMultiMatch"
+            productId: 37298790,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/blue-shorts.png?alt=media&token=da2dc63c-3d35-41a1-b18c-679b44662395",
+            macysUrl: "https://macys.com/shop/product/lauren-ralph-lauren-twill-cotton-shorts?ID=4695308"
+        },
+        {
+            productId: 37289611,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/bottom_jeanshorts.png?alt=media&token=8938cd28-ef29-4fc0-be4b-99c5e4a7124d",
+            macysUrl: "https://www.macys.com/shop/product/tommy-hilfiger-cuffed-shorts-only-at-macys?ID=4075810&CategoryID=5344&selectedSize=#fn=BRAND%3DTommy Hilfiger%26sp%3D1%26spc%3D13%26ruleId%3D78|BS|BA%26slotId%3D2"
         }
     ],
     "shoes": [

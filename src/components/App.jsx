@@ -65,7 +65,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <a href="https://www.macys.com"><img src="https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/macysNavBar.png?alt=media&token=2392f318-136e-49e6-a390-ce0e9b0ec758" /></a>
+          <img src="https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/macysNavBar.png?alt=media&token=2392f318-136e-49e6-a390-ce0e9b0ec758" />
           <Switch>
             <Redirect exact from='/' to='/login'/>
             <PublicRoute path='/login' component={LoginPage} uid={this.state.uid}/>

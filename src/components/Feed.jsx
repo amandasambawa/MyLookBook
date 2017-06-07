@@ -47,8 +47,8 @@ class Feed extends Component {
       return (
           <div className="feedContainer" style={{ position: "absolute", bottom: "0"}}>
               <h1 className="redText">You have no outfits yet.</h1>
-              <h2 className="spaceUnder">Start creating outfits here</h2>
-              <img src="../assets/curve-down-arrow.png" />
+              <h2 className="spaceUnder">Start creating outfits here!</h2>
+              <img id="downArrow" src="../assets/download-arrow.svg" />
           </div>
       );
       //we will default load the rest of the items in the closet.

@@ -46,10 +46,11 @@ class Navigation extends Component {
                   <div className="backgroundImage"></div>
                   <img className="navIcon" src="../../assets/shirt.svg" />
                   {/* <div ref = "theDiv" className="navLink">My Lookbook</div> */}
+                  {/* this button autofocus */}
                   <button
                       className="navLink"
                       value="My Lookbook"
-                      autoFocus
+
                   >My Lookbook</button>
               </Link>
           </div>);
