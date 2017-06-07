@@ -261,7 +261,7 @@ class SingleOutfitView extends Component {
     if (this.state.global === false) {
       return (
         <div style={ {textAlign: "center", marginTop: "1em"} }>
-          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey" }}>Delete Outfit</button>
+          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey", color: "black" }}>Delete Outfit</button>
         </div>
       );
     } else {
