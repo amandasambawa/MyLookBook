@@ -159,8 +159,9 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
             <div className='commentBox'>{rating.comment}</div>
-
           </div>
+
+
         </div>
       );
     })
@@ -186,7 +187,7 @@ class SingleOutfitView extends Component {
 
       ratingsContent = (
         <div id="container">
-          <div className="ratingsContainer">
+          <div className="ratingsContainer" id="overallRatingsContainer">
 
             <div className="ratingsLabel">Overall Composition</div>
             <Rate value={this.state.compositionRating} style={{
@@ -198,8 +199,16 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
           </div>
-          <div className="ratingsLabel">Ratings and Comments</div>
-          {this.loadRatings()}
+
+            <main>
+                <input id="toggle" type="checkbox" />
+                <label id="ratingsLabelContainer" htmlFor="toggle">Ratings and Comments</label>
+                <div id="expand">
+                    <section>
+                        {this.loadRatings()}
+                    </section>
+                </div>
+            </main>
         </div>
 
       );
@@ -346,6 +355,7 @@ class SingleOutfitView extends Component {
           {this.injectRatingsContent()}
             {this.removeOutfit()}
         </div>
+
       </div>
     );
   }
