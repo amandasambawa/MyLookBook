@@ -213,7 +213,7 @@ class SingleOutfitView extends Component {
 
           return (
               <div className="wishlistItems">
-                  <a href={item[1]}>
+                  <a href={item[1]} target="_blank">
                     <img className="categoryItems" src={item[0]} />
                   </a>
                   <img className="wishlistAdd" onClick={() => this.addToWishList(item[2])} src="../assets/plus.svg"/>
