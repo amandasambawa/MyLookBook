@@ -74,7 +74,8 @@ class SaveOutfitButton extends Component {
             ratings: {},
             img: url,
             uid: this.props.uid,
-            oid: this.state.outfitKey
+            oid: this.state.outfitKey,
+            items: this.props.clickedItems
           });
 
         }
