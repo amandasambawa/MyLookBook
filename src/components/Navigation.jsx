@@ -81,7 +81,6 @@ class Navigation extends Component {
             <div>
                 <Link to="/outfitCreation">
                     <img className="navIcon" src="../../assets/plus-button.svg" />
-                    {/*<div className="navLink">Create An Outfit</div> */}
                     <button
                         className="navLink"
                         value="Create an Outfit"

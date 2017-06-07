@@ -3,9 +3,9 @@ import { database } from '../firebase.js';
 import { Redirect } from 'react-router-dom';
 import Rate from 'rc-rate';
 import "../styles/stars.css";
-import AlertContainer from 'react-alert';
 import "../styles/RateView.css";
 import Confirmation from './Confirmation.jsx';
+import NotificationSystem from 'react-notification-system';
 
 class RateView extends Component {
 
@@ -44,15 +44,6 @@ class RateView extends Component {
             this.setState({ sender: snapshot.child("username").val() });
         });
     }
-  }
-
-  //the alert options for the npm react-alert
-  alertOptions = {
-    offset: 14,
-    position: 'top right',
-    theme: 'dark',
-    time: 5000,
-    transition: 'scale'
   }
 
   //handles the composition rating
@@ -107,14 +98,11 @@ class RateView extends Component {
         this.setState({haveSaved: true});
     } else {
       //the user has already pressed save, give them alert denying the option
-      this.msg.show('You have already rated this image!', {
-        offset: 14,
-        position: 'top right',
-        theme: 'dark',
-        time: 5000,
-        transition: 'scale',
-        type: null
-      })
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `You have already rated this image!!`,
+        level: 'error'
+    });
 
     }
   }
@@ -152,7 +140,7 @@ class RateView extends Component {
           <div className="ratingsLabel">Comment</div>
           <textarea className="commentBox" placeholder="Leave a comment!" onChange={this.handleCommentChange}></textarea>
 
-          <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+          <NotificationSystem ref="notificationSystem" />
           <button onClick={this.saveRating} className="button" style= {{ marginBottom: "4em" }}>Save</button>
 
         </div>

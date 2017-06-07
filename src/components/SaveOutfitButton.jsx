@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import '../styles/SaveOutfitButton.css';
-import AlertContainer from 'react-alert';
+import NotificationSystem from 'react-notification-system';
 
 class SaveOutfitButton extends Component {
 
@@ -18,23 +18,15 @@ class SaveOutfitButton extends Component {
     this.generateImage = this.generateImage.bind(this);
   }
 
-  alertOptions = {
-    offset: 50,
-    position: 'top right',
-    theme: 'dark',
-    //time: 1,
-    transition: 'fade'
-  }
-
   saveOutfit() {
     //console.log(this.props);
     if (this.props.itemCount <= 0) {
-      //console.log("need items for outfit!");
-      this.msg.show("Can't save empty outfit!", {
-        time: 20000,
-        type: 'error'
 
-      });
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Can't save an empty outfit!`,
+        level: 'error'
+    });
     } else {
       //console.log("here: ",this.props.clickedItems);
       this.generateImage();
@@ -103,7 +95,7 @@ class SaveOutfitButton extends Component {
           {/*<button className="button" onClick={this.saveOutfit}>
             Save Outfit
           </button> */}
-          <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+          <NotificationSystem ref="notificationSystem" />
         </div>
 
       );

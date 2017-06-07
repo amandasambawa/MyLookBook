@@ -5,8 +5,8 @@ import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 import {Redirect} from 'react-router-dom';
-import AlertContainer from 'react-alert';
 import Logout from './Logout.jsx'
+import NotificationSystem from 'react-notification-system';
 
 class SingleOutfitView extends Component {
 
@@ -33,14 +33,6 @@ class SingleOutfitView extends Component {
     this.injectOutfitItems = this.injectOutfitItems.bind(this);
     this.loadShareLinks = this.loadShareLinks.bind(this);
   }
-
-  globalAlert = () => {
-    this.msg.show('You cannot delete objects in Global Feed!', {
-      time: 2000,
-      type: 'success'
-    })
-  }
-
 
   componentDidMount() {
     //grab outfit image in database
@@ -220,14 +212,6 @@ class SingleOutfitView extends Component {
       })
   }
 
-  alertOptions = {
-    offset: 14,
-    position: 'top right',
-    theme: 'dark',
-    time: 5000,
-    transition: 'scale'
-  }
-
   //handleFocus is a function that allows the application to "focus" on the
   //machine
   handleFocus(event) {
@@ -239,7 +223,11 @@ class SingleOutfitView extends Component {
   copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
-    this.msg.success("Copy to Clipboard Success");
+    this.refs.notificationSystem.clearNotifications();
+    this.refs.notificationSystem.addNotification({
+      message: `Copied to clipboard!`,
+      level: 'success'
+  });
   }
 
   //removeOutfit is a function that creates a button and hides it depending on
@@ -259,13 +247,21 @@ class SingleOutfitView extends Component {
   //removeConfirm is a function that prompts the user whether or not the user
   //really wants to delete the outfit.
   removeConfirm() {
-    if (window.confirm("Are you sure you want to delete this outfit?") === true) {
-      database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
-      database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
-      this.setState({confirm: true});
-    } else {
-      this.setState({confirm: false});
-    }
+    this.refs.notificationSystem.clearNotifications();
+    this.refs.notificationSystem.addNotification({
+      message: `Are you sure you want to delete this outfit?`,
+      level: `warning`,
+      action: {
+      label: 'DELETE',
+        callback: () => {
+          database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
+          database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
+          this.setState({confirm:true});
+        }
+      }
+  });
+
+
   }
 
   addToWishList(productId) {
@@ -306,11 +302,17 @@ class SingleOutfitView extends Component {
       // }
       return response;
     }).then((data)=> {
-      this.msg.success("Add to Wishlist success");
-      console.log("Successfully Add to Wishlist");
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Successfully Added to Wishlist!`,
+        level: 'success'
+    });
     }).catch((err)=> {
-      this.msg.error("Fail add to Wishlist, "+err);
-      console.log("Fail add to Wishlist",err);
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Failed to add to Wishlist! ` + err,
+        level: 'error'
+    });
     });
   }
 
@@ -324,7 +326,6 @@ class SingleOutfitView extends Component {
             <h2>{this.state.title}</h2>
           </div>
 
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
@@ -342,6 +343,7 @@ class SingleOutfitView extends Component {
           {this.injectRatingsContent()}
             {this.removeOutfit()}
         </div>
+          <NotificationSystem ref="notificationSystem" />
       </div>
     );
   }
