@@ -41,26 +41,26 @@ class SingleOutfitView extends Component {
     let averageUsers = 0;
     let ratingArray = [];
     let image = null;
+    let globalHolder = false;
 
     //initializing the database variables
-    let dataBaseIMG = "";
-    let dataBaseRating = "";
+    let dataBase = "";
     //Singleoutview database
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
-      dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: false});
+      dataBase = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
     } else {
       //publicview database
-      dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: true});
+      dataBase = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
+      globalHolder = true;
     }
-    //grabbing the image from database
+    this.setState({global:globalHolder});
 
-    dataBaseIMG.once("value").then((snapshot) => {
+    //grabbing the image from database
+    dataBase.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
+      let title = snapshot.child("title".val());
+      
       if (this.props.uid) {
         this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
       } else {
@@ -69,7 +69,7 @@ class SingleOutfitView extends Component {
 
     });
 
-    dataBaseRating.once("value").then((snapshot) => {
+    dataBase.child("ratings").once("value").then((snapshot) => {
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot) {
         //add a Rating object to ratingArray
@@ -94,7 +94,7 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    let databaseItems = dataBase.child("items");
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
@@ -103,16 +103,14 @@ class SingleOutfitView extends Component {
         arr.push(childSnapshot.child("macysUrl").val());
         arr.push(childSnapshot.child("productId").val());
         arrayItem.push(arr);
-        console.log("arr", arr);
       });
-      this.setState({wishlistItems: arrayItem});
-      console.log("inside array: ", this.state.wishlistItems);
+      this.setState({wishlistItems: arrayItem, global:globalHolder});
     });
 
   }
 
   loadShareLinks() {
-    if (this.props.navFrom == "globalFeed") {
+    if (this.props.navFrom === "globalFeed") {
     } else {
       return (
         <div>
@@ -165,7 +163,7 @@ class SingleOutfitView extends Component {
   injectRatingsContent() {
     //check if ratings is empty
     var ratingsContent;
-    if (this.state.ratings.length === 0) {
+    if (this.state.ratings.length === 0 && this.state.global === false) {
       ratingsContent = <div id="noRatingsPlaceholder">
 
         <h1 id="noRatingsHeader">
@@ -211,9 +209,8 @@ class SingleOutfitView extends Component {
   }
 
   injectOutfitItems() {
-    console.log(this.state);
       return this.state.wishlistItems.map((item) => {
-        console.log("add to wl function");
+
           return (
               <div className="wishlistItems">
                   <a href={item[1]}>
@@ -263,7 +260,8 @@ class SingleOutfitView extends Component {
     this.refs.notificationSystem.clearNotifications();
     this.refs.notificationSystem.addNotification({
       message: `Are you sure you want to delete this outfit?`,
-      level: `warning`,
+      level: `error`,
+      autoDismiss: 0,
       action: {
       label: 'DELETE',
         callback: () => {
