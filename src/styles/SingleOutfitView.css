@@ -23,6 +23,8 @@
     width: 90%;
     margin: auto;
     margin-bottom: 5px;
+    word-wrap: break-word;
+    padding: 5px;
 }
 
 .ratingsContainer {
@@ -31,6 +33,7 @@
     margin-bottom: 10px;
     width: 95%;
     margin: auto;
+    margin-top: 10px;
 }
 
 .imageID{
@@ -54,7 +57,7 @@
     font-size: 20px;
     width: 90%;
     margin: auto;
-    margin-top: 5px;
+    margin-top: 1em;
 }
 
 .averageRatings {
@@ -118,4 +121,67 @@
     left: 67%;
     height: 25px;
     width: 25px;
+}
+
+#overallRatingsContainer {
+    border-style: double;
+}
+
+
+
+main {
+    background: #EEE;
+    width: 95%;
+    text-align: center;
+    margin: auto;
+    margin-top: 1em;
+}
+p {
+    font-size: 13px;
+}
+#toggle {
+    display: none;
+    visibility: hidden;
+}
+label {
+    display: block;
+    padding: 0.5em;
+    text-align: center;
+    border-bottom: 1px solid #CCC;
+    color: #666;
+}
+label:hover {
+    color: #000;
+}
+label::before {
+    font-family: Consolas, monaco, monospace;
+    font-weight: bold;
+    font-size: 15px;
+    content: "+";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+#expand {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+}
+.section {
+    padding: 0 20px;
+}
+#toggle:checked ~ #expand {
+    height: inherit;
+}
+#toggle:checked ~ label::before {
+    content: "-";
+}
+
+#ratingsLabelContainer {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 16px;
+    border-bottom: none;
 }

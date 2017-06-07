@@ -94,7 +94,7 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    let databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
@@ -103,8 +103,10 @@ class SingleOutfitView extends Component {
         arr.push(childSnapshot.child("macysUrl").val());
         arr.push(childSnapshot.child("productId").val());
         arrayItem.push(arr);
+        console.log("arr", arr);
       });
       this.setState({wishlistItems: arrayItem});
+      console.log("inside array: ", this.state.wishlistItems);
     });
 
   }
@@ -149,8 +151,9 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
             <div className='commentBox'>{rating.comment}</div>
-
           </div>
+
+
         </div>
       );
     })
@@ -176,7 +179,7 @@ class SingleOutfitView extends Component {
 
       ratingsContent = (
         <div id="container">
-          <div className="ratingsContainer">
+          <div className="ratingsContainer" id="overallRatingsContainer">
 
             <div className="ratingsLabel">Overall Composition</div>
             <Rate value={this.state.compositionRating} style={{
@@ -188,8 +191,16 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
           </div>
-          <div className="ratingsLabel">Ratings and Comments</div>
-          {this.loadRatings()}
+
+            <main>
+                <input id="toggle" type="checkbox" />
+                <label id="ratingsLabelContainer" htmlFor="toggle">Ratings and Comments</label>
+                <div id="expand">
+                    <section>
+                        {this.loadRatings()}
+                    </section>
+                </div>
+            </main>
         </div>
 
       );
@@ -200,7 +211,9 @@ class SingleOutfitView extends Component {
   }
 
   injectOutfitItems() {
+    console.log(this.state);
       return this.state.wishlistItems.map((item) => {
+        console.log("add to wl function");
           return (
               <div className="wishlistItems">
                   <a href={item[1]}>
@@ -236,7 +249,7 @@ class SingleOutfitView extends Component {
     if (this.state.global === false) {
       return (
         <div style={ {textAlign: "center", marginTop: "1em"} }>
-          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey" }}>Delete Outfit</button>
+          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey", color: "black" }}>Delete Outfit</button>
         </div>
       );
     } else {

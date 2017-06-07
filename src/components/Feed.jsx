@@ -45,9 +45,9 @@ class Feed extends Component {
     //if state exists is null, we will prompt the user to create an outfit
     }else if(this.state.exists === null){
       return (
-          <div className="feedContainer">
-              <h1>You have no outfits yet.</h1>
-              <h2>Start creating outfits here</h2>
+          <div className="feedContainer" style={{ position: "absolute", bottom: "0"}}>
+              <h1 className="redText">You have no outfits yet.</h1>
+              <h2 className="spaceUnder">Start creating outfits here</h2>
               <img src="../assets/curve-down-arrow.png" />
           </div>
       );
