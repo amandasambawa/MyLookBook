@@ -41,6 +41,7 @@ class SingleOutfitView extends Component {
     let averageUsers = 0;
     let ratingArray = [];
     let image = null;
+    let globalHolder = false;
 
     //initializing the database variables
     let dataBaseIMG = "";
@@ -49,12 +50,12 @@ class SingleOutfitView extends Component {
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
       dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: false});
     } else {
       //publicview database
       dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
       dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: true});
+      globalHolder = true;
+
     }
     //grabbing the image from database
 
@@ -94,7 +95,13 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    let databaseItems = "";
+    if (globalHolder === true){
+     databaseItems = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/items/`);
+   }else{
+     databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+   }
+
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
@@ -103,16 +110,14 @@ class SingleOutfitView extends Component {
         arr.push(childSnapshot.child("macysUrl").val());
         arr.push(childSnapshot.child("productId").val());
         arrayItem.push(arr);
-        console.log("arr", arr);
       });
-      this.setState({wishlistItems: arrayItem});
-      console.log("inside array: ", this.state.wishlistItems);
+      this.setState({wishlistItems: arrayItem, global:globalHolder});
     });
 
   }
 
   loadShareLinks() {
-    if (this.props.navFrom == "globalFeed") {
+    if (this.props.navFrom === "globalFeed") {
     } else {
       return (
         <div>
@@ -211,9 +216,8 @@ class SingleOutfitView extends Component {
   }
 
   injectOutfitItems() {
-    console.log(this.state);
       return this.state.wishlistItems.map((item) => {
-        console.log("add to wl function");
+
           return (
               <div className="wishlistItems">
                   <a href={item[1]}>
@@ -263,7 +267,8 @@ class SingleOutfitView extends Component {
     this.refs.notificationSystem.clearNotifications();
     this.refs.notificationSystem.addNotification({
       message: `Are you sure you want to delete this outfit?`,
-      level: `warning`,
+      level: `error`,
+      autoDismiss: 0,
       action: {
       label: 'DELETE',
         callback: () => {
