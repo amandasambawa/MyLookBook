@@ -12,10 +12,19 @@ class SaveOutfitButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfitKey: false
+      outfitKey: false,
+      username: null
     }
     this.saveOutfit = this.saveOutfit.bind(this);
     this.generateImage = this.generateImage.bind(this);
+  }
+
+  componentDidMount(){
+    let usernameRef = database.ref(`/users/${this.props.uid}/username`);
+    usernameRef.once("value").then((snapshot)=>{
+      console.log("snapshot: ", snapshot.val());
+      this.setState({username: snapshot.val()});
+    });
   }
 
   saveOutfit() {
@@ -60,6 +69,7 @@ class SaveOutfitButton extends Component {
         //if this outfit is global, save it to the global database.
         if (this.props.global === true) {
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
+          console.log(this.state.username);
           globalRef.set({
             title: titleRef,
             global: Boolean(this.props.global),
@@ -67,7 +77,8 @@ class SaveOutfitButton extends Component {
             img: url,
             uid: this.props.uid,
             oid: this.state.outfitKey,
-            items: this.props.clickedItems
+            items: this.props.clickedItems,
+            username:this.state.username
           });
 
         }
