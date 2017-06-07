@@ -47,7 +47,7 @@ class Feed extends Component {
       return (
           <div className="feedContainer">
               <h1 className="redText">You have no outfits yet.</h1>
-              <h2>Start creating outfits here</h2>
+              <h2 className="spaceUnder">Start creating outfits here</h2>
               <img src="../assets/curve-down-arrow.png" />
           </div>
       );
