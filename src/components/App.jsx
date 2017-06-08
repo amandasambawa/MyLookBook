@@ -44,6 +44,7 @@ class App extends Component {
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
     this.addSteps = this.addSteps.bind(this);
+    this.next = this.next.bind(this);
     this.callback = this.callback.bind(this);
   }
 
@@ -65,6 +66,22 @@ class App extends Component {
     }, 1000);
   }
 
+  // addSteps(steps) {
+  //   let newSteps = steps;
+  //
+  //   if (!Array.isArray(newSteps)) {
+  //     newSteps = [newSteps];
+  //   }
+  //
+  //   if (!newSteps.length) {
+  //     return;
+  //   }
+  //   let coolSteps = [...this.state.steps, ...newSteps];
+  //   // Force setState to be synchronous to keep step order.
+  //   this.setState({
+  //     steps: coolSteps
+  //   });
+  // }
   addSteps(steps) {
     let newSteps = steps;
 
@@ -93,12 +110,20 @@ class App extends Component {
   }
 
   callback(data) {
-    console.log('%ccallback', 'color: #47AAAC; font-weight: bold; font-size: 13px;'); //eslint-disable-line no-console
-    console.log(data); //eslint-disable-line no-console
+    console.log("CALLBACK DATA GOD", data); //eslint-disable-line no-console
+    if(data.type === "finished"){
+      this.setState({
+        steps: {},
+    //     stepIndex: 0,
+    //     isRunning: true,
+    //     isReady: true
+      });
+    }else{
+      this.setState({
+        selector: data.type === 'tooltip:before' ? data.step.selector : '',
+      });
+    }
 
-    this.setState({
-      selector: data.type === 'tooltip:before' ? data.step.selector : '',
-    });
   }
 
   onClickSwitch(e) {
@@ -157,8 +182,9 @@ class App extends Component {
       var jr =
                     <Joyride
                       ref={c => (this.joyride = c)}
+                      allowClicksThruHole = {false}
                       callback={this.callback}
-                      debug={true}
+                      debug={false}
                       locale={{
                         back: (<span>Back</span>),
                         close: (<span>Close</span>),
@@ -170,6 +196,7 @@ class App extends Component {
                       showOverlay={joyrideOverlay}
                       showSkipButton={true}
                       showStepsProgress={true}
+                      scrollToSteps={false}
                       stepIndex={stepIndex}
                       steps={steps}
                       type={joyrideType}

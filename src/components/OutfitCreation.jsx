@@ -36,6 +36,12 @@ class OutfitCreation extends Component {
     this.startGesture();
     this.props.addSteps([
       {
+        title: 'Global or Private',
+        text: 'Toggle this icon, if unlocked your outfit will be sent to the Global Feed',
+        selector: '#lockIcon',
+        position: 'bottom',
+      },
+      {
         title: 'Outfit Title',
         text: 'Add a title to your oufit',
         selector: '#outfitNameField',
@@ -52,7 +58,7 @@ class OutfitCreation extends Component {
         text: 'When your done click here to save the outfit to your closet!',
         selector: '.small-6',
         position: 'top',
-      },
+      }
     ]);
   }
 

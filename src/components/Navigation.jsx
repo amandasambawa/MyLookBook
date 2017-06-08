@@ -78,7 +78,7 @@ class Navigation extends Component {
     }else{
       //anywhere else and the user will be prompted to make an outfit
         return (
-            <div>
+            <div className="createOutfitLink">
                 <Link to="/outfitCreation">
                     <img className="navIcon" src="../../assets/plus-button.svg" />
                     {/*<div className="navLink">Create An Outfit</div> */}
@@ -101,15 +101,15 @@ class Navigation extends Component {
       return(
           <div>
             <div className="row" id="navBar">
-                <div className="small-5 columns">
-                    {this.backToFeed()}
-                </div>
+              <div className="small-5 columns ">
+                  {this.backToFeed()}
+              </div>
               <div className="small-6 columns">
                     {this.createOrSaveOutfit()}
               </div>
-                <div className="small-5 columns">
-                        {this.backToGlobalFeed()}
-                </div>
+              <div className="small-5 columns">
+                    {this.backToGlobalFeed()}
+              </div>
             </div>
           </div>
       );

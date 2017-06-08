@@ -116,7 +116,6 @@ class DropZone extends Component {
   }
 
   renderImage(){
-      console.log(this.props.clickedItems);
       return(
           this.props.clickedItems.map((item) => {
               // if (item.top === this.props.pos.top && item.left === this.props.pos.left){
