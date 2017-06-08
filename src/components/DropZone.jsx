@@ -118,14 +118,9 @@ class DropZone extends Component {
   renderImage(){
       return(
           this.props.clickedItems.map((item) => {
-              // if (item.top === this.props.pos.top && item.left === this.props.pos.left){
-              //   this.props.pos["position"] = "absolute";
-              //   return <img ref="child" className="inside" style={this.props.pos} src={item.url}/>
-              // }else{
                 let pos = {top: item.top, left: item.left};
                 pos["position"] = "absolute";
                 return <img className="inside" style={pos} src={item.imgUrl}/>
-              // }
 
           })
       );

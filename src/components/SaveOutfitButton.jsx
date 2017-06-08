@@ -5,36 +5,37 @@ import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import '../styles/SaveOutfitButton.css';
-import AlertContainer from 'react-alert';
+import NotificationSystem from 'react-notification-system';
 
 class SaveOutfitButton extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      outfitKey: false
+      outfitKey: false,
+      username: null
     }
     this.saveOutfit = this.saveOutfit.bind(this);
     this.generateImage = this.generateImage.bind(this);
   }
 
-  alertOptions = {
-    offset: 50,
-    position: 'top right',
-    theme: 'dark',
-    //time: 1,
-    transition: 'fade'
+  componentDidMount(){
+    let usernameRef = database.ref(`/users/${this.props.uid}/username`);
+    usernameRef.once("value").then((snapshot)=>{
+      console.log("snapshot: ", snapshot.val());
+      this.setState({username: snapshot.val()});
+    });
   }
 
   saveOutfit() {
     //console.log(this.props);
     if (this.props.itemCount <= 0) {
-      //console.log("need items for outfit!");
-      this.msg.show("Can't save empty outfit!", {
-        time: 20000,
-        type: 'error'
 
-      });
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Can't save an empty outfit!`,
+        level: 'error'
+    });
     } else {
       //console.log("here: ",this.props.clickedItems);
       this.generateImage();
@@ -68,13 +69,16 @@ class SaveOutfitButton extends Component {
         //if this outfit is global, save it to the global database.
         if (this.props.global === true) {
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
+          console.log(this.state.username);
           globalRef.set({
             title: titleRef,
             global: Boolean(this.props.global),
             ratings: {},
             img: url,
             uid: this.props.uid,
-            oid: this.state.outfitKey
+            oid: this.state.outfitKey,
+            items: this.props.clickedItems,
+            username:this.state.username
           });
 
         }
@@ -103,7 +107,7 @@ class SaveOutfitButton extends Component {
           {/*<button className="button" onClick={this.saveOutfit}>
             Save Outfit
           </button> */}
-          <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+          <NotificationSystem ref="notificationSystem" />
         </div>
 
       );

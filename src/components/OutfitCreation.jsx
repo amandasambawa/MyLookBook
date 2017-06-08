@@ -9,6 +9,7 @@ import Navigation from './Navigation.jsx';
 import Logout from './Logout.jsx';
 import Joyride from 'react-joyride';
 import '../styles/OutfitCreation.css';
+import NotificationSystem from 'react-notification-system';
 
 const feedToJoyride   =  {
       joyrideOverlay: true,
@@ -121,11 +122,11 @@ class OutfitCreation extends Component {
       this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
       //console.log("clicled items: ", this.state.clickedItems);
     } else {
-      this.msg.show('Reached Maximum(6) Items', {
-        time: 20000,
-        type: 'error'
-
-      })
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Reached Maxiumum(6) Items`,
+        level: 'error'
+    });
     }
   }
 
@@ -137,11 +138,11 @@ class OutfitCreation extends Component {
       itemsArray.pop();
       this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
     } else {
-      this.msg.show('There are no more items', {
-        time: 20000,
-        type: 'error'
-        //icon: <img src="path/to/some/img/32x32.png"/>
-      })
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `There are no items!`,
+        level: 'error'
+    });
     }
     //console.log(this.state.itemCount);
   }
@@ -304,7 +305,7 @@ class OutfitCreation extends Component {
               <DropZone pos={this.state.pos} clickedItems={this.state.clickedItems} undoItem={this.undoItem}/>
               <CategoryTabs />
             </div>
-            <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
+            <NotificationSystem ref="notificationSystem" />
           </div>
         </div>
         <Navigation render={true} uid={this.props.uid} global={this.state.global}

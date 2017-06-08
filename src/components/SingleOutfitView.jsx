@@ -5,8 +5,8 @@ import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 import {Redirect} from 'react-router-dom';
-import AlertContainer from 'react-alert';
 import Logout from './Logout.jsx'
+import NotificationSystem from 'react-notification-system';
 
 class SingleOutfitView extends Component {
 
@@ -34,14 +34,6 @@ class SingleOutfitView extends Component {
     this.loadShareLinks = this.loadShareLinks.bind(this);
   }
 
-  globalAlert = () => {
-    this.msg.show('You cannot delete objects in Global Feed!', {
-      time: 2000,
-      type: 'success'
-    })
-  }
-
-
   componentDidMount() {
     //grab outfit image in database
     let compositionTotal = 0;
@@ -49,35 +41,32 @@ class SingleOutfitView extends Component {
     let averageUsers = 0;
     let ratingArray = [];
     let image = null;
+    let globalHolder = false;
 
     //initializing the database variables
-    let dataBaseIMG = "";
-    let dataBaseRating = "";
+    let dataBase = "";
     //Singleoutview database
     if (!this.props.testing && this.props.location.pathname.charAt(1) === 's') {
-      dataBaseIMG = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: false});
+      dataBase = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`);
     } else {
       //publicview database
-      dataBaseIMG = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
-      dataBaseRating = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}/ratings/`);
-      this.setState({global: true});
+      dataBase = database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`);
+      globalHolder = true;
     }
-    //grabbing the image from database
+    this.setState({global:globalHolder});
 
-    dataBaseIMG.once("value").then((snapshot) => {
+    //grabbing the image from database
+    dataBase.once("value").then((snapshot) => {
       image = snapshot.child("img").val();
       let uid = snapshot.child("uid").val();
       if (this.props.uid) {
-        this.setState({outfitImage: image, uid: this.props.uid, title:snapshot.child("title").val()});
-      } else {
-        this.setState({outfitImage: image, uid: uid , title: snapshot.child("title").val() });
+        uid = this.props.uid;
       }
-
+      let title = snapshot.child("title").val();
+      this.setState({outfitImage: image, uid: uid , title: title });
     });
 
-    dataBaseRating.once("value").then((snapshot) => {
+    dataBase.child("ratings").once("value").then((snapshot) => {
       //iterating through each index of the database
       snapshot.forEach(function(childSnapshot) {
         //add a Rating object to ratingArray
@@ -102,7 +91,7 @@ class SingleOutfitView extends Component {
       this.setState({compositionRating: avgComposition, trendyRating: avgTrendy, ratings: ratingArray});
     });
 
-    let databaseItems = database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}/items/`);
+    let databaseItems = dataBase.child("items");
     databaseItems.once("value").then((snapshot) => {
       let arrayItem = [];
       snapshot.forEach(function(childSnapshot) {
@@ -112,13 +101,22 @@ class SingleOutfitView extends Component {
         arr.push(childSnapshot.child("productId").val());
         arrayItem.push(arr);
       });
-      this.setState({wishlistItems: arrayItem});
+      this.setState({wishlistItems: arrayItem, global:globalHolder});
     });
 
   }
 
   loadShareLinks() {
-    if (this.props.navFrom == "globalFeed") {
+    if (this.props.navFrom === "globalFeed") {
+      return (
+          <div id="shareLinkButtons">
+            <a id="fbShare" href="https://www.facebook.com/sharer.php?u=" title="Facebook share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/facebook.svg"/></a>
+            <a className="socialMediaLink" id="tShare" href="https://twitter.com/share?url=;text=Rate my Outfit" title="Twitter share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/twitter.svg"/></a>
+            <a className="socialMediaLink" id="gpShare" href="https://plus.google.com/share?url=" title="Google Plus Share" target="rateView/${this.props.uid}/${this.props.match.params.outfitId}"><img className="socialMediaIcon" src="../assets/google-plus.svg"/></a>
+            <a className="socialMediaLink" id="pShare" href="https://www.pinterest.com/"><img className="socialMediaIcon" src="../assets/pinterest.svg"/></a>
+            <a className="socialMediaLink" id="mShare" href={`sms:&body='Hey! Check out my Macys Magic Lookbook here:${this.props.uid}/${this.props.match.params.outfitId}'`}><img className="socialMediaIcon" src="../assets/chatIcon.svg"/></a>
+          </div>
+      );
     } else {
       return (
         <div>
@@ -157,7 +155,6 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
             <div className='commentBox'>{rating.comment}</div>
-
           </div>
         </div>
       );
@@ -170,7 +167,7 @@ class SingleOutfitView extends Component {
   injectRatingsContent() {
     //check if ratings is empty
     var ratingsContent;
-    if (this.state.ratings.length === 0) {
+    if (this.state.ratings.length === 0 && this.state.global === false) {
       ratingsContent = <div id="noRatingsPlaceholder">
 
         <h1 id="noRatingsHeader">
@@ -184,7 +181,7 @@ class SingleOutfitView extends Component {
 
       ratingsContent = (
         <div id="container">
-          <div className="ratingsContainer">
+          <div className="ratingsContainer" id="overallRatingsContainer">
 
             <div className="ratingsLabel">Overall Composition</div>
             <Rate value={this.state.compositionRating} style={{
@@ -196,8 +193,16 @@ class SingleOutfitView extends Component {
               fontSize: 30
             }} allowHalf/>
           </div>
-          <div className="ratingsLabel">Ratings and Comments</div>
-          {this.loadRatings()}
+
+            <main>
+                <input id="toggle" type="checkbox" />
+                <label id="ratingsLabelContainer" htmlFor="toggle">Ratings and Comments</label>
+                <div id="expand">
+                    <section>
+                        {this.loadRatings()}
+                    </section>
+                </div>
+            </main>
         </div>
 
       );
@@ -209,23 +214,16 @@ class SingleOutfitView extends Component {
 
   injectOutfitItems() {
       return this.state.wishlistItems.map((item) => {
+
           return (
               <div className="wishlistItems">
-                  <a href={item[1]}>
+                  <a href={item[1]} target="_blank">
                     <img className="categoryItems" src={item[0]} />
                   </a>
-                  <img className="wishlistAdd" onClick={() => this.addToWishList(item[2])} src="../assets/plus.svg"/>
+                  <img className="wishlistAdd" onClick={() => this.addToWishList(item[2])} src="../assets/plus-icon.png"/>
               </div>
           );
       })
-  }
-
-  alertOptions = {
-    offset: 14,
-    position: 'top right',
-    theme: 'dark',
-    time: 5000,
-    transition: 'scale'
   }
 
   //handleFocus is a function that allows the application to "focus" on the
@@ -239,7 +237,11 @@ class SingleOutfitView extends Component {
   copyToClipboard() {
     document.querySelector("#linkCopy").select();
     document.execCommand('copy');
-    this.msg.success("Copy to Clipboard Success");
+    this.refs.notificationSystem.clearNotifications();
+    this.refs.notificationSystem.addNotification({
+      message: `Copied to clipboard!`,
+      level: 'success'
+  });
   }
 
   //removeOutfit is a function that creates a button and hides it depending on
@@ -248,7 +250,7 @@ class SingleOutfitView extends Component {
     if (this.state.global === false) {
       return (
         <div style={ {textAlign: "center", marginTop: "1em"} }>
-          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey" }}>Delete Outfit</button>
+          <button onClick={this.removeConfirm} className="button" style={{ width: "90%", background: "lightgrey", color: "black" }}>Delete Outfit</button>
         </div>
       );
     } else {
@@ -259,13 +261,22 @@ class SingleOutfitView extends Component {
   //removeConfirm is a function that prompts the user whether or not the user
   //really wants to delete the outfit.
   removeConfirm() {
-    if (window.confirm("Are you sure you want to delete this outfit?") === true) {
-      database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
-      database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
-      this.setState({confirm: true});
-    } else {
-      this.setState({confirm: false});
-    }
+    this.refs.notificationSystem.clearNotifications();
+    this.refs.notificationSystem.addNotification({
+      message: `Are you sure you want to delete this outfit?`,
+      level: `error`,
+      autoDismiss: 0,
+      action: {
+      label: 'DELETE',
+        callback: () => {
+          database.ref(`/users/${this.props.uid}/outfitobjects/${this.props.match.params.outfitId}`).remove();
+          database.ref(`/global/outfitobjects/${this.props.match.params.outfitId}`).remove();
+          this.setState({confirm:true});
+        }
+      }
+  });
+
+
   }
 
   addToWishList(productId) {
@@ -306,11 +317,17 @@ class SingleOutfitView extends Component {
       // }
       return response;
     }).then((data)=> {
-      this.msg.success("Add to Wishlist success");
-      console.log("Successfully Add to Wishlist");
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Successfully Added to Wishlist!`,
+        level: 'success'
+    });
     }).catch((err)=> {
-      this.msg.error("Fail add to Wishlist, "+err);
-      console.log("Fail add to Wishlist",err);
+      this.refs.notificationSystem.clearNotifications();
+      this.refs.notificationSystem.addNotification({
+        message: `Failed to add to Wishlist! ` + err,
+        level: 'error'
+    });
     });
   }
 
@@ -324,7 +341,6 @@ class SingleOutfitView extends Component {
             <h2>{this.state.title}</h2>
           </div>
 
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions}/>
         <div id="singleOutfitViewContainer">
           <div className="imageIDContainer">
             <img className="imageID" src={this.state.outfitImage}/>
@@ -342,6 +358,7 @@ class SingleOutfitView extends Component {
           {this.injectRatingsContent()}
             {this.removeOutfit()}
         </div>
+          <NotificationSystem ref="notificationSystem" />
       </div>
     );
   }
