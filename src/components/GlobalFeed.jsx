@@ -47,7 +47,13 @@ class GlobalFeed extends Component {
             <div style={{ marginTop: "1em"}}>
                 <span className="outfitName2">{preview.val().title}</span>
                 <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
-                <span className="outfitInfo">Create by:{preview.val().username}</span>
+                <div style={{ textAlign: "left", marginLeft: "2.5%"}}>
+                    <img className="navIcon" src="../assets/profile.svg" style={{ marginRight: "5px" }} />
+                    <span className="outfitInfo">{preview.val().username}</span>
+                    <span style={{ marginLeft: "260px", marginRight: "5px"}}>4.5</span>
+                    <img src="../assets/rate-star-button.svg" height="20px" />
+                </div>
+
             </div>
         );
       });

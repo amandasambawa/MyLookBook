@@ -45,19 +45,24 @@ const itemsArray = {
     ],
     "shoes": [
         {
-            productId: 35486032,
-            imgUrl: "https://cdn.shopify.com/s/files/1/0930/7298/products/830751-001-PHSRH000-2000_3611666778159049684_1024x1024.png?v=1489452882",
-            macysUrl: "https://macys.com/shop/product/nike-womens-flex-2016-rn-running-sneakers-from-finish-line?ID=2745215"
-        },
-        {
             productId: 29615612,
             imgUrl: "https://cdn.shopify.com/s/files/1/1741/1799/products/keds_champion_oxford_sneakers_03_grande.png?v=1485443316",
             macysUrl: "https://macys.com/shop/product/keds-womens-champion-oxford-sneakers?ID=564801"
         },
         {
-            productId: 36647549,
-            imgUrl: "https://cdn.shopify.com/s/files/1/1429/9478/products/abbey-grape.png?v=1478098924",
-            macysUrl: "https://macys.com/shop/product/aldo-falia-block-heel-pumps?ID=4745297"
+            productId: 33625902,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/bow-sandal.png?alt=media&token=e45ad3b0-4825-4d51-a848-3615d54ac913",
+            macysUrl: "https://macys.com/shop/product/inc-international-concepts-malissa-rhinestone-bow-flat-sandals-only-at-macys?ID=1856629&CategoryID=17570"
+        },
+        {
+            productId: 37075367,
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/pom-sandals.png?alt=media&token=42188004-3061-4e05-9e2c-1e056d65118e",
+            macysUrl: "https://macys.com/shop/product/vince-camuto-balisa-pom-pom-lace-up-sandals?ID=4503608"
+        },
+        {
+            productId: 35486032,
+            imgUrl: "https://cdn.shopify.com/s/files/1/0930/7298/products/830751-001-PHSRH000-2000_3611666778159049684_1024x1024.png?v=1489452882",
+            macysUrl: "https://macys.com/shop/product/nike-womens-flex-2016-rn-running-sneakers-from-finish-line?ID=2745215"
         }
     ],
     "accessories": [
