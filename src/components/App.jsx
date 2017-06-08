@@ -31,14 +31,7 @@ class App extends Component {
       uid: null,
       uname: null,
       global: null,
-      title: null,
-      joyrideOverlay: true,
-      joyrideType: 'continuous',
-      isReady: true,
-      isRunning: true,
-      stepIndex: 0,
-      steps: [],
-      selector: '',
+      title: null
     }
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
@@ -168,46 +161,45 @@ class App extends Component {
 
   render() {
 
-    const {
-      isReady,
-      isRunning,
-      joyrideOverlay,
-      joyrideType,
-      selector,
-      stepIndex,
-      steps,
-    } = this.state;
+    // const {
+    //   isReady,
+    //   isRunning,
+    //   joyrideOverlay,
+    //   joyrideType,
+    //   selector,
+    //   stepIndex,
+    //   steps,
+    // } = this.state;
 
-    if (isReady) {
-      var jr =
-                    <Joyride
-                      ref={c => (this.joyride = c)}
-                      allowClicksThruHole = {false}
-                      callback={this.callback}
-                      debug={false}
-                      locale={{
-                        back: (<span>Back</span>),
-                        close: (<span>Close</span>),
-                        last: (<span>Last</span>),
-                        next: (<span>Next</span>),
-                        skip: (<span>Skip</span>),
-                      }}
-                      run={isRunning}
-                      showOverlay={joyrideOverlay}
-                      showSkipButton={true}
-                      showStepsProgress={true}
-                      scrollToSteps={false}
-                      stepIndex={stepIndex}
-                      steps={steps}
-                      type={joyrideType}
-                    />;
-
-
-         }
+    // if (isReady) {
+    //   var jr =
+    //                 <Joyride
+    //                   ref={c => (this.joyride = c)}
+    //                   allowClicksThruHole = {false}
+    //                   callback={this.callback}
+    //                   debug={false}
+    //                   locale={{
+    //                     back: (<span>Back</span>),
+    //                     close: (<span>Close</span>),
+    //                     last: (<span>Last</span>),
+    //                     next: (<span>Next</span>),
+    //                     skip: (<span>Skip</span>),
+    //                   }}
+    //                   run={isRunning}
+    //                   showOverlay={joyrideOverlay}
+    //                   showSkipButton={true}
+    //                   showStepsProgress={true}
+    //                   scrollToSteps={false}
+    //                   stepIndex={stepIndex}
+    //                   steps={steps}
+    //                   type={joyrideType}
+    //                 />;
+    //
+    //
+    //      }
 
     return (
       <div className="app">
-       {jr}
         <Router>
           <div>
             <a href="https://www.macys.com"><img src="https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/macysNavBar.png?alt=media&token=2392f318-136e-49e6-a390-ce0e9b0ec758" /></a>

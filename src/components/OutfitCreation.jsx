@@ -6,8 +6,44 @@ import {database, auth} from '../firebase.js';
 import AlertContainer from 'react-alert';
 import interact from 'interactjs';
 import Navigation from './Navigation.jsx';
-import Logout from './Logout.jsx'
+import Logout from './Logout.jsx';
+import Joyride from 'react-joyride';
 import '../styles/OutfitCreation.css';
+
+const feedToJoyride   =  {
+      joyrideOverlay: true,
+      joyrideType: 'continuous',
+      isReady: true,
+      isRunning: true,
+      stepIndex: 0,
+      steps: [
+        {
+          title: 'Global or Private',
+          text: 'Toggle this icon, if unlocked your outfit will be sent to the Global Feed',
+          selector: '#lockIcon',
+          position: 'bottom',
+        },
+        {
+          title: 'Outfit Title',
+          text: 'Add a title to your oufit',
+          selector: '#outfitNameField',
+          position: 'bottom',
+        },
+        {
+          title: 'Pick an item',
+          text: 'Drag and drop any item onto the canvas',
+          selector: '.belowBox',
+          position: 'top',
+        },
+        {
+          title: 'Save Outfit',
+          text: 'When your done click here to save the outfit to your closet!',
+          selector: '.small-6',
+          position: 'top',
+        }
+      ],
+      selector: '',
+    };
 
 class OutfitCreation extends Component {
 
@@ -34,32 +70,6 @@ class OutfitCreation extends Component {
 
   componentDidMount() {
     this.startGesture();
-    this.props.addSteps([
-      {
-        title: 'Global or Private',
-        text: 'Toggle this icon, if unlocked your outfit will be sent to the Global Feed',
-        selector: '#lockIcon',
-        position: 'bottom',
-      },
-      {
-        title: 'Outfit Title',
-        text: 'Add a title to your oufit',
-        selector: '#outfitNameField',
-        position: 'bottom',
-      },
-      {
-        title: 'Pick an item',
-        text: 'Drag and drop any item onto the canvas',
-        selector: '.belowBox',
-        position: 'top',
-      },
-      {
-        title: 'Save Outfit',
-        text: 'When your done click here to save the outfit to your closet!',
-        selector: '.small-6',
-        position: 'top',
-      }
-    ]);
   }
 
 
@@ -247,9 +257,38 @@ class OutfitCreation extends Component {
   }
 
   render() {
-    //console.log(this.state.clickedItems);
+    const {
+      isReady,
+      isRunning,
+      joyrideOverlay,
+      joyrideType,
+      selector,
+      stepIndex,
+      steps,
+    } = feedToJoyride;
+
     return (
       <div>
+        <Joyride
+          ref={c => (this.joyride = c)}
+          allowClicksThruHole = {false}
+          debug={false}
+          locale={{
+            back: (<span>Back</span>),
+            close: (<span>Close</span>),
+            last: (<span>Last</span>),
+            next: (<span>Next</span>),
+            skip: (<span>Skip</span>),
+          }}
+          run={isRunning}
+          showOverlay={joyrideOverlay}
+          showSkipButton={true}
+          showStepsProgress={true}
+          scrollToSteps={false}
+          stepIndex={stepIndex}
+          steps={steps}
+          type={joyrideType}
+        />
         <Logout />
         <div id="outfitCreationContainer">
           <span onClick={this.handleGlobalLock}>{this.state.global}

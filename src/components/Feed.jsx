@@ -4,6 +4,43 @@ import {Link} from 'react-router-dom';
 import Logout from './Logout.jsx'
 import "../styles/foundation.css";
 import "../styles/Feed.css";
+import Joyride from 'react-joyride';
+
+
+const feedToJoyride   =  {
+      joyrideOverlay: true,
+      joyrideType: 'continuous',
+      isReady: true,
+      isRunning: true,
+      stepIndex: 0,
+      steps: [
+        {
+          title: 'My Lookbook',
+          text: 'You are currently in your lookbook',
+          selector: '.feedLink',
+          position: 'top',
+        },
+        {
+          title: 'Create an Outift',
+          text: 'Here is where you can design an outfit that will save to your feed or share it with the world',
+          selector: '.createOutfitLink',
+          position: 'top',
+        },
+        {
+          title: 'Global Feed',
+          text: `See other people's outfits and get inspiration`,
+          selector: '.globalFeedLink',
+          position: 'top',
+        },
+        {
+          title: 'Logout',
+          text: `When you are done you can logout by pressing this button`,
+          selector: '#logoutContainer',
+          position: 'bottom',
+        }
+      ],
+      selector: '',
+    };
 
 class Feed extends Component {
 
@@ -12,8 +49,7 @@ class Feed extends Component {
     this.state = {
       previews: [],
       exists: false,
-      title: "   "
-
+      title: ""
     }
     this.loadingContent = this.loadingContent.bind(this);
   }
@@ -31,32 +67,32 @@ class Feed extends Component {
       previewArray.reverse();
       this.setState({previews: previewArray, exists: snapshot.val()});
     });
-    this.props.addSteps([
-      {
-        title: 'My Lookbook',
-        text: 'You are currently in your lookbook',
-        selector: '.feedLink',
-        position: 'top',
-      },
-      {
-        title: 'Create an Outift',
-        text: 'Here is where you can design an outfit that will save to your feed or share it with the world',
-        selector: '.createOutfitLink',
-        position: 'top',
-      },
-      {
-        title: 'Global Feed',
-        text: `See other people's outfits and get inspiration`,
-        selector: '.globalFeedLink',
-        position: 'top',
-      },
-      {
-        title: 'Logout',
-        text: `When you are done you can logout by pressing this button`,
-        selector: '#logoutContainer',
-        position: 'bottom',
-      }
-    ]);
+    // this.props.addSteps([
+    //   {
+    //     title: 'My Lookbook',
+    //     text: 'You are currently in your lookbook',
+    //     selector: '.feedLink',
+    //     position: 'top',
+    //   },
+    //   {
+    //     title: 'Create an Outift',
+    //     text: 'Here is where you can design an outfit that will save to your feed or share it with the world',
+    //     selector: '.createOutfitLink',
+    //     position: 'top',
+    //   },
+    //   {
+    //     title: 'Global Feed',
+    //     text: `See other people's outfits and get inspiration`,
+    //     selector: '.globalFeedLink',
+    //     position: 'top',
+    //   },
+    //   {
+    //     title: 'Logout',
+    //     text: `When you are done you can logout by pressing this button`,
+    //     selector: '#logoutContainer',
+    //     position: 'bottom',
+    //   }
+    // ]);
   }
 
   /*loadingContent is a method that uses the state "exists" to determine
@@ -91,15 +127,46 @@ class Feed extends Component {
   }
 
   render() {
+
+    const {
+      isReady,
+      isRunning,
+      joyrideOverlay,
+      joyrideType,
+      selector,
+      stepIndex,
+      steps,
+    } = feedToJoyride;
+
     return (
         <div>
-        <Logout />
-        <div id="lookbookContainer">
-            <h2 id="lookbookHeader">My Macy's Lookbook</h2>
-            <div className="row" id="lookbookRow">
-                {this.loadingContent()}
-            </div>
-        </div>
+          <Joyride
+            ref={c => (this.joyride = c)}
+            allowClicksThruHole = {false}
+            debug={false}
+            locale={{
+              back: (<span>Back</span>),
+              close: (<span>Close</span>),
+              last: (<span>Last</span>),
+              next: (<span>Next</span>),
+              skip: (<span>Skip</span>),
+            }}
+            run={isRunning}
+            showOverlay={joyrideOverlay}
+            showSkipButton={true}
+            showStepsProgress={true}
+            scrollToSteps={false}
+            stepIndex={stepIndex}
+            steps={steps}
+            type={joyrideType}
+          />
+          <Logout />
+          <div id="lookbookContainer">
+              <h2 id="lookbookHeader">My Macy's Lookbook</h2>
+              <div className="row" id="lookbookRow">
+                  {this.loadingContent()}
+              </div>
+          </div>
         </div>
     );
   }
