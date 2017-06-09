@@ -3,7 +3,6 @@ import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import {database, auth} from '../firebase.js';
-import AlertContainer from 'react-alert';
 import interact from 'interactjs';
 import Navigation from './Navigation.jsx';
 import Logout from './Logout.jsx';
@@ -86,13 +85,6 @@ class OutfitCreation extends Component {
           this.setState({tutorial: true})
         }
     });
-  }
-  alertOptions = {
-    offset: 50,
-    position: 'top right',
-    theme: 'dark',
-    //time: 50000,
-    transition: 'fade'
   }
 
   //handles the global Lock state

@@ -11,6 +11,7 @@ import OutfitCreation from '../src/components/OutfitCreation.jsx';
 //Make sure that OutfitCreation can even render.
 it('OutfitCreation renders properly.', () => {
   const wrapper = shallow(<OutfitCreation />);
+  console.log(wrapper.debug());
 });
 
 
@@ -55,11 +56,11 @@ describe('OutfitCreation', () => {
     });
   });
 
-//make sure that alerts is loaded up
+//make sure that notifications is loaded up
 describe('OutfitCreation', () => {
-    it('check if the Alerts is loading up', () => {
+    it('check if the Notification is loading up', () => {
         const wrapper = shallow(<OutfitCreation />);
-        const alert = wrapper.find('AlertContainer').exists();
+        const alert = wrapper.find('Logout').exists();
         expect(alert).toEqual(true);
     });
   });

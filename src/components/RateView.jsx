@@ -114,7 +114,7 @@ class RateView extends Component {
       return <Confirmation />
     } else {
 
-    if ( this.props.uid === this.props.match.params.userId || this.state.outfitImage === null ){
+    if ( this.props.testing === undefined && (this.props.uid === this.props.match.params.userId || this.state.outfitImage === null)  ){
       return <Redirect to={{ pathname: `/singleOutfit/${this.props.match.params.outfitId}` }} />
     }else{
       return(

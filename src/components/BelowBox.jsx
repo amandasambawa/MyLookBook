@@ -5,8 +5,6 @@ class BelowBox extends Component {
     constructor(){
       super();
       this.returnCatalogItems = this.returnCatalogItems.bind(this);
-      // this.starter = this.starter.bind(this);
-      // this.end = this.end.bind(this);
     }
 
 
@@ -20,26 +18,7 @@ class BelowBox extends Component {
               </div>);
         })
     }
-    //
-    // onMouseUp={this.end}
-    // onTouchEnd={this.end} onMouseDown={this.starter} onTouchStart={this.starter}
 
-    // end(event) {
-    //   // console.log("trying to run function getClickedItem");
-    //   // this.props.getClickedItem(event.target.src);
-    // //     //console.log("src from", event.target.src);
-    // //     // this.props.getClickedItem(event.target.src);
-    // //     event.target.classList.remove('dragging');
-    // //     console.log(event.target.getBoundingClientRect());
-    //     // this.setState({scrollClass: "movemenu"});
-    // //
-    // //     // top and left given, gets img relative to viewport
-    // }
-    // starter(event) {
-    //   // this.setState({scrollClass: "staymenu"});
-    // //
-    // //   event.target.classList.add('dragging');
-    // }
 
     render(){
       return(

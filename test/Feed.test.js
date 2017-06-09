@@ -31,14 +31,16 @@ describe('Feed', () => {
 * The following tests encompass the functionality
 */
 
-//Make sure that load outfits works. As long as loadoutfits does not cause an
+//Make sure that loadConents works. As long as loadcontents does not cause an
 //error, it is working properly.
-it('make sure that loadOutfits is working properly.', () => {
+it('make sure that loadingContents is working properly.', () => {
     const wrapper = shallow(<Feed />);
     wrapper.instance().loadingContent();
   });
 
-it('make sure that handleComposition is working properly.', () => {
+  //Make sure that joyrideCreation works. As long as joyrideCreation
+  //does not cause an error, it is working properly.
+it('make sure that joyrideCreation is working properly.', () => {
     const wrapper = shallow(<Feed />);
-    expect(wrapper.instance().logout() ).toEqual(true);
+    wrapper.instance().joyrideCreation();
 });
