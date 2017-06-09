@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { auth } from '../firebase.js';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
 import OutfitCreation from './OutfitCreation.jsx';
-import Logout from './Logout.jsx'
 import "../styles/Navigation.css";
 
 
@@ -45,8 +43,6 @@ class Navigation extends Component {
               <Link to="/feed">
                   <div className="backgroundImage"></div>
                   <img className="navIcon" src="../../assets/shirt.svg" />
-                  {/* <div ref = "theDiv" className="navLink">My Lookbook</div> */}
-                  {/* this button autofocus */}
                   <button
                       className="navLink"
                       value="My Lookbook"

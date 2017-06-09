@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {auth} from '../firebase.js';
 import interact from 'interactjs';
 import '../styles/DropZone.css'
 
@@ -29,7 +28,6 @@ class DropZone extends Component {
 
   startGesture() {
     var scale = 1,
-      gestureArea = document.getElementsByClassName('DropZoneContainer'),
       scaleElement = document.getElementsByClassName('draggable'),
       resetTimeout,
       index = 0;

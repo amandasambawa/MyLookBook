@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {database, auth} from '../firebase.js';
+import {database} from '../firebase.js';
 import {Link} from 'react-router-dom';
 import Logout from './Logout.jsx'
 import "../styles/foundation.css";

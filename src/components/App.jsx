@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Joyride from 'react-joyride';
 import { auth,database } from '../firebase.js';
 import {PrivateRoute, PublicRoute, RateRoute, GlobalRoute} from './Routes.jsx';
 import LoginPage from './LoginPage';
@@ -17,8 +16,6 @@ import "../styles/react-joyride-compiled.css";
 
 import {
   BrowserRouter as Router,
-  Route,
-  Link,
   Redirect,
   Switch
 } from 'react-router-dom';
@@ -36,9 +33,6 @@ class App extends Component {
     this.getUserName = this.getUserName.bind(this);
     this.setGlobal = this.setGlobal.bind(this);
     this.setTitle = this.setTitle.bind(this);
-    this.addSteps = this.addSteps.bind(this);
-    this.next = this.next.bind(this);
-    this.callback = this.callback.bind(this);
   }
 
   componentDidMount() {
@@ -59,90 +53,6 @@ class App extends Component {
     }, 1000);
   }
 
-  // addSteps(steps) {
-  //   let newSteps = steps;
-  //
-  //   if (!Array.isArray(newSteps)) {
-  //     newSteps = [newSteps];
-  //   }
-  //
-  //   if (!newSteps.length) {
-  //     return;
-  //   }
-  //   let coolSteps = [...this.state.steps, ...newSteps];
-  //   // Force setState to be synchronous to keep step order.
-  //   this.setState({
-  //     steps: coolSteps
-  //   });
-  // }
-  addSteps(steps) {
-    let newSteps = steps;
-
-    if (!Array.isArray(newSteps)) {
-      newSteps = [newSteps];
-    }
-
-    if (!newSteps.length) {
-      return;
-    }
-
-    // Force setState to be synchronous to keep step order.
-    this.setState(currentState => {
-      currentState.steps = currentState.steps.concat(newSteps);
-      return currentState;
-    });
-  }
-
-
-  addTooltip(data) {
-    this.joyride.addTooltip(data);
-  }
-
-  next() {
-    this.joyride.next();
-  }
-
-  callback(data) {
-    console.log("CALLBACK DATA GOD", data); //eslint-disable-line no-console
-    if(data.type === "finished"){
-      this.setState({
-        steps: {},
-    //     stepIndex: 0,
-    //     isRunning: true,
-    //     isReady: true
-      });
-    }else{
-      this.setState({
-        selector: data.type === 'tooltip:before' ? data.step.selector : '',
-      });
-    }
-
-  }
-
-  onClickSwitch(e) {
-    e.preventDefault();
-    const el = e.currentTarget;
-    const state = {};
-
-    if (el.dataset.key === 'joyrideType') {
-      this.joyride.reset();
-
-      setTimeout(() => {
-        this.setState({
-          isRunning: true,
-        });
-      }, 300);
-
-      state.joyrideType = e.currentTarget.dataset.type;
-    }
-
-    if (el.dataset.key === 'joyrideOverlay') {
-      state.joyrideOverlay = el.dataset.type === 'active';
-    }
-
-    this.setState(state);
-  }
-
   getUserName(){
     database.ref(`/users/${this.state.uid}/`)
     .once("value").then((snapshot)=> {
@@ -160,43 +70,6 @@ class App extends Component {
   }
 
   render() {
-
-    // const {
-    //   isReady,
-    //   isRunning,
-    //   joyrideOverlay,
-    //   joyrideType,
-    //   selector,
-    //   stepIndex,
-    //   steps,
-    // } = this.state;
-
-    // if (isReady) {
-    //   var jr =
-    //                 <Joyride
-    //                   ref={c => (this.joyride = c)}
-    //                   allowClicksThruHole = {false}
-    //                   callback={this.callback}
-    //                   debug={false}
-    //                   locale={{
-    //                     back: (<span>Back</span>),
-    //                     close: (<span>Close</span>),
-    //                     last: (<span>Last</span>),
-    //                     next: (<span>Next</span>),
-    //                     skip: (<span>Skip</span>),
-    //                   }}
-    //                   run={isRunning}
-    //                   showOverlay={joyrideOverlay}
-    //                   showSkipButton={true}
-    //                   showStepsProgress={true}
-    //                   scrollToSteps={false}
-    //                   stepIndex={stepIndex}
-    //                   steps={steps}
-    //                   type={joyrideType}
-    //                 />;
-    //
-    //
-    //      }
 
     return (
       <Router>

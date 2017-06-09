@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import LoginForm from './LoginForm.jsx';
 import {database} from '../firebase.js';
-import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import '../styles/SaveOutfitButton.css';

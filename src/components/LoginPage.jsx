@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from './LoginForm.jsx';
 import SignUpForm from './SignUpForm.jsx';
-import { database } from '../firebase.js';
 import { Redirect } from 'react-router-dom';
 
 class LoginPage extends Component {

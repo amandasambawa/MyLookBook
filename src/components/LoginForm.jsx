@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth, database } from '../firebase.js';
+import { auth } from '../firebase.js';
 
 class LoginForm extends Component {
 
@@ -32,8 +32,6 @@ class LoginForm extends Component {
   login(){
     auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
       if (error){
         console.log("error ->", error.message);
       }else{
