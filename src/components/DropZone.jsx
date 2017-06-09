@@ -77,7 +77,7 @@ class DropZone extends Component {
         //resetTimeout = setTimeout(reset, 1000);
         scaleElement.classList.add('reset');
       }
-    }).resizable({
+    }).resizable({  //make the item resizeable
         preserveAspectRatio: true,
         invert: 'none',
         restrict: {
@@ -94,12 +94,15 @@ class DropZone extends Component {
       onstart: function (event) {
         // anyonstart evenets
       },
+      // end of the resizing
       onend  : function (event) {
           console.log('onend: ',event.target);
+          //if resized less than 80px, set to 80px for the item
           if(event.target.height <= 80 || event.target.width <= 80){
-            console.log('too small');
+          //  console.log('too small');
+          //set the height and width if is too small.
             event.target.style.height='80px';
-            event.target.style.width='80px';
+            event.target.style.width='70px';
           }
       }
     })
