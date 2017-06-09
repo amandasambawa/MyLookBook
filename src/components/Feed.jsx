@@ -87,7 +87,7 @@ class Feed extends Component {
   callback(data) {
 
         if(data.type === "finished"){
-          let tutorialRef = database.ref(`/users/${this.props.uid}/tutorials`);
+          let tutorialRef = database.ref(`/users/${this.props.uid}/tutorials/feedTutorial`);
           tutorialRef.set({
             feedTutorial: Boolean(false)
           })

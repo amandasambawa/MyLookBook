@@ -186,7 +186,7 @@ class OutfitCreation extends Component {
   callback(data) {
 
         if(data.type === "finished"){
-          let tutorialRef = database.ref(`/users/${this.props.uid}/tutorials`);
+          let tutorialRef = database.ref(`/users/${this.props.uid}/tutorials/outfitTutorial`);
           tutorialRef.set({
             outfitTutorial: Boolean(false)
           })
