@@ -44,14 +44,13 @@ class GlobalFeed extends Component {
       return this.state.previews.map((preview) => {
         return (
             <div style={{ marginTop: "1em"}}>
-                <span className="outfitName2">{preview.val().title}</span>
-                <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
-                <div style={{ textAlign: "left", marginLeft: "2.5%"}}>
-                    <img className="navIcon" src="../assets/profile.svg" style={{ marginRight: "5px" }} />
+                {/*<span className="outfitName2">{preview.val().title}</span>*/}
+                <div style={{ textAlign: "left", marginLeft: "2.5%", padding: "2px"}}>
+                    <img className="navIcon" src="../assets/profile.svg" style={{ marginRight: "5px", marginBottom: "5px" }} />
                     <span className="outfitInfo">{preview.val().username}</span>
-                    <span style={{ marginLeft: "260px", marginRight: "5px"}}>4.5</span>
-                    <img src="../assets/rate-star-button.svg" height="20px" />
                 </div>
+                <Link to={`publicOutfit/${preview.val().oid}`}><img className="imageID"  src={preview.val().img}/></Link>
+
 
             </div>
         );

@@ -87,9 +87,6 @@ class OutfitCreation extends Component {
         }
     });
   }
-
-
-
   alertOptions = {
     offset: 50,
     position: 'top right',

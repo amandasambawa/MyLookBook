@@ -6,7 +6,7 @@ import BelowBox from "./BelowBox.jsx"
 const itemsArray = {
     "tops": [
         {
-            productId: 37331529,
+            productId: 37331554,
             imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/top_striped.png?alt=media&token=c1b5ea91-724b-4d0b-95ac-383bed724208",
             macysUrl: "https://www.macys.com/shop/product/polo-ralph-lauren-striped-cotton-t-shirt?ID=4701909&CategoryID=85842&LinkType=&selectedSize=#fn=BRAND%3DPolo Ralph Lauren;;Weekend Max Mara%26sp%3D1%26spc%3D268%26ruleId%3D64|BS%26slotId%3D8"
         },
