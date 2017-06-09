@@ -280,7 +280,7 @@ class SingleOutfitView extends Component {
   }
 
   addToWishList(productId) {
-    var userId = "12564949299"; // "12570015021";
+    var userId = "12171329308";
     console.log("Added to wishlist -"+ productId);
     var data = JSON.stringify({
       "wishlists": {

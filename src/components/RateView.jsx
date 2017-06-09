@@ -108,7 +108,6 @@ class RateView extends Component {
     }
   }
 
-
   render(){
     if(this.state.haveSaved === true){
       return <Confirmation />
