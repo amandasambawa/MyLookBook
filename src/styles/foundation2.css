@@ -92,3 +92,7 @@ img.categoryItems {
 .spaceUnder{
   margin-bottom: 2rem;
 }
+
+#lookbookHeader, #feedTitle {
+    font-family: Century Gothic;
+}
