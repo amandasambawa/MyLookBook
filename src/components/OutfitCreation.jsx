@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CategoryTabs from './CategoryTabs.jsx';
 import DropZone from './DropZone.jsx';
 import SaveOutfitButton from './SaveOutfitButton.jsx';
-import {database, auth} from '../firebase.js';
+import {database} from '../firebase.js';
 import interact from 'interactjs';
 import Navigation from './Navigation.jsx';
 import Logout from './Logout.jsx';
@@ -203,7 +203,7 @@ class OutfitCreation extends Component {
           <Joyride
             ref={c => (this.joyride = c)}
             callback={this.callback}
-            allowClicksThruHole = {false}
+            allowClicksThruHole={false}
             debug={false}
             locale={{
               back: (<span>Back</span>),

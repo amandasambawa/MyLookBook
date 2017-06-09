@@ -45,8 +45,7 @@ class SignUpForm extends Component {
         username: this.state.username
       });
     }).catch((error, user)=>{
-      var errorCode = error.code;
-      var errorMessage = error.message;
+
       if (error){
         console.log("error ->", error.message);
       }else{

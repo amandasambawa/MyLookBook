@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {database, auth} from '../firebase.js';
+import {database} from '../firebase.js';
 import Rate from 'rc-rate';
 import Feed from './Feed.jsx';
 import "../styles/stars.css";
 import "../styles/SingleOutfitView.css";
 import {Redirect} from 'react-router-dom';
-import Logout from './Logout.jsx'
+import Logout from './Logout.jsx';
 import NotificationSystem from 'react-notification-system';
 
 class SingleOutfitView extends Component {
