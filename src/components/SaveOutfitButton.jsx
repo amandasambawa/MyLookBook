@@ -22,7 +22,6 @@ class SaveOutfitButton extends Component {
   componentDidMount(){
     let usernameRef = database.ref(`/users/${this.props.uid}/username`);
     usernameRef.once("value").then((snapshot)=>{
-      console.log("snapshot: ", snapshot.val());
       this.setState({username: snapshot.val()});
     });
   }

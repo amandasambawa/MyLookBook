@@ -42,7 +42,6 @@ class GlobalFeed extends Component {
     //if state exists is null, we will prompt the user to create an outfit
     }else{
       return this.state.previews.map((preview) => {
-        console.log("preview: ",  preview.val());
         return (
             <div style={{ marginTop: "1em"}}>
                 <span className="outfitName2">{preview.val().title}</span>

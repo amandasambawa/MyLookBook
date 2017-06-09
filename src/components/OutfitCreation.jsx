@@ -55,13 +55,16 @@ class OutfitCreation extends Component {
       title: "",
       global: false,
       lockImgSrc: "../assets/locked.svg",
-      itemCount:0
+      itemCount: 0,
+      tutorial: false,
     }
     this.droppedItem = this.droppedItem.bind(this);
     this.undoItem = this.undoItem.bind(this);
     this.nameOutfit = this.nameOutfit.bind(this);
     this.handleGlobalLock = this.handleGlobalLock.bind(this);
     this.startGesture = this.startGesture.bind(this);
+    this.joyrideCreation = this.joyrideCreation.bind(this);
+    this.callback = this.callback.bind(this);
   }
 
   static propTypes = {
@@ -71,6 +74,18 @@ class OutfitCreation extends Component {
 
   componentDidMount() {
     this.startGesture();
+
+    //checking the database to see if its a first time user.
+    let dataBase = database.ref(`/users/${this.props.uid}`);
+    dataBase.child("tutorials").once("value").then((snapshot)=> {
+        if(snapshot.child("outfitTutorial").exists() ){
+          let joyTemp = snapshot.child("outfitTutorial").val();
+          //if the tutorial is false, then we set the state to be false.
+          this.setState({tutorial: joyTemp});
+        }else{
+          this.setState({tutorial: true})
+        }
+    });
   }
 
 
@@ -117,7 +132,6 @@ class OutfitCreation extends Component {
       newPos.imgUrl =  item.dataset.itemimgurl;
       newPos.macysUrl =  item.dataset.itemmacysurl;
       itemsArray.push(newPos);
-      console.log(itemsArray);
       // , pos: pos
       this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
       //console.log("clicled items: ", this.state.clickedItems);
@@ -170,6 +184,60 @@ class OutfitCreation extends Component {
     document.body;
 
   }
+
+
+  callback(data) {
+
+        if(data.type === "finished"){
+          let tutorialRef = database.ref(`/users/${this.props.uid}/tutorials`);
+          tutorialRef.set({
+            outfitTutorial: Boolean(false)
+          })
+        }
+  }
+
+  joyrideCreation() {
+
+    if(this.state.tutorial === true){
+      const {
+        isReady,
+        isRunning,
+        joyrideOverlay,
+        joyrideType,
+        selector,
+        stepIndex,
+        steps,
+      } = feedToJoyride;
+
+      return (
+        <div>
+          <Joyride
+            ref={c => (this.joyride = c)}
+            callback={this.callback}
+            allowClicksThruHole = {false}
+            debug={false}
+            locale={{
+              back: (<span>Back</span>),
+              close: (<span>Close</span>),
+              last: (<span>Last</span>),
+              next: (<span>Next</span>),
+              skip: (<span>Skip</span>),
+            }}
+            run={isRunning}
+            showOverlay={joyrideOverlay}
+            showSkipButton={true}
+            showStepsProgress={true}
+            scrollToSteps={false}
+            stepIndex={stepIndex}
+            steps={steps}
+            type={joyrideType}
+          />
+        </div>
+      );
+    }else{
+  }
+  }
+
 
   startGesture() {
     var scale = 1,
@@ -258,38 +326,9 @@ class OutfitCreation extends Component {
   }
 
   render() {
-    const {
-      isReady,
-      isRunning,
-      joyrideOverlay,
-      joyrideType,
-      selector,
-      stepIndex,
-      steps,
-    } = feedToJoyride;
-
     return (
       <div>
-        <Joyride
-          ref={c => (this.joyride = c)}
-          allowClicksThruHole = {false}
-          debug={false}
-          locale={{
-            back: (<span>Back</span>),
-            close: (<span>Close</span>),
-            last: (<span>Last</span>),
-            next: (<span>Next</span>),
-            skip: (<span>Skip</span>),
-          }}
-          run={isRunning}
-          showOverlay={joyrideOverlay}
-          showSkipButton={true}
-          showStepsProgress={true}
-          scrollToSteps={false}
-          stepIndex={stepIndex}
-          steps={steps}
-          type={joyrideType}
-        />
+        {this.joyrideCreation()}
         <Logout />
         <div id="outfitCreationContainer">
           <span onClick={this.handleGlobalLock}>{this.state.global}
