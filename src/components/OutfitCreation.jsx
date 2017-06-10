@@ -18,8 +18,8 @@ const feedToJoyride   =  {
       stepIndex: 0,
       steps: [
         {
-          title: 'Global or Private',
-          text: 'Toggle this icon, if unlocked your outfit will be sent to the Global Feed',
+          title: 'Public or Private',
+          text: 'Toggle to keep private or share with the world',
           selector: '#lockIcon',
           position: 'bottom',
         },
