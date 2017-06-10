@@ -31,12 +31,6 @@ const feedToJoyride   =  {
           text: `See other people's outfits and get inspiration`,
           selector: '.globalFeedLink',
           position: 'top',
-        },
-        {
-          title: 'Logout',
-          text: `When you are done you can logout by pressing this button`,
-          selector: '#logoutContainer',
-          position: 'bottom',
         }
       ],
       selector: '',
