@@ -25,7 +25,6 @@ class SaveOutfitButton extends Component {
   }
 
   saveOutfit() {
-    //console.log(this.props);
     if (this.props.itemCount <= 0) {
 
       this.refs.notificationSystem.clearNotifications();
@@ -34,7 +33,6 @@ class SaveOutfitButton extends Component {
         level: 'error'
     });
     } else {
-      //console.log("here: ",this.props.clickedItems);
       this.generateImage();
     }
   }
@@ -45,7 +43,6 @@ class SaveOutfitButton extends Component {
       logging: false,
       useCORS: true,
       onrendered: (canvas) => {
-        //console.log('generating');
 
         var url = canvas.toDataURL("image/png");
         let outfitRef = database.ref(`/users/${this.props.uid}/outfitobjects`);
@@ -66,7 +63,6 @@ class SaveOutfitButton extends Component {
         //if this outfit is global, save it to the global database.
         if (this.props.global === true) {
           let globalRef = database.ref(`/global/outfitobjects/${this.state.outfitKey}`);
-          console.log(this.state.username);
           globalRef.set({
             title: titleRef,
             global: Boolean(this.props.global),
