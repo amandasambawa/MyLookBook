@@ -144,7 +144,7 @@ class Feed extends Component {
     }else if(this.state.exists === null){
       return (
           <div className="feedContainer" style={{ position: "absolute", bottom: "0"}}>
-              <img id="" src="../assets/empty-image.png" />
+              <img src="../assets/empty-image.png" style={{ opacity: "0.5" }}/>
               <h1 className="redText">You have no outfits yet.</h1>
               <h2 className="spaceUnder">Start creating outfits here!</h2>
               <img id="downArrow" src="../assets/download-arrow.svg" />
