@@ -30,12 +30,6 @@ class Navigation extends Component {
     }
   }
 
-/*    componentDidMount() {
-        this.refs.theDiv.focus();
-    }
-*/
-
-
 
   backToFeed(){
       return (

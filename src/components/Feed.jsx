@@ -57,7 +57,6 @@ class Feed extends Component {
     //outfits exist
     database.ref(`/users/${this.props.uid}/outfitobjects/`).once("value").then((snapshot) => {
       //iterating through each index of the database
-      //console.log(snapshot.val());
       snapshot.forEach(function(childSnapshot, key) {
         previewArray.push(childSnapshot);
       });

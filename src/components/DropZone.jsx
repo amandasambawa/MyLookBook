@@ -33,7 +33,6 @@ class DropZone extends Component {
       index = 0;
       // let restrict = document.getElementById('dropZoneAndContainer');
 
-      //console.log('scaleElement: ',scaleElement);
     interact('.inside').draggable({
       // enable inertial throwing
       inertia: true,
@@ -96,10 +95,8 @@ class DropZone extends Component {
       },
       // end of the resizing
       onend  : function (event) {
-          console.log('onend: ',event.target);
           //if resized less than 80px, set to 80px for the item
           if(event.target.height <= 80 || event.target.width <= 80){
-          //  console.log('too small');
           //set the height and width if is too small.
             event.target.style.height='80px';
             event.target.style.width='70px';
@@ -108,8 +105,7 @@ class DropZone extends Component {
     })
     .on('resizemove', function (event) {
       var target = event.target;
-      //console.log(target);
-      // update the element's style
+      //update the element's style
       target.style.width  = event.rect.width + 'px';
       target.style.height = event.rect.height + 'px';
 

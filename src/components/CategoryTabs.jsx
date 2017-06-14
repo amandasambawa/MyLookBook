@@ -117,7 +117,6 @@ class CategoryTabs extends Component {
         activeState[this.state.selected] = "default";
         activeState[category] = "active";
         this.setState({imageObj: itemsArray[category], selected: category, active: activeState});
-        //console.log("imageObj: ",this.state.imageObj);
     }
 
     render() {
