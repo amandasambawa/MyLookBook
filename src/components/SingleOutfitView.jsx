@@ -281,7 +281,6 @@ class SingleOutfitView extends Component {
 
   addToWishList(productId) {
     var userId = "12171329308";
-    console.log("Added to wishlist -"+ productId);
     var data = JSON.stringify({
       "wishlists": {
         "wishlist": [
@@ -311,10 +310,6 @@ class SingleOutfitView extends Component {
       },
       body: data
     }).then((response)=> {
-      // console.log(response);
-      // if (!response.ok) {
-      //     throw Error(response.statusText);
-      // }
       return response;
     }).then((data)=> {
       this.refs.notificationSystem.clearNotifications();

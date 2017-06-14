@@ -19,7 +19,4 @@ let title= "test";
 //Make sure that LoginForm can even render.
 it('Navigation renders properly.', () => {
   let wrapper = shallow(<Navigation userName={userName} uid={uid} title={title} />);
-  //let wrapper2 = mount(<Navigation userName={userName} uid={uid} title={title} />);
-  //let wrapper3 = render(<Navigation userName={userName} uid={uid} title={title} />);
-  console.log(wrapper.debug());
 });

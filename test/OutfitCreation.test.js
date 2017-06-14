@@ -11,7 +11,6 @@ import OutfitCreation from '../src/components/OutfitCreation.jsx';
 //Make sure that OutfitCreation can even render.
 it('OutfitCreation renders properly.', () => {
   const wrapper = shallow(<OutfitCreation />);
-  console.log(wrapper.debug());
 });
 
 

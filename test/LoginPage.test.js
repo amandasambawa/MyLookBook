@@ -6,7 +6,7 @@ import LoginPage from '../src/components/LoginPage.jsx';
 
 
 /*
-* This test file is for SignUpForm
+* This test file is for LoginPage
 */
 
 

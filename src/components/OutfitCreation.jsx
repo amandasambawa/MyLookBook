@@ -113,7 +113,6 @@ class OutfitCreation extends Component {
 
 
   droppedItem(item, pos){
-    console.log(pos, "inside dropped item");
     if (this.state.clickedItems.length <= 5) {
       let itemsArray = this.state.clickedItems.slice();
       let newPos = Object.assign({}, pos);
@@ -123,7 +122,6 @@ class OutfitCreation extends Component {
       itemsArray.push(newPos);
       // , pos: pos
       this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
-      //console.log("clicled items: ", this.state.clickedItems);
     } else {
       this.refs.notificationSystem.clearNotifications();
       this.refs.notificationSystem.addNotification({
@@ -134,9 +132,7 @@ class OutfitCreation extends Component {
   }
 
   undoItem() {
-    //console.log(this.state.clickedItems.length);
     if (this.state.clickedItems.length >= 1) {
-      //console.log("undo item");
       let itemsArray = this.state.clickedItems.slice();
       itemsArray.pop();
       this.setState({clickedItems: itemsArray, itemCount: itemsArray.length});
@@ -147,7 +143,6 @@ class OutfitCreation extends Component {
         level: 'error'
     });
     }
-    //console.log(this.state.itemCount);
   }
 
 
@@ -301,11 +296,7 @@ class OutfitCreation extends Component {
       onstart: (event) => {
         let something = document.getElementsByClassName("scrollmenu")[0].scrollLeft;
         event.target.classList.add('dragging');
-        console.log(event.target.getBoundingClientRect().left);
         event.target.style.left = `${Math.round(event.target.getBoundingClientRect().left - something)}px`;
-        console.log(event.target.style.left);
-        // index++;
-        // event.target.style.zIndex = index;
       },
       onend: (event)=> {
         event.target.classList.remove('dragging');

@@ -78,7 +78,7 @@ const itemsArray = {
         },
         {
             productId: 37215977,
-            imgUrl: "https://cdn.ivizi.nl/images/product-carousel-lightbox/2e01840f-fee1-43e4-bcc2-78f9adb00a21.png",
+            imgUrl: "https://firebasestorage.googleapis.com/v0/b/productpoll-7127e.appspot.com/o/apple-watch.png?alt=media&token=b368d5ca-098c-49fc-8d40-0bb8f55c474d",
             macysUrl: "https://www.macys.com/shop/product/apple-watch-series-1-42mm-rose-gold-aluminum-case-with-pink-sand-sport-band?ID=4673904&CategoryID=101043#fn=sp%3D1%26spc%3D26%26ruleId%3D105|BS%26slotId%3D22"
         }
     ]
