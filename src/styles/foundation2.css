@@ -29,8 +29,7 @@ h1, h2, h3, h4 {
 .feedContainer {
     text-align: center;
     width: 100%;
-  
-
+    margin-bottom: 8em;
 }
 
 .outfitLink {
@@ -65,10 +64,6 @@ h1, h2, h3, h4 {
 button:focus {
     /*color: #af0000; */
     outline: none;
-}
-
-.feedContainer {
-    margin-bottom: 4em;
 }
 
 #logoutContainer {
