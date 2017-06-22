@@ -64,20 +64,26 @@ class Navigation extends Component {
   createOrSaveOutfit(){
     //if we are in create outfit, the middle button should be saving the outfit
     if ( this.props.location.pathname.split("/")[1] === "outfitCreation"){
-        return <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title}
-        global={this.props.global} clickedItems={this.props.clickedItems} itemCount={this.props.itemCount}/>
+        return(
+          <div className="small-6 columns middleNavSave">
+            <SaveOutfitButton uid={this.props.uid} outfitTitle={this.props.title}
+            global={this.props.global} clickedItems={this.props.clickedItems} itemCount={this.props.itemCount}/>
+          </div>
+        );
     }else{
       //anywhere else and the user will be prompted to make an outfit
         return (
-            <div className="createOutfitLink">
-                <Link to="/outfitCreation">
-                    <img className="navIcon" src="../../assets/plus-button.svg" />
-                    <button
-                        className="navLink"
-                        value="Create an Outfit"
-                    >Create an Outfit</button>
-                </Link>
-            </div>
+          <div className="small-6 columns">
+              <div className="createOutfitLink">
+                  <Link to="/outfitCreation">
+                      <img className="navIcon" src="../../assets/plus-button.svg" />
+                      <button
+                          className="navLink"
+                          value="Create an Outfit"
+                      >Create an Outfit</button>
+                  </Link>
+              </div>
+        </div>
         );
     }
 
@@ -94,9 +100,7 @@ class Navigation extends Component {
               <div className="small-5 columns ">
                   {this.backToFeed()}
               </div>
-              <div className="small-6 columns">
-                    {this.createOrSaveOutfit()}
-              </div>
+              {this.createOrSaveOutfit()}
               <div className="small-5 columns">
                     {this.backToGlobalFeed()}
               </div>

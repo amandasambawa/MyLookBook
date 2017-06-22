@@ -25,6 +25,11 @@
     z-index: 11;
 }
 
+.middleNavSave {
+  background-color: #cc0000;
+  border-radius: 30px;
+}
+
 .backgroundImage {
     background-image: url("../../public/assets/red-shirt.svg");
 }
