@@ -1,17 +1,27 @@
-Welcome to the Spring TechStar 2017 Project. 
-Our team is composed of Daniel Adeyanju, Amanda Sambawa, Christopher Van Hoosier, Eddy Wang, and Anthony Yu.
+Welcome to the Spring TechStar 2017 Project.
 
-This product allows the user to create outfits and allows the user to send that outfit for other people to review.
+Project Description:
+My Lookbook is a new discovery-centric experience that allows users to design outfits for sharing with friends. The user can design outfits by dragging and dropping items from the Macys catalog into a canvas. The user can share their outfits with friends or with other app users.
 
+This proof of concept was created by the 2017 Spring Tech Stars.
 
-Here are the steps to run our application:
+Hypothesis:
+We Believe that customers want an online experience that allows for creativity and social interaction
 
-1: git clone https://github.com/any027/TechStar2017Project.git (In any directory you would like)
+So, if we allow customers to design outfits in a tactile and visual way
 
-2. cd into the cloned repo
+Then they will use the app for frequently and Macy's will be top of mind when they need to make a purchase.
 
-3. npm install
+---
 
-4. npm run build
+Here are the steps to run the application:
 
-5. npm start
+1.  git clone https://github.com/amandasambawa/MyLookbook.git (In any directory you would like)
+
+2.  cd into the cloned repo
+
+3.  npm install
+
+4.  npm run build
+
+5.  npm start
