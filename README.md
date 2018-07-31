@@ -18,7 +18,7 @@ Then they will use the app for frequently and Macy's will be top of mind when th
 
 Here are the steps to run the application:
 
-1.  git clone https://github.com/amandasambawa/MyLookbook.git(In any directory you would like)
+1.  git clone https://github.com/amandasambawa/MyLookbook.git (In any directory you would like)
 
 2.  cd into the cloned repo
 
